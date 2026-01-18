@@ -1,0 +1,41 @@
+:root {
+  /* Colores base */
+  --color-primary: #2c7a7b;
+  --color-primary-light: #319795;
+  --color-secondary: #065f46;
+  --color-bg: #ffffff;
+  --color-bg-alt: #f9fafb;
+  --color-border: #d1d5db;
+  --color-text: #1f2937;
+  --color-text-muted: #374151;
+  --color-success: #f0fdfa;
+  --color-success-hover: #e6fffa;
+  --color-muted: #e5e7eb;
+
+  /* Versiones para tipografía */
+  --color-title: var(--color-text);
+  --color-subtitle: var(--color-text-muted);
+
+  /* Versiones para botones */
+  --color-btn-primary: var(--color-primary);
+  --color-btn-primary-light: var(--color-primary-light);
+  --color-btn-secondary: var(--color-muted);
+  --color-btn-danger: var(--color-secondary);
+  --color-btn-text-light: var(--color-bg);
+
+  /* Estados */
+  --color-estado-pendiente: #facc15;  /* amarillo */
+  --color-estado-aceptado: var(--color-success); /* verde */
+  --color-estado-rechazado: #ef4444;  /* rojo */
+}
+
+html, body { 
+  height: 100%; 
+}
+
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}

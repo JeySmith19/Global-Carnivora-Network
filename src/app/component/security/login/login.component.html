@@ -1,0 +1,23 @@
+<div class="login-wrapper">
+  <div class="login-card">
+    <h2>Bienvenido</h2>
+    <p class="subtitle">Inicia sesión para continuar</p>
+
+    <div class="input-group">
+      <input type="text" placeholder="Usuario" [(ngModel)]="username" />
+    </div>
+
+    <div class="input-group">
+      <input type="password" placeholder="Contraseña" [(ngModel)]="password" />
+    </div>
+
+    <button class="login-btn" (click)="login()">Iniciar sesión</button>
+
+    <p class="text-small">
+      ¿No tienes cuenta? <span class="link-text" routerLink="/registro">Regístrate</span>
+    </p>
+    <p class="text-small">
+      <span class="link-text" routerLink="/request-password-reset">¿Olvidaste tu contraseña?</span>
+    </p>
+  </div>
+</div>

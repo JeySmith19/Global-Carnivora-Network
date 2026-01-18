@@ -1,0 +1,110 @@
+<div class="evento-page">
+
+  <div class="top-bar">
+    <h2>Eventos de Subasta</h2>
+    <button class="btn-new" (click)="toggleForm()">
+      <i class="fa-solid fa-plus"></i>
+      Nuevo evento
+    </button>
+  </div>
+
+  <!-- LISTA DE EVENTOS (ESTILO LISTA PROFESIONAL) -->
+  <div class="lista-eventos">
+
+    <div class="evento-row" *ngFor="let e of eventos">
+
+      <div class="row-left">
+        <div class="fecha-badge">
+          <span class="dia">{{ e.fechaEvento | date:'dd' }}</span>
+          <span class="mes">{{ e.fechaEvento | date:'MMM' }}</span>
+        </div>
+
+        <div class="evento-info">
+          <h3>{{ e.nombre }}</h3>
+          <p>
+            <i class="fa-regular fa-clock"></i>
+            {{ e.horaInicio }} • 
+            {{ e.duracionSubastaMinutos }} min + {{ e.descansoMinutos }} min descanso
+          </p>
+        </div>
+      </div>
+
+      <div class="row-right">
+
+        <span class="estado-chip" [class.abierto]="e.estado === 'ABIERTO'"
+              [class.cerrado]="e.estado === 'CERRADO'">
+          {{ e.estado }}
+        </span>
+
+        <div class="acciones">
+          <button class="icon-btn edit" (click)="seleccionar(e); toggleForm()">
+            <i class="fa-solid fa-pen"></i>
+          </button>
+
+          <button class="icon-btn lock" *ngIf="e.estado === 'ABIERTO'"
+                  (click)="cerrarManual(e.id)">
+            <i class="fa-solid fa-lock"></i>
+          </button>
+
+          <button class="icon-btn delete" (click)="eliminar(e.id)">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ======== FORMULARIO FLOTANTE (PANEL LATERAL) ======== -->
+  <div class="drawer-overlay" *ngIf="showForm" (click)="toggleForm()"></div>
+
+  <div class="drawer" [class.open]="showForm">
+
+    <div class="drawer-header">
+      <h3>{{ editando ? 'Editar evento' : 'Crear nuevo evento' }}</h3>
+      <button class="close-btn" (click)="toggleForm()">×</button>
+    </div>
+
+    <div class="drawer-body">
+
+      <div class="form-section">
+        <label>Nombre del evento</label>
+        <input [(ngModel)]="evento.nombre" placeholder="Ej: Subasta Carnívora #18" />
+      </div>
+
+      <div class="form-grid">
+
+        <div class="form-section">
+          <label>Fecha del evento</label>
+          <input type="date" [(ngModel)]="evento.fechaEvento" />
+        </div>
+
+        <div class="form-section">
+          <label>Hora de inicio</label>
+          <input type="time" [(ngModel)]="evento.horaInicio" />
+        </div>
+
+        <div class="form-section">
+          <label>Duración por subasta (min)</label>
+          <input type="number" [(ngModel)]="evento.duracionSubastaMinutos" />
+        </div>
+
+        <div class="form-section">
+          <label>Descanso entre subastas (min)</label>
+          <input type="number" [(ngModel)]="evento.descansoMinutos" />
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="drawer-footer">
+      <button class="btn-save" *ngIf="!editando" (click)="guardar()">Guardar evento</button>
+      <button class="btn-save" *ngIf="editando" (click)="actualizar()">Actualizar evento</button>
+      <button class="btn-cancel" (click)="toggleForm()">Cancelar</button>
+    </div>
+
+  </div>
+
+</div>

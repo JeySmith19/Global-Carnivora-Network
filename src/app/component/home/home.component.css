@@ -1,0 +1,179 @@
+/* Reset y fuente */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header */
+.header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 20px 0;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  color: #2c3e50;
+  font-weight: 700;
+  font-size: 1.9rem;
+}
+
+.header nav button {
+  margin-left: 12px;
+}
+
+/* Botones */
+.btn {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+/* Hero */
+.hero {
+  background: linear-gradient(135deg, #f0faf8, #e6f2f1);
+  text-align: center;
+  padding: 140px 20px;
+  color: #2c3e50;
+}
+
+.hero h2 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  max-width: 700px;
+  margin: 0 auto 30px;
+}
+
+.hero-buttons button {
+  margin: 8px;
+}
+
+/* Features */
+.features {
+  padding: 100px 0;
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.features h3 {
+  font-size: 2.2rem;
+  margin-bottom: 50px;
+  color: #2c3e50;
+}
+
+.feature-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.card {
+  background-color: #ffffff;
+  padding: 35px 25px;
+  width: 280px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  text-align: center;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+}
+
+.card h4 {
+  margin-bottom: 12px;
+  color: #2ecc71;
+  font-size: 1.3rem;
+}
+
+.card p {
+  color: #555555;
+  font-size: 1rem;
+}
+
+.icon {
+  font-size: 2.4rem;
+  color: #2ecc71;
+  margin-bottom: 14px;
+}
+
+/* Upcoming */
+.upcoming {
+  padding: 80px 0;
+  background-color: #f7f9f9;
+  text-align: center;
+}
+
+.upcoming h3 {
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+  color: #2c3e50;
+}
+
+.upcoming ul {
+  list-style-type: disc;
+  display: inline-block;
+  text-align: left;
+  margin-top: 20px;
+  padding-left: 20px;
+}
+
+.upcoming li {
+  font-size: 1.05rem;
+  margin: 12px 0;
+}
+
+/* Call to Action */
+.cta {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  color: white;
+  text-align: center;
+  padding: 120px 20px;
+  border-radius: 12px 12px 0 0;
+}
+
+.cta h3 {
+  font-size: 2.4rem;
+  margin-bottom: 25px;
+}
+
+/* Footer */
+.footer {
+  background-color: #ffffff;
+  border-top: 1px solid #e0e0e0;
+  color: #555555;
+  text-align: center;
+  padding: 30px 0;
+  font-size: 0.95rem;
+}

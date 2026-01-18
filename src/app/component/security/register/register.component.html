@@ -1,0 +1,78 @@
+<div class="register-wrapper">
+  <h2>Registro</h2>
+
+  <form [formGroup]="form" (ngSubmit)="registrar()" class="register-form">
+    <!-- Correo -->
+    <div class="form-group">
+      <label>Correo</label>
+      <input type="email" formControlName="username" placeholder="usuario@correo.com">
+      <small *ngIf="form.get('username')?.touched && form.get('username')?.invalid">
+        Ingresa un correo válido
+      </small>
+    </div>
+
+    <!-- Contraseña -->
+    <div class="form-group">
+      <label>Contraseña</label>
+      <div class="password-wrapper">
+        <input [type]="passwordVisible ? 'text' : 'password'" formControlName="password" placeholder="Contraseña">
+        <button type="button" class="toggle-btn" (click)="togglePassword()">
+          {{ passwordVisible ? 'Ocultar' : 'Mostrar' }}
+        </button>
+      </div>
+      <small *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
+        La contraseña debe tener al menos 5 caracteres
+      </small>
+    </div>
+
+    <!-- Confirmar contraseña -->
+    <div class="form-group">
+      <label>Confirmar Contraseña</label>
+      <input [type]="passwordVisible ? 'text' : 'password'" formControlName="confirmPassword" placeholder="Repite la contraseña">
+      <small *ngIf="form.errors?.['mismatch'] && form.get('confirmPassword')?.touched">
+        Las contraseñas no coinciden
+    </small>
+
+    </div>
+
+    <!-- Nombre -->
+    <div class="form-group">
+      <label>Nombre</label>
+      <input type="text" formControlName="name" placeholder="Nombre">
+    </div>
+
+    <!-- Apellido -->
+    <div class="form-group">
+      <label>Apellido</label>
+      <input type="text" formControlName="lastName" placeholder="Apellido">
+    </div>
+
+    <!-- Teléfono -->
+    <div class="form-group">
+      <label>Teléfono</label>
+      <input type="text" formControlName="phone" placeholder="999999999">
+      <small *ngIf="form.get('phone')?.touched && form.get('phone')?.invalid">
+        Ingresa un teléfono válido
+      </small>
+    </div>
+
+    <!-- Ciudad -->
+    <div class="form-group">
+      <label>Ciudad</label>
+      <input type="text" formControlName="city" placeholder="Ciudad">
+    </div>
+
+    <!-- Botón registrar -->
+    <button type="submit" [disabled]="loading" class="btn-submit">
+      {{ loading ? 'Registrando...' : 'Registrar' }}
+    </button>
+  </form>
+
+  <!-- Mensajes de éxito y error -->
+  <div *ngIf="successMessage" class="success-message">
+    ✅ {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="error-message">
+    ❌ {{ errorMessage }}
+  </div>
+</div>

@@ -1,0 +1,118 @@
+/* register.component.css */
+
+.register-wrapper {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 30px 25px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.register-wrapper h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+.register-form .form-group {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.register-form label {
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #555;
+}
+
+.register-form input {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.register-form input:focus {
+  border-color: #4caf50;
+  outline: none;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+.password-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper input {
+  flex: 1;
+}
+
+.password-wrapper .toggle-btn {
+  margin-left: 8px;
+  padding: 8px 10px;
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background 0.2s;
+}
+
+.password-wrapper .toggle-btn:hover {
+  background-color: #43a047;
+}
+
+.register-form small {
+  color: #e53935;
+  margin-top: 3px;
+  font-size: 12px;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 12px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-submit:hover:not([disabled]) {
+  background-color: #43a047;
+}
+
+.btn-submit:disabled {
+  background-color: #a5d6a7;
+  cursor: not-allowed;
+}
+
+/* Mensajes de éxito y error */
+.success-message,
+.error-message {
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.success-message {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+}
+
+.error-message {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+}
