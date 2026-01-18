@@ -1,59 +1,56 @@
 <div class="container">
   <div class="subastas-header">
     <h2>Tus Subastas</h2>
-    <button class="btn-crear" (click)="crearSubasta()">Crear Subasta</button>
+    <button class="btn-crear" (click)="crearSubasta()">+ Crear Subasta</button>
   </div>
 
   <div class="cards-grid">
     <div *ngFor="let s of subastas" class="card">
 
       <div class="card-image-wrapper">
-        <img
-          *ngIf="s.imagen && s.imagen !== '' ; else sinImagen"
-          [src]="s.imagen"
-          class="card-image"
-          alt="Imagen subasta"
-        />
-
+        <img *ngIf="s.imagen; else sinImagen" [src]="s.imagen" alt="Imagen subasta" class="card-image"/>
         <ng-template #sinImagen>
           <div class="sin-imagen">Sin imagen</div>
         </ng-template>
-
-        <div
-          class="estado-etiqueta"
-          [ngClass]="(s.estado || 'pendiente').toLowerCase()">
-          {{ s.estado }}
-        </div>
+        <span class="estado-etiqueta" [ngClass]="(s.estado || 'pendiente').toLowerCase()">
+          {{ s.estado || 'Pendiente' }}
+        </span>
       </div>
 
       <div class="card-body">
-        <h3>Subasta #{{ s.id }}</h3>
-
-        <div class="card-info">
-          <p *ngIf="s.fechaEvento">
-            Fecha: {{ s.fechaEvento | date:'dd/MM/yyyy' }}
-          </p>
-          <p *ngIf="s.duracionSubastaMinutos">
-            Duración: {{ s.duracionSubastaMinutos }} min
-          </p>
+        <h3>Subasta #{{ s.numeroSubasta || 'Por definir' }}</h3>
+        <div class="card-info-row">
+          <div class="info-item">
+            <strong>Evento:</strong>
+            <span>{{ s.eventoNombre || 'Por definir' }}</span>
+          </div>
+          <div class="info-item">
+            <strong>Fecha:</strong>
+            <span>{{ s.fechaEvento ? (s.fechaEvento | date:'dd/MM/yyyy') : 'Por definir' }}</span>
+          </div>
+          <div class="info-item">
+            <strong>Hora inicio:</strong>
+            <span>{{ s.horaInicio || 'Por definir' }}</span>
+          </div>
         </div>
-
-        <div class="card-details">
-          <p *ngIf="s.username"><strong>Subastador:</strong> {{ s.username }}</p>
-          <p *ngIf="s.phone"><strong>Contacto:</strong> {{ s.phone }}</p>
-          <p *ngIf="s.city"><strong>Procedencia:</strong> {{ s.city }}</p>
-
-          <p><strong>Planta:</strong> {{ s.planta }}</p>
-          <p><strong>Maceta:</strong> {{ s.maceta }}</p>
-          <p><strong>Precio base:</strong> S/ {{ s.precioBase }}</p>
-
-          <p *ngIf="s.observaciones">
-            <strong>Observaciones:</strong> {{ s.observaciones }}
-          </p>
+        <div class="card-info-row">
+          <div class="info-item">
+            <strong>Planta:</strong>
+            <span>{{ s.planta }}</span>
+          </div>
+          <div class="info-item">
+            <strong>Maceta:</strong>
+            <span>{{ s.maceta }}</span>
+          </div>
+          <div class="info-item precio">
+            <strong>Precio base:</strong>
+            <span>S/ {{ s.precioBase }}</span>
+          </div>
         </div>
       </div>
 
       <div class="card-footer">
+        <button class="btn-detalles" (click)="verDetalles(s)">Ver Detalles</button>
         <button class="btn-editar" (click)="editar(s)">Editar</button>
         <button class="btn-eliminar" (click)="eliminar(s.id)">Eliminar</button>
       </div>

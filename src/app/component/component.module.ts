@@ -5,6 +5,7 @@ import { EventoComponent } from './evento/evento.component';
 import { SubastaComponent } from './subasta/subasta.component';
 import { FormsModule } from '@angular/forms';
 import { ListarComponent } from './subasta/listar/listar.component';
+import { InformacionSubastaComponent } from './subasta/listar/informacion-subasta/informacion-subasta.component';
 
 
 
@@ -13,7 +14,8 @@ import { ListarComponent } from './subasta/listar/listar.component';
   declarations: [
     EventoComponent,
     SubastaComponent,
-    ListarComponent
+    ListarComponent,
+    InformacionSubastaComponent
   ],
   
   imports: [

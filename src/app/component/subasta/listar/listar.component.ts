@@ -23,20 +23,21 @@ export class ListarComponent implements OnInit {
   }
 
   cargarMisSubastas() {
-    this.cargando = true;
+  this.cargando = true;
 
-    this.subastaService.listMisSubastas().subscribe({
-      next: (data) => {
-        this.subastas = data;
-        console.log('Mis subastas:', this.subastas);
-        this.cargando = false;
-      },
-      error: () => {
-        console.log('Error al cargar subastas');
-        this.cargando = false;
-      }
-    });
-  }
+  this.subastaService.listMisSubastas().subscribe({
+    next: (data) => {
+      this.subastas = data;
+      console.log('Mis subastas actualizadas:', this.subastas); // ahora incluye numeroSubasta, horaInicioAsignada y horaFinAsignada
+      this.cargando = false;
+    },
+    error: () => {
+      console.log('Error al cargar subastas');
+      this.cargando = false;
+    }
+  });
+}
+
 
   editar(s: Subasta) {
     // ahora usamos parámetro de ruta
@@ -50,6 +51,11 @@ export class ListarComponent implements OnInit {
   }
 
   crearSubasta() {
-    this.router.navigate(['/components/subastas']); // ruta sin id para crear
+    this.router.navigate(['/components/subastas']);
   }
+
+  verDetalles(s: Subasta) {
+  this.router.navigate(['/components/detalles'], { state: { subasta: s } });
+}
+
 }
