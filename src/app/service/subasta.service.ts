@@ -61,4 +61,12 @@ export class SubastaService {
   getList() {
     return this.listaCambio.asObservable();
   }
+
+  listByEvento(idEvento: number): Observable<Subasta[]> {
+  return this.http.get<Subasta[]>(
+    `${this.url}/evento/${idEvento}`,
+    { headers: this.getHeaders() }
+  );
+}
+
 }

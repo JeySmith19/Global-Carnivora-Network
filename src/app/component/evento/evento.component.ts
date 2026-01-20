@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { EventoService } from 'src/app/service/evento.service';
 import { Evento } from 'src/app/model/evento';
 
@@ -14,12 +15,14 @@ export class EventoComponent implements OnInit {
   editando = false;
   showForm = false;
 
-  constructor(private eventoService: EventoService) {}
+  constructor(
+    private eventoService: EventoService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.listar();
 
-    // Verifica cierre automático cada 60 segundos
     setInterval(() => {
       this.eventos.forEach(e => {
         if (e.estado === 'ABIERTO') {
@@ -70,12 +73,16 @@ export class EventoComponent implements OnInit {
     });
   }
 
-  toggleForm() {
-  this.showForm = !this.showForm;
-  if (!this.showForm) {
-    this.limpiar();
+  irAOrganizarSubastas(idEvento: number) {
+    this.router.navigate(['/components/organizar-subastas', idEvento]);
   }
-}
+
+  toggleForm() {
+    this.showForm = !this.showForm;
+    if (!this.showForm) {
+      this.limpiar();
+    }
+  }
 
   limpiar() {
     this.evento = new Evento();

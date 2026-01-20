@@ -6,6 +6,7 @@ import { SubastaComponent } from './subasta/subasta.component';
 import { FormsModule } from '@angular/forms';
 import { ListarComponent } from './subasta/listar/listar.component';
 import { InformacionSubastaComponent } from './subasta/listar/informacion-subasta/informacion-subasta.component';
+import { OrganizarSubastasComponent } from './administracion/organizar-subastas/organizar-subastas.component';
 
 
 
@@ -15,7 +16,8 @@ import { InformacionSubastaComponent } from './subasta/listar/informacion-subast
     EventoComponent,
     SubastaComponent,
     ListarComponent,
-    InformacionSubastaComponent
+    InformacionSubastaComponent,
+    OrganizarSubastasComponent
   ],
   
   imports: [
