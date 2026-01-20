@@ -1,0 +1,64 @@
+<div class="detalle-container" *ngIf="subasta">
+  <div class="detalle-card">
+
+    <header class="detalle-header">
+      <h2>Detalle de la Subasta</h2>
+      <span class="estado" [ngClass]="subasta.estado.toLowerCase()">
+        {{ subasta.estado }}
+      </span>
+    </header>
+
+    <div class="detalle-grid">
+
+      <div class="detalle-imagen">
+        <img *ngIf="subasta.imagen; else sinImagen" [src]="subasta.imagen" />
+        <ng-template #sinImagen>
+          <div class="sin-imagen">Sin imagen</div>
+        </ng-template>
+      </div>
+
+      <div class="detalle-bloque">
+        <h3>Información general</h3>
+        <p><strong>N° de subasta:</strong> {{ subasta.numeroSubasta || 'Lo define administración' }}</p>
+        <p><strong>Evento:</strong> {{ subasta.eventoNombre }}</p>
+        <p><strong>Fecha del evento:</strong> {{ subasta.fechaEvento | date:'dd/MM/yyyy' }}</p>
+        <p><strong>Hora inicio evento:</strong> {{ subasta.horaInicio }}</p>
+      </div>
+
+      <div class="detalle-bloque">
+        <h3>Horario asignado</h3>
+        <p>
+          <strong>Inicio:</strong> {{ subasta.horaInicioAsignada || 'Lo define administración' }}<br>
+          <strong>Fin:</strong> {{ subasta.horaFinAsignada || 'Lo define administración' }}
+        </p>
+        <p><strong>Duración:</strong> {{ subasta.duracionSubastaMinutos }} min</p>
+        <p><strong>Descanso:</strong> {{ subasta.descansoMinutos }} min</p>
+      </div>
+
+      <div class="detalle-bloque">
+        <h3>Planta y maceta</h3>
+        <p><strong>Planta:</strong> {{ subasta.planta }}</p>
+        <p><strong>Maceta:</strong> {{ subasta.maceta }}</p>
+        <p><strong>Precio base:</strong> S/ {{ subasta.precioBase }}</p>
+      </div>
+
+      <div class="detalle-bloque">
+        <h3>Subastador</h3>
+        <p><strong>Nombre:</strong> {{ subasta.username }}</p>
+        <p><strong>Contacto:</strong> {{ subasta.phone }}</p>
+        <p><strong>Procedencia:</strong> {{ subasta.city }}</p>
+      </div>
+
+      <div class="detalle-bloque" *ngIf="subasta.observaciones">
+        <h3>Observaciones</h3>
+        <p>{{ subasta.observaciones }}</p>
+      </div>
+
+    </div>
+
+    <div class="detalle-footer">
+      <button class="btn-volver" (click)="volver()">Volver</button>
+    </div>
+
+  </div>
+</div>

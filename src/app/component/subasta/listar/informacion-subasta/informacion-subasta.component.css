@@ -1,0 +1,126 @@
+.detalle-container {
+  padding: 40px 20px;
+  background: var(--color-bg-alt);
+  min-height: 100vh;
+}
+
+.detalle-card {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: var(--color-bg);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  padding: 25px 30px 30px;
+}
+
+.detalle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.detalle-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-title);
+}
+
+.estado {
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-bg);
+}
+
+.estado.pendiente { background: var(--color-estado-pendiente); }
+.estado.aceptado { background: var(--color-estado-aceptado); }
+.estado.rechazado { background: var(--color-estado-rechazado); }
+
+.detalle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.detalle-imagen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-column: 1 / -1;
+  margin-bottom: 10px;
+}
+
+.detalle-imagen img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--color-bg);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.sin-imagen {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: var(--color-muted);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-btn-primary-light);
+  font-style: italic;
+}
+
+.detalle-bloque {
+  background: var(--color-bg-alt);
+  border-radius: 16px;
+  padding: 16px 18px;
+  border: 1px solid var(--color-border);
+}
+
+.detalle-bloque h3 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-title);
+}
+
+.detalle-bloque p {
+  margin: 6px 0;
+  font-size: 14px;
+  color: var(--color-subtitle);
+}
+
+.detalle-bloque p strong {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.detalle-footer {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-volver {
+  background: linear-gradient(135deg, var(--color-btn-primary), var(--color-btn-primary-light));
+  color: var(--color-btn-text-light);
+  border: none;
+  padding: 12px 28px;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+.btn-volver:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.15);
+}

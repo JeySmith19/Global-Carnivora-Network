@@ -20,4 +20,9 @@ export class InformacionSubastaComponent implements OnInit {
     }
   }
 
+  volver() {
+  history.back();
+}
+
+
 }
