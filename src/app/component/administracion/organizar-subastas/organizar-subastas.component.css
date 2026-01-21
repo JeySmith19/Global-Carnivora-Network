@@ -1,161 +1,277 @@
 .organizar-container {
-  max-width: 1100px;
-  margin: 30px auto;
-  padding: 25px;
-  background: var(--color-bg-alt);
-  border-radius: 16px;
+  max-width: 1200px;
+  margin: 20px auto;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  color: var(--color-text);
 }
 
 .organizar-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  background: var(--color-bg);
-  padding: 18px 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-  margin-bottom: 20px;
-  border: 1px solid var(--color-border);
+  margin-bottom: 16px;
+  flex-wrap: wrap;
 }
 
-.evento-id {
-  background: var(--color-muted);
-  padding: 6px 10px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: bold;
+.organizar-header h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.organizar-header .evento-id {
+  font-size: 14px;
   color: var(--color-text-muted);
 }
 
-.grid-subastas {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
-}
-
-.sin-datos {
-  color: var(--color-text-muted);
-}
-
-.subasta-card {
-  background: var(--color-bg);
-  border-radius: 14px;
-  padding: 12px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
-  position: relative;
-  overflow: hidden;
-  border: 1px solid var(--color-border);
-}
-
-.card-main {
+.lista-subastas {
   display: flex;
-  gap: 10px;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.card-image img,
-.sin-imagen {
-  width: 90px;
-  height: 90px;
-  border-radius: 10px;
-  object-fit: cover;
+.fila-subasta {
+  display: grid;
+  grid-template-columns: 200px 1fr auto;
+  gap: 14px;
+  background: var(--color-bg);
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid var(--color-border);
+  align-items: center;
 }
 
-.sin-imagen {
+.img-box {
+  width: 200px;
+  height: 140px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: zoom-in;
+  background: transparent;
+  border: 1px solid var(--color-border);
+}
+
+.img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.img-empty {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--color-muted);
+  height: 100%;
+  font-size: 13px;
   color: var(--color-text-muted);
 }
 
-.card-info h3 {
+.info h3 {
   margin: 0;
   font-size: 16px;
   color: var(--color-title);
 }
 
-.estado-chip {
-  display: inline-block;
-  margin-top: 6px;
-  background: var(--color-success);
-  color: var(--color-secondary);
-  padding: 4px 8px;
-  border-radius: 999px;
-  font-size: 12px;
+.meta {
+  display: flex;
+  gap: 12px;
+  font-size: 13px;
+  margin: 4px 0;
+}
+
+.estado {
   font-weight: bold;
+  color: var(--color-estado-pendiente);
 }
 
 .precio {
-  margin-top: 6px;
   font-weight: bold;
-  color: var(--color-primary);
+  color: var(--color-success);
 }
 
-.btn-ver {
-  display: block;
-  margin-top: 10px;
-  text-align: center;
-  padding: 8px;
-  background: var(--color-btn-primary);
-  color: var(--color-btn-text-light);
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-/* PANEL LATERAL */
-
-.side-panel {
-  position: fixed;
-  top: 0;
-  right: -400px;
-  width: 380px;
-  height: 100vh;
-  background: var(--color-bg);
-  box-shadow: -4px 0 10px rgba(0,0,0,.1);
-  transition: right .3s ease;
-  padding: 16px;
-  overflow-y: auto;
-  z-index: 1000;
-  border-left: 1px solid var(--color-border);
-}
-
-input:checked ~ .side-panel {
-  right: 0;
-}
-
-.panel-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid var(--color-border);
-  padding-bottom: 8px;
-  margin-bottom: 8px;
-}
-
-.panel-header h3 {
-  color: var(--color-title);
-}
-
-.cerrar {
-  font-size: 24px;
-  cursor: pointer;
+.sub {
+  font-size: 12px;
   color: var(--color-text-muted);
 }
 
-/* FOOTER */
+.acciones {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.btn-detalle {
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-light);
+  padding: 6px 12px;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: -380px;
+  width: 360px;
+  height: 100vh;
+  background: var(--color-bg);
+  border-radius: 14px 0 0 14px;
+  box-shadow: -8px 0 24px rgba(0,0,0,0.12);
+  transition: 0.3s;
+  z-index: 1000;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+input:checked ~ .drawer {
+  right: 0;
+}
+
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid var(--color-border);
+  border-radius: 14px 0 0 0;
+  background: var(--color-bg-alt);
+}
+
+.drawer-body {
+  padding: 14px;
+  font-size: 14px;
+  flex: 1;
+}
+
+.drawer-acciones {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.btn-aceptar, .btn-rechazar {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-aceptar {
+  background: var(--color-success);
+  color: var(--color-btn-text-light);
+}
+
+.btn-rechazar {
+  background: var(--color-btn-danger);
+  color: var(--color-btn-text-light);
+}
+
+.zoom {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+input:checked ~ .zoom {
+  display: flex;
+}
+
+.zoom-bg {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(8px);
+  background: rgba(0,0,0,0.3);
+}
+
+.zoom img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  z-index: 2001;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+}
+
+.zoom-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  font-size: 32px;
+  color: #fff;
+  cursor: pointer;
+  z-index: 2002;
+}
 
 .organizar-footer {
-  margin-top: 20px;
+  margin-top: 16px;
   text-align: right;
+  position: sticky;
+  top: 10px;
+  z-index: 50;
+  background: var(--color-bg);
+  padding: 8px 0;
 }
 
 .btn-volver {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
   background: var(--color-btn-primary);
   color: var(--color-btn-text-light);
-  border: none;
-  padding: 10px 16px;
-  border-radius: 10px;
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .fila-subasta {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .img-box {
+    width: 100%;
+    height: 220px;
+  }
+
+  .acciones {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .drawer {
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .drawer-header {
+    border-radius: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .drawer {
+    width: 100%;
+    right: -100%;
+  }
+
+  input:checked ~ .drawer {
+    right: 0;
+  }
+
+  .drawer-body {
+    padding: 12px;
+    font-size: 13px;
+  }
+
+  .drawer-acciones {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .zoom img {
+    max-width: 95vw;
+    max-height: 80vh;
+  }
 }

@@ -1,82 +1,76 @@
 <div class="organizar-container">
 
   <header class="organizar-header">
+    <button class="btn-volver" (click)="volver()">← Volver</button>
     <h2>Subastas del Evento</h2>
     <span class="evento-id">Evento #{{ idEvento }}</span>
   </header>
 
-  <div class="grid-subastas">
+  <div class="lista-subastas">
 
-    <p class="sin-datos" *ngIf="!subastas?.length">
-      No hay subastas registradas para este evento.
-    </p>
+    <div class="fila-subasta" *ngFor="let s of subastas">
 
-    <div class="subasta-card" *ngFor="let s of subastas">
+      <!-- IMAGEN PRINCIPAL -->
+      <input type="checkbox" id="img-{{s.id}}" hidden>
+      <label class="img-box" for="img-{{s.id}}">
+        <img *ngIf="s.imagen; else noImg" [src]="s.imagen">
+        <ng-template #noImg>
+          <div class="img-empty">Sin imagen</div>
+        </ng-template>
+      </label>
 
-      <div class="card-main">
-        <div class="card-image">
-          <img *ngIf="s.imagen; else sinImagen" [src]="s.imagen" />
-          <ng-template #sinImagen>
-            <div class="sin-imagen">Sin imagen</div>
-          </ng-template>
-        </div>
+      <!-- DATOS BÁSICOS -->
+      <div class="info">
+        <h3>{{ s.planta }}</h3>
+        <p class="meta">
+          <span class="estado">{{ s.estado }}</span>
+          <span class="precio">S/ {{ s.precioBase }}</span>
+          <span class="hora">{{ s.horaInicio }}</span>
+        </p>
+        <p class="sub">Subastador: {{ s.username }} · {{ s.city }}</p>
+      </div>
 
-        <div class="card-info">
-          <h3>{{ s.planta }}</h3>
-          <span class="estado-chip">{{ s.estado }}</span>
-          <p class="precio">S/ {{ s.precioBase }}</p>
+      <!-- BOTÓN DETALLE -->
+      <div class="acciones">
+        <input type="checkbox" id="det-{{s.id}}" hidden>
+        <label for="det-{{s.id}}" class="btn-detalle">Ver Detalle</label>
+
+        <!-- DRAWER -->
+        <div class="drawer">
+          <div class="drawer-header">
+            <h3>{{ s.planta }}</h3>
+            <label for="det-{{s.id}}">×</label>
+          </div>
+          <div class="drawer-body">
+            <p><b>Subasta:</b> {{ s.numeroSubasta || '-' }}</p>
+            <p><b>Fecha:</b> {{ s.fechaEvento | date:'dd/MM/yyyy' }}</p>
+            <p><b>Hora Inicio:</b> {{ s.horaInicioAsignada || '-' }}</p>
+            <p><b>Hora Fin:</b> {{ s.horaFinAsignada || '-' }}</p>
+            <p><b>Duración:</b> {{ s.duracionSubastaMinutos }} min</p>
+            <p><b>Descanso:</b> {{ s.descansoMinutos }} min</p>
+            <hr>
+            <p><b>Contacto:</b> {{ s.phone }}</p>
+            <p *ngIf="s.observaciones"><b>Observaciones:</b> {{ s.observaciones }}</p>
+            <div class="drawer-acciones">
+              <button class="btn-aceptar">Aceptar</button>
+              <button class="btn-rechazar">Rechazar</button>
+            </div>
+          </div>
         </div>
       </div>
 
-      <input type="checkbox" id="panel-{{s.id}}" hidden />
-
-      <label class="btn-ver" for="panel-{{s.id}}">
-        Ver detalles
-      </label>
-
-      <div class="side-panel">
-
-        <div class="panel-header">
-          <h3>Detalle de la subasta</h3>
-          <label for="panel-{{s.id}}" class="cerrar">×</label>
-        </div>
-
-        <div class="panel-body">
-
-          <p><strong>N° de subasta:</strong> {{ s.numeroSubasta || 'Lo define administración' }}</p>
-          <p><strong>Evento:</strong> {{ s.eventoNombre }}</p>
-          <p><strong>Fecha:</strong> {{ s.fechaEvento | date:'dd/MM/yyyy' }}</p>
-          <p><strong>Hora inicio:</strong> {{ s.horaInicio }}</p>
-
-          <hr />
-
-          <p><strong>Inicio asignado:</strong> {{ s.horaInicioAsignada || '-' }}</p>
-          <p><strong>Fin asignado:</strong> {{ s.horaFinAsignada || '-' }}</p>
-          <p><strong>Duración:</strong> {{ s.duracionSubastaMinutos }} min</p>
-          <p><strong>Descanso:</strong> {{ s.descansoMinutos }} min</p>
-
-          <hr />
-
-          <p><strong>Maceta:</strong> {{ s.maceta }}</p>
-          <p><strong>Precio base:</strong> S/ {{ s.precioBase }}</p>
-
-          <hr />
-
-          <p><strong>Subastador:</strong> {{ s.username }}</p>
-          <p><strong>Contacto:</strong> {{ s.phone }}</p>
-          <p><strong>Ciudad:</strong> {{ s.city }}</p>
-
-          <p *ngIf="s.observaciones"><strong>Observaciones:</strong> {{ s.observaciones }}</p>
-
-        </div>
+      <!-- ZOOM IMAGEN -->
+      <div class="zoom">
+        <div class="zoom-bg"></div>
+        <label for="img-{{s.id}}" class="zoom-close">×</label>
+        <img [src]="s.imagen">
       </div>
 
     </div>
 
-  </div>
+    <p *ngIf="!subastas.length" class="sin-datos">
+      No hay subastas registradas.
+    </p>
 
-  <div class="organizar-footer">
-    <button class="btn-volver" (click)="volver()">Volver</button>
   </div>
-
 </div>
