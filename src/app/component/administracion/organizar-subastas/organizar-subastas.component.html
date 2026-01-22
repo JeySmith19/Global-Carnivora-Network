@@ -1,45 +1,59 @@
 <div class="organizar-container">
 
+  <!-- HEADER -->
   <header class="organizar-header">
     <button class="btn-volver" (click)="volver()">← Volver</button>
     <h2>Subastas del Evento</h2>
     <span class="evento-id">Evento #{{ idEvento }}</span>
   </header>
 
+  <!-- LISTA -->
   <div class="lista-subastas">
 
     <div class="fila-subasta" *ngFor="let s of subastas">
 
-      <!-- IMAGEN PRINCIPAL -->
-      <input type="checkbox" id="img-{{s.id}}" hidden>
-      <label class="img-box" for="img-{{s.id}}">
+      <!-- IMAGEN -->
+      <input type="checkbox" id="img-{{ s.id }}" hidden>
+      <label class="img-box" for="img-{{ s.id }}">
         <img *ngIf="s.imagen; else noImg" [src]="s.imagen">
         <ng-template #noImg>
           <div class="img-empty">Sin imagen</div>
         </ng-template>
       </label>
 
-      <!-- DATOS BÁSICOS -->
+      <!-- INFO -->
       <div class="info">
         <h3>{{ s.planta }}</h3>
+
         <p class="meta">
-          <span class="estado">{{ s.estado }}</span>
+          <span
+            class="estado"
+            [ngClass]="{
+              'estado-pendiente': s.estado === 'PENDIENTE',
+              'estado-aceptado': s.estado === 'ACEPTADA',
+              'estado-rechazado': s.estado === 'RECHAZADA'
+            }">
+            {{ s.estado }}
+          </span>
+
           <span class="precio">S/ {{ s.precioBase }}</span>
         </p>
+
         <p class="sub">Subastador: {{ s.username }}</p>
       </div>
 
-      <!-- BOTÓN DETALLE -->
+      <!-- ACCIONES -->
       <div class="acciones">
-        <input type="checkbox" id="det-{{s.id}}" hidden>
-        <label for="det-{{s.id}}" class="btn-detalle">Ver Detalle</label>
+        <input type="checkbox" id="det-{{ s.id }}" hidden>
+        <label for="det-{{ s.id }}" class="btn-detalle">Ver Detalle</label>
 
         <!-- DRAWER -->
         <div class="drawer">
           <div class="drawer-header">
             <h3>{{ s.planta }}</h3>
-            <label for="det-{{s.id}}">×</label>
+            <label for="det-{{ s.id }}">×</label>
           </div>
+
           <div class="drawer-body">
             <p><b>Subasta:</b> {{ s.numeroSubasta || '-' }}</p>
             <p><b>Fecha:</b> {{ s.fechaEvento | date:'dd/MM/yyyy' }}</p>
@@ -47,23 +61,29 @@
             <p><b>Hora Fin:</b> {{ s.horaFinAsignada || '-' }}</p>
             <p><b>Duración:</b> {{ s.duracionSubastaMinutos }} min</p>
             <p><b>Descanso:</b> {{ s.descansoMinutos }} min</p>
+
             <hr>
+
             <p><b>Contacto:</b> {{ s.username }}</p>
-            <p><b>Contacto:</b> {{ s.city }}</p>
-            <p><b>Contacto:</b> {{ s.phone }}</p>
-            <p *ngIf="s.observaciones"><b>Observaciones:</b> {{ s.observaciones }}</p>
+            <p><b>Ciudad:</b> {{ s.city }}</p>
+            <p><b>Teléfono:</b> {{ s.phone }}</p>
+
+            <p *ngIf="s.observaciones">
+              <b>Observaciones:</b> {{ s.observaciones }}
+            </p>
+
             <div class="drawer-acciones">
-              <button class="btn-aceptar">Aceptar</button>
-              <button class="btn-rechazar">Rechazar</button>
+              <button class="btn-aceptar" (click)="aceptar(s)">Aceptar</button>
+              <button class="btn-rechazar" (click)="rechazar(s)">Rechazar</button>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ZOOM IMAGEN -->
+      <!-- ZOOM -->
       <div class="zoom">
         <div class="zoom-bg"></div>
-        <label for="img-{{s.id}}" class="zoom-close">×</label>
+        <label for="img-{{ s.id }}" class="zoom-close">×</label>
         <img [src]="s.imagen">
       </div>
 

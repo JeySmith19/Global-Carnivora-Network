@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subasta } from 'src/app/model/subasta';
+import { AdministracionService } from 'src/app/service/administracion.service';
 import { SubastaService } from 'src/app/service/subasta.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class OrganizarSubastasComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private subastaService: SubastaService
+    private subastaService: SubastaService,
+    private adminService: AdministracionService
   ) {}
 
   ngOnInit(): void {
@@ -33,4 +35,14 @@ export class OrganizarSubastasComponent implements OnInit {
   volver() {
     this.router.navigate(['/components/eventos']);
   }
+
+  aceptar(subasta: Subasta) {
+  this.adminService.decidirSubasta(subasta.id, 'ACEPTADA')
+    .subscribe(() => this.cargarSubastas());
+}
+
+rechazar(subasta: Subasta) {
+  this.adminService.decidirSubasta(subasta.id, 'RECHAZADA')
+    .subscribe(() => this.cargarSubastas());
+}
 }

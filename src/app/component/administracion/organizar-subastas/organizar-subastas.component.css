@@ -225,6 +225,28 @@ input:checked ~ .zoom {
   cursor: pointer;
 }
 
+.estado {
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.estado-pendiente {
+  color: #92400e;
+  background: #fef3c7;
+}
+
+.estado-aceptado {
+  color: #065f46;
+  background: var(--color-success);
+}
+
+.estado-rechazado {
+  color: #7f1d1d;
+  background: #fee2e2;
+}
+
 @media (max-width: 768px) {
   .fila-subasta {
     grid-template-columns: 1fr;

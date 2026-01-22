@@ -37,4 +37,13 @@ export class AdministracionService {
       { headers: this.getHeaders() }
     );
   }
+
+  decidirSubasta(id: number, estado: string) {
+  return this.http.put(
+    `${this.url}/subastas/${id}/decision/${estado}`,
+    {},
+    { headers: this.getHeaders() }
+  );
+}
+
 }
