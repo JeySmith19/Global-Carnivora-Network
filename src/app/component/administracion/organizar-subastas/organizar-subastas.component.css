@@ -83,7 +83,7 @@
 
 .precio {
   font-weight: bold;
-  color: var(--color-success);
+  color: var(--color-text-muted);
 }
 
 .sub {
@@ -157,14 +157,15 @@ input:checked ~ .drawer {
 }
 
 .btn-aceptar {
-  background: var(--color-success);
+  background: var(--color-btn-danger);
   color: var(--color-btn-text-light);
 }
 
 .btn-rechazar {
-  background: var(--color-btn-danger);
-  color: var(--color-btn-text-light);
+  background: var(--color-success);
+  color: var(--color-btn-danger);
 }
+
 
 .zoom {
   position: fixed;

@@ -25,9 +25,8 @@
         <p class="meta">
           <span class="estado">{{ s.estado }}</span>
           <span class="precio">S/ {{ s.precioBase }}</span>
-          <span class="hora">{{ s.horaInicio }}</span>
         </p>
-        <p class="sub">Subastador: {{ s.username }} · {{ s.city }}</p>
+        <p class="sub">Subastador: {{ s.username }}</p>
       </div>
 
       <!-- BOTÓN DETALLE -->
@@ -49,6 +48,8 @@
             <p><b>Duración:</b> {{ s.duracionSubastaMinutos }} min</p>
             <p><b>Descanso:</b> {{ s.descansoMinutos }} min</p>
             <hr>
+            <p><b>Contacto:</b> {{ s.username }}</p>
+            <p><b>Contacto:</b> {{ s.city }}</p>
             <p><b>Contacto:</b> {{ s.phone }}</p>
             <p *ngIf="s.observaciones"><b>Observaciones:</b> {{ s.observaciones }}</p>
             <div class="drawer-acciones">
