@@ -281,6 +281,53 @@ input[id^="img-"]:checked ~ .zoom {
   }
 }
 
+.badge-numero {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  z-index: 2;
+}
+
+.img-box {
+  position: relative;
+}
+
+.planta {
+  font-size: 18px;
+  margin: 0;
+}
+
+.precio-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 6px 0 8px;
+}
+
+.precio {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.btn-detalle.primary {
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-light);
+  border: none;
+  padding: 10px 18px;
+}
+
+.btn-detalle.primary:hover {
+  background: var(--color-btn-primary-light);
+}
+
+
 @media (max-width: 768px) {
   .organizar-header {
     grid-template-columns: 1fr;

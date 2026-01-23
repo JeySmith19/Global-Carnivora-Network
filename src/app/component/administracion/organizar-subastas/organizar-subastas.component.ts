@@ -28,7 +28,9 @@ export class OrganizarSubastasComponent implements OnInit {
 
   cargarSubastas() {
     this.subastaService.listByEvento(this.idEvento).subscribe(data => {
-      this.subastas = data;
+      this.subastas = data.filter(s =>
+        s.estado === 'PENDIENTE' || s.estado === 'RECHAZADA'
+      );
     });
   }
 
@@ -37,17 +39,16 @@ export class OrganizarSubastasComponent implements OnInit {
   }
 
   aceptar(subasta: Subasta) {
-  this.adminService.decidirSubasta(subasta.id, 'ACEPTADA')
-    .subscribe(() => this.cargarSubastas());
-}
+    this.adminService.decidirSubasta(subasta.id, 'ACEPTADA')
+      .subscribe(() => this.cargarSubastas());
+  }
 
-rechazar(subasta: Subasta) {
-  this.adminService.decidirSubasta(subasta.id, 'RECHAZADA')
-    .subscribe(() => this.cargarSubastas());
-}
+  rechazar(subasta: Subasta) {
+    this.adminService.decidirSubasta(subasta.id, 'RECHAZADA')
+      .subscribe(() => this.cargarSubastas());
+  }
 
-verAceptadas() {
-  this.router.navigate(['/components/subastas-aceptadas', this.idEvento]);
-}
-
+  verAceptadas() {
+    this.router.navigate(['/components/subastas-aceptadas', this.idEvento]);
+  }
 }

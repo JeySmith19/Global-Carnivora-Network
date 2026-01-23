@@ -18,6 +18,7 @@
 
     <div class="fila-subasta" *ngFor="let s of subastas">
 
+      <!-- IMAGEN -->
       <input type="checkbox" id="img-{{ s.id }}" hidden>
       <label class="img-box" for="img-{{ s.id }}">
         <img *ngIf="s.imagen; else noImg" [src]="s.imagen">
@@ -26,6 +27,7 @@
         </ng-template>
       </label>
 
+      <!-- INFO -->
       <div class="info">
         <h3>{{ s.planta }}</h3>
 
@@ -46,10 +48,14 @@
         <p class="sub">Subastador: {{ s.username }}</p>
       </div>
 
+      <!-- ACCIONES -->
       <div class="acciones">
         <input type="checkbox" id="det-{{ s.id }}" hidden>
-        <label for="det-{{ s.id }}" class="btn-detalle">Ver Detalle</label>
+        <label for="det-{{ s.id }}" class="btn-detalle">
+          Ver Detalle
+        </label>
 
+        <!-- DRAWER -->
         <div class="drawer">
           <div class="drawer-header">
             <h3>{{ s.planta }}</h3>
@@ -74,14 +80,30 @@
               <b>Observaciones:</b> {{ s.observaciones }}
             </p>
 
+            <!-- ACCIONES SEGÚN ESTADO -->
             <div class="drawer-acciones">
-              <button class="btn-aceptar" (click)="aceptar(s)">Aceptar</button>
-              <button class="btn-rechazar" (click)="rechazar(s)">Rechazar</button>
+
+              <!-- PENDIENTE -->
+              <ng-container *ngIf="s.estado === 'PENDIENTE'">
+                <button class="btn-aceptar" (click)="aceptar(s)">
+                  Aceptar
+                </button>
+                <button class="btn-rechazar" (click)="rechazar(s)">
+                  Rechazar
+                </button>
+              </ng-container>
+
+              <!-- RECHAZADA -->
+              <p *ngIf="s.estado === 'RECHAZADA'" class="mensaje-rechazada">
+                Esta subasta ha sido rechazada por un administrador.
+              </p>
+
             </div>
           </div>
         </div>
       </div>
 
+      <!-- ZOOM -->
       <div class="zoom">
         <div class="zoom-bg"></div>
         <label for="img-{{ s.id }}" class="zoom-close">×</label>
@@ -90,6 +112,7 @@
 
     </div>
 
+    <!-- SIN DATOS -->
     <p *ngIf="!subastas.length" class="sin-datos">
       No hay subastas registradas.
     </p>

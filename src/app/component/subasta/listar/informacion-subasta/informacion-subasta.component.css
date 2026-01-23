@@ -1,82 +1,90 @@
 .detalle-container {
-  padding: 40px 20px;
-  background: var(--color-bg-alt);
-  min-height: 100vh;
+  max-width: 1100px;
+  margin: 32px auto;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .detalle-card {
-  max-width: 1000px;
-  margin: 0 auto;
   background: var(--color-bg);
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-  padding: 25px 30px 30px;
+  border-radius: 22px;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.08);
+  overflow: hidden;
 }
 
+/* HEADER */
 .detalle-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 25px;
-  padding-bottom: 15px;
+  padding: 20px 24px;
   border-bottom: 1px solid var(--color-border);
+  background: linear-gradient(
+    180deg,
+    var(--color-bg-alt),
+    var(--color-bg)
+  );
 }
 
 .detalle-header h2 {
   margin: 0;
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 22px;
   color: var(--color-title);
 }
 
 .estado {
   padding: 6px 14px;
-  border-radius: 16px;
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: var(--color-bg);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
 }
 
-.estado.pendiente { background: var(--color-estado-pendiente); }
-.estado.aceptado { background: var(--color-estado-aceptado); }
-.estado.rechazado { background: var(--color-estado-rechazado); }
+.estado.pendiente {
+  background: var(--color-estado-pendiente);
+  color: #92400e;
+}
 
+.estado.aceptada {
+  background: var(--color-estado-aceptado);
+  color: var(--color-secondary);
+}
+
+.estado.rechazada {
+  background: #fee2e2;
+  color: var(--color-estado-rechazado);
+}
+
+/* GRID */
 .detalle-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
+  grid-template-columns: 420px 1fr;
+  gap: 24px;
+  padding: 24px;
 }
 
+/* IMAGEN */
 .detalle-imagen {
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-alt);
   display: flex;
-  justify-content: center;
   align-items: center;
-  grid-column: 1 / -1;
-  margin-bottom: 10px;
+  justify-content: center;
 }
 
 .detalle-imagen img {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid var(--color-bg);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .sin-imagen {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  background: var(--color-muted);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--color-btn-primary-light);
-  font-style: italic;
+  font-size: 14px;
+  color: var(--color-text-muted);
 }
 
+/* BLOQUES */
 .detalle-bloque {
   background: var(--color-bg-alt);
   border-radius: 16px;
@@ -85,42 +93,52 @@
 }
 
 .detalle-bloque h3 {
-  margin: 0 0 10px 0;
-  font-size: 16px;
-  font-weight: 700;
+  margin: 0 0 10px;
+  font-size: 15px;
   color: var(--color-title);
 }
 
 .detalle-bloque p {
   margin: 6px 0;
-  font-size: 14px;
-  color: var(--color-subtitle);
+  font-size: 13px;
+  color: var(--color-text-muted);
 }
 
-.detalle-bloque p strong {
-  font-weight: 600;
-  color: var(--color-text);
+.detalle-bloque strong {
+  color: var(--color-title);
 }
 
+/* FOOTER */
 .detalle-footer {
-  margin-top: 25px;
+  padding: 18px 24px;
+  border-top: 1px solid var(--color-border);
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+  background: var(--color-bg);
 }
 
-.btn-volver {
-  background: linear-gradient(135deg, var(--color-btn-primary), var(--color-btn-primary-light));
-  color: var(--color-btn-text-light);
-  border: none;
-  padding: 12px 28px;
-  border-radius: 20px;
+.detalle-footer .btn-volver {
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-  transition: all 0.3s ease;
+  color: var(--color-title);
 }
 
-.btn-volver:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(0,0,0,0.15);
+.detalle-footer .btn-volver:hover {
+  background: var(--color-border);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .detalle-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detalle-imagen {
+    height: 260px;
+  }
 }

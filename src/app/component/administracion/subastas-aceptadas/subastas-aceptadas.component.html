@@ -7,6 +7,10 @@
       <h2>Subastas Aceptadas</h2>
       <span class="evento-id">Listado general</span>
     </div>
+
+    <button class="btn-secundario" (click)="Generar()">
+      Generar subastas
+    </button>
   </header>
 
   <!-- LISTA -->
@@ -17,6 +21,8 @@
       <!-- IMAGEN -->
       <input type="checkbox" id="img-{{ s.id }}" hidden>
       <label class="img-box" for="img-{{ s.id }}">
+        <span class="badge-numero">#{{ s.numeroSubasta || '-' }}</span>
+
         <img *ngIf="s.imagen; else noImg" [src]="s.imagen">
         <ng-template #noImg>
           <div class="img-empty">Sin imagen</div>
@@ -25,21 +31,26 @@
 
       <!-- INFO -->
       <div class="info">
-        <h3>{{ s.planta }}</h3>
 
-        <p class="meta">
-          <span class="estado estado-aceptado">ACEPTADA</span>
+        <h3 class="planta">{{ s.planta }}</h3>
+
+        <div class="precio-row">
           <span class="precio">S/ {{ s.precioBase }}</span>
+          <span class="estado estado-aceptado">ACEPTADA</span>
+        </div>
+
+        <p class="sub">
+          Subastador: <b>{{ s.username }}</b>
         </p>
 
-        <p class="sub">Subastador: {{ s.username }}</p>
-        <p class="sub">Evento: {{ s.eventoNombre }}</p>
       </div>
 
-      <!-- DETALLE -->
+      <!-- ACCIONES -->
       <div class="acciones">
         <input type="checkbox" id="det-{{ s.id }}" hidden>
-        <label for="det-{{ s.id }}" class="btn-detalle">Ver Detalle</label>
+        <label for="det-{{ s.id }}" class="btn-detalle primary">
+          Ver detalle
+        </label>
 
         <div class="drawer">
           <div class="drawer-header">

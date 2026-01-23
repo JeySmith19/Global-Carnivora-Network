@@ -230,6 +230,15 @@ input[id^="det-"]:checked ~ .drawer {
   background: #fecaca;
 }
 
+.mensaje-rechazada {
+  font-size: 13px;
+  color: var(--color-estado-rechazado);
+  background: #fee2e2;
+  padding: 10px 12px;
+  border-radius: 10px;
+  text-align: center;
+}
+
 .zoom {
   position: fixed;
   inset: 0;
