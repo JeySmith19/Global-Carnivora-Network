@@ -50,9 +50,23 @@
       </div>
 
       <div class="card-footer">
+        <!-- Detalles siempre disponibles -->
         <button class="btn-detalles" (click)="verDetalles(s)">Ver Detalles</button>
-        <button class="btn-editar" (click)="editar(s)">Editar</button>
-        <button class="btn-eliminar" (click)="eliminar(s.id)">Eliminar</button>
+
+        <!-- Editar y Eliminar solo si NO es aceptada y NO es rechazada respectivamente -->
+        <button 
+          class="btn-editar" 
+          *ngIf="s.estado !== 'ACEPTADA' && s.estado !== 'RECHAZADA'" 
+          (click)="editar(s)">
+          Editar
+        </button>
+
+        <button 
+          class="btn-eliminar" 
+          *ngIf="s.estado !== 'ACEPTADA'" 
+          (click)="eliminar(s.id)">
+          Eliminar
+        </button>
       </div>
 
     </div>
