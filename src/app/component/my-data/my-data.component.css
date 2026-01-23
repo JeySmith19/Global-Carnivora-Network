@@ -1,0 +1,131 @@
+/* Panel principal */
+.dashboard-panel {
+  max-width: 700px;
+  margin: 50px auto;
+  padding: 35px 40px;
+  background-color: var(--color-bg);
+  border-left: 6px solid var(--color-primary);
+  border-radius: 12px;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+}
+
+/* Header con avatar */
+.profile-top {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+  font-weight: bold;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 25px;
+}
+
+.profile-info h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: var(--color-title);
+}
+
+.profile-info .username {
+  font-size: 1rem;
+  color: var(--color-subtitle);
+  margin-top: 5px;
+}
+
+/* Contenido del perfil */
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  border-top: 1px solid var(--color-border);
+  padding-top: 20px;
+}
+
+.content-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.content-label {
+  font-weight: 600;
+  color: var(--color-primary);
+  flex: 1;
+}
+
+.content-value {
+  flex: 2;
+  text-align: right;
+  color: var(--color-text);
+}
+
+.roles-row .role-pill {
+  display: inline-block;
+  background-color: var(--color-success);
+  color: var(--color-primary);
+  padding: 6px 14px;
+  margin-right: 6px;
+  margin-top: 4px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+/* Mensajes */
+.loading {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--color-primary);
+}
+
+.error {
+  text-align: center;
+  color: var(--color-btn-danger);
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .dashboard-panel {
+    padding: 25px 20px;
+  }
+
+  .profile-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .avatar {
+    width: 70px;
+    height: 70px;
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+
+  .profile-info h2 {
+    font-size: 1.5rem;
+  }
+
+  .content-row {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .content-value {
+    text-align: left;
+    margin-top: 4px;
+  }
+}

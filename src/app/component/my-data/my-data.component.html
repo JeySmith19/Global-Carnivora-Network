@@ -1,0 +1,32 @@
+<div class="dashboard-panel" *ngIf="!loading; else loadingTpl">
+  <div class="profile-top">
+    <div class="avatar">{{ user.name.charAt(0) }}{{ user.lastName.charAt(0) }}</div>
+    <div class="profile-info">
+      <h2>{{ user.name }} {{ user.lastName }}</h2>
+      <p class="username">{{ user.username }}</p>
+    </div>
+  </div>
+
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <div *ngIf="!error" class="profile-content">
+    <div class="content-row">
+      <div class="content-label">Teléfono</div>
+      <div class="content-value">{{ user.phone }}</div>
+    </div>
+    <div class="content-row">
+      <div class="content-label">Ciudad</div>
+      <div class="content-value">{{ user.city }}</div>
+    </div>
+    <div class="content-row roles-row">
+      <div class="content-label">Roles</div>
+      <div class="content-value">
+        <span *ngFor="let role of user.roles" class="role-pill">{{ role }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingTpl>
+  <p class="loading">Cargando información...</p>
+</ng-template>

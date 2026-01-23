@@ -8,6 +8,8 @@ import { ListarComponent } from './subasta/listar/listar.component';
 import { InformacionSubastaComponent } from './subasta/listar/informacion-subasta/informacion-subasta.component';
 import { OrganizarSubastasComponent } from './administracion/organizar-subastas/organizar-subastas.component';
 import { SubastasAceptadasComponent } from './administracion/subastas-aceptadas/subastas-aceptadas.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { MyDataComponent } from './my-data/my-data.component';
 
 
 
@@ -19,7 +21,9 @@ import { SubastasAceptadasComponent } from './administracion/subastas-aceptadas/
     ListarComponent,
     InformacionSubastaComponent,
     OrganizarSubastasComponent,
-    SubastasAceptadasComponent
+    SubastasAceptadasComponent,
+    DashboardComponent,
+    MyDataComponent
   ],
   
   imports: [
