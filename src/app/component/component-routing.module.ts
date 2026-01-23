@@ -6,6 +6,7 @@ import { SubastaComponent } from './subasta/subasta.component';
 import { ListarComponent } from './subasta/listar/listar.component';
 import { InformacionSubastaComponent } from './subasta/listar/informacion-subasta/informacion-subasta.component';
 import { OrganizarSubastasComponent } from './administracion/organizar-subastas/organizar-subastas.component';
+import { SubastasAceptadasComponent } from './administracion/subastas-aceptadas/subastas-aceptadas.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'ver-subastas', component: ListarComponent },
   { path: 'detalles', component: InformacionSubastaComponent },
   { path: 'organizar-subastas/:idEvento', component: OrganizarSubastasComponent },
-
+  { path: 'subastas-aceptadas/:idEvento', component: SubastasAceptadasComponent }
+  
 ];
 
 @NgModule({

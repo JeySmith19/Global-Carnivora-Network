@@ -46,4 +46,11 @@ export class AdministracionService {
   );
 }
 
+listarSubastasAceptadas() {
+  return this.http.get<Subasta[]>(
+    `${this.url}/subastas/aceptadas`,
+    { headers: this.getHeaders() }
+  );
+}
+
 }

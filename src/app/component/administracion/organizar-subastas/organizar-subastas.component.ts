@@ -45,4 +45,9 @@ rechazar(subasta: Subasta) {
   this.adminService.decidirSubasta(subasta.id, 'RECHAZADA')
     .subscribe(() => this.cargarSubastas());
 }
+
+verAceptadas() {
+  this.router.navigate(['/components/subastas-aceptadas', this.idEvento]);
+}
+
 }
