@@ -55,7 +55,7 @@ export class RegisterComponent implements OnInit {
       id: 0,
       username: this.form.value.username,
       password: this.form.value.password,
-      roles: ['USER'],
+      roles: ['SUBASTADOR'],
       name: this.form.value.name,
       lastName: this.form.value.lastName,
       phone: this.form.value.phone,

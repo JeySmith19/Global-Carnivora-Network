@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserData } from 'src/app/model/security/userdata';
 import { MydataService } from 'src/app/service/mydata.service';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/service/security/login.service';
 
 @Component({
   selector: 'app-my-data',
@@ -13,7 +15,7 @@ export class MyDataComponent implements OnInit {
   loading: boolean = true;
   error: string = '';
 
-  constructor(private mydataService: MydataService) { }
+  constructor(private mydataService: MydataService, private router: Router, private loginService: LoginService) { }
 
   ngOnInit(): void {
     this.loadUserData();
@@ -31,5 +33,10 @@ export class MyDataComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  logout() {
+    sessionStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 }

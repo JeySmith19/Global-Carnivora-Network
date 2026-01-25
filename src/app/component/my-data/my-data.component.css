@@ -96,6 +96,22 @@
   margin-bottom: 15px;
 }
 
+.btn-logout {
+  margin-left: auto;
+  padding: 8px 14px;
+  background-color: var(--color-btn-danger);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.btn-logout:hover {
+  background-color: darkred;
+}
+
 /* Responsivo */
 @media (max-width: 600px) {
   .dashboard-panel {
