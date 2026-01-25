@@ -1,71 +1,65 @@
 <div class="subasta-container">
-  <h2>{{ subastaEditando ? 'Editar Subasta' : 'Crear Subasta' }}</h2>
+  <h2>{{ subastaEditando ? 'Editar Subasta' : 'Crea tu Subasta' }}</h2>
 
-  <div class="form-group">
-    <label>Evento *</label>
-    <select [(ngModel)]="subasta.eventoId" name="eventoId" required>
-      <option value="" disabled>Selecciona un evento</option>
-      <option *ngFor="let e of eventosAbiertos" [value]="e.id">
-        {{ e.nombre }} - {{ e.fechaEvento | date:'shortDate' }} - {{ e.horaInicio }}
-      </option>
-    </select>
+  <div *ngIf="eventosAbiertos.length > 0; else noEventos">
+
+    <div class="form-group">
+      <label>Evento *</label>
+      <select [(ngModel)]="subasta.eventoId" name="eventoId" required>
+        <option value="" disabled>Selecciona un evento</option>
+        <option *ngFor="let e of eventosAbiertos" [value]="e.id">
+          {{ e.nombre }} - {{ e.fechaEvento | date:'shortDate' }} - {{ e.horaInicio }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Planta *</label>
+      <input type="text" [(ngModel)]="subasta.planta" placeholder="Nombre de la planta" required />
+    </div>
+
+    <div class="form-group">
+      <label>Maceta (opcional)</label>
+      <input type="text" [(ngModel)]="subasta.maceta" placeholder="Tamaño de maceta" />
+    </div>
+
+    <div class="form-group">
+      <label>Precio base (S/) *</label>
+      <input type="number" [(ngModel)]="subasta.precioBase" placeholder="Ej: 100" required />
+    </div>
+
+    <div class="form-group">
+      <label>Observaciones (opcional)</label>
+      <input type="text" [(ngModel)]="subasta.observaciones" placeholder="Coloca alguna observación" />
+    </div>
+
+    <div class="form-group">
+      <label>Imagen *</label>
+      <label class="upload-box">
+        <span>📷 Seleccionar imagen</span>
+        <input type="file" accept="image/*" (change)="onFileSelected($event)" hidden />
+      </label>
+    </div>
+
+    <div *ngIf="previewUrl" class="preview">
+      <img [src]="previewUrl" />
+    </div>
+
+    <div class="acciones-form">
+      <button class="btn-crear" (click)="subastaEditando ? guardarEdicion() : crear()">
+        {{ subastaEditando ? 'Guardar cambios' : 'Crear Subasta' }}
+      </button>
+      <button class="btn-cancelar" (click)="cancelarEdicion()">Cancelar</button>
+    </div>
+
   </div>
 
-  <div class="form-group">
-    <label>Planta *</label>
-    <input type="text"
-           [(ngModel)]="subasta.planta"
-           placeholder="Nombre de la planta"
-           required />
-  </div>
-
-  <div class="form-group">
-    <label>Maceta (opcional)</label>
-    <input type="text"
-           [(ngModel)]="subasta.maceta"
-           placeholder="Tamaño de maceta" />
-  </div>
-
-  <div class="form-group">
-    <label>Precio base (S/) *</label>
-    <input type="number"
-           [(ngModel)]="subasta.precioBase"
-           placeholder="Ej: 100"
-           required />
-  </div>
-
-  <div class="form-group">
-    <label>Observaciones (opcional)</label>
-    <input type="text"
-           [(ngModel)]="subasta.observaciones"
-           placeholder="Coloca alguna observación" />
-  </div>
-
-  <div class="form-group">
-    <label>Imagen *</label>
-
-    <label class="upload-box">
-      <span>📷 Seleccionar imagen</span>
-      <input type="file"
-             accept="image/*"
-             (change)="onFileSelected($event)"
-             hidden />
-    </label>
-  </div>
-
-  <div *ngIf="previewUrl" class="preview">
-    <img [src]="previewUrl" />
-  </div>
-
-  <div class="acciones-form">
-    <button class="btn-crear"
-            (click)="subastaEditando ? guardarEdicion() : crear()">
-      {{ subastaEditando ? 'Guardar cambios' : 'Crear Subasta' }}
-    </button>
-
-    <button class="btn-cancelar"
-            (click)="cancelarEdicion()">
-      Cancelar
-    </button>
-  </div>
+  <ng-template #noEventos>
+    <div class="no-eventos-wrapper">
+      <p class="no-eventos">🚫 Por el momento no hay eventos abiertos, vuelve más tarde.</p>
+      <div class="acciones-form">
+        <button class="btn-cancelar" (click)="cancelarEdicion()">Volver</button>
+      </div>
+    </div>
+  </ng-template>
 </div>

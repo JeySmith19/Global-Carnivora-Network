@@ -5,6 +5,7 @@ import { EventoService } from 'src/app/service/evento.service';
 import { SubastaService } from 'src/app/service/subasta.service';
 import { Evento } from 'src/app/model/evento';
 import { Subasta } from 'src/app/model/subasta';
+import { Roles } from 'src/app/model/security/roles';
 
 @Component({
   selector: 'app-dashboard',
@@ -106,4 +107,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
     tick();
     this.timer = setInterval(tick, 1000);
   }
+
+  isAdmin(): boolean {
+    return this.user?.roles?.includes(Roles.ADMIN);
+  }
+
+  goOrganizarEvento() {
+this.router.navigate(['/components/eventos']);
+}
 }
