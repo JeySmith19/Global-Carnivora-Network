@@ -8,17 +8,19 @@ import { InformacionSubastaComponent } from './subasta/listar/informacion-subast
 import { OrganizarSubastasComponent } from './administracion/organizar-subastas/organizar-subastas.component';
 import { SubastasAceptadasComponent } from './administracion/subastas-aceptadas/subastas-aceptadas.component';
 import { MyDataComponent } from './my-data/my-data.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'eventos', component: EventoComponent },
-  { path: 'subastas', component: SubastaComponent },        // crear subasta
-  { path: 'subastas/:id', component: SubastaComponent },    // editar subasta
+  { path: 'subastas', component: SubastaComponent },
+  { path: 'subastas/:id', component: SubastaComponent },
   { path: 'ver-subastas', component: ListarComponent },
   { path: 'detalles', component: InformacionSubastaComponent },
   { path: 'organizar-subastas/:idEvento', component: OrganizarSubastasComponent },
   { path: 'subastas-aceptadas/:idEvento', component: SubastasAceptadasComponent },
-  { path: 'mi-informacion', component: MyDataComponent }
+  { path: 'mi-informacion', component: MyDataComponent },
+  { path: 'dashboard', component: DashboardComponent }
 
   
 ];

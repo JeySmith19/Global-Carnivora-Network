@@ -1,1 +1,82 @@
-<p>dashboard works!</p>
+<div class="dashboard">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <h1>Hola, {{ user?.name }}</h1>
+      <p class="subtitle" *ngIf="eventoActivo">
+        {{ eventoActivo.estado === 'ABIERTO' ? 'Evento disponible' : 'Evento cerrado' }}
+      </p>
+    </div>
+
+    <div class="top-actions">
+      <button class="btn-secondary" (click)="go('/components/ver-subastas')">
+        Mis subastas
+      </button>
+
+      <button class="btn-primary" (click)="go('/components/subastas')" *ngIf="eventoActivo?.estado === 'ABIERTO'">
+        Crear subasta
+      </button>
+
+      <div class="profile-icon" (click)="go('/components/perfil')">
+        {{ user?.name?.charAt(0) }}
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <div class="block">
+      <span>Total enviadas</span>
+      <strong>{{ subastas.length }}</strong>
+      <small>Esta semana</small>
+    </div>
+
+    <div class="block success">
+      <span>Aceptadas</span>
+      <strong>{{ subastasAceptadas }}</strong>
+    </div>
+
+    <div class="block warning">
+      <span>Pendientes</span>
+      <strong>{{ subastasPendientes }}</strong>
+    </div>
+
+    <div class="block danger">
+      <span>Rechazadas</span>
+      <strong>{{ subastasRechazadas }}</strong>
+    </div>
+
+    <div class="block wide info" *ngIf="eventoActivo">
+      <span>Evento</span>
+      <strong>{{ eventoActivo.nombre }}</strong>
+      <small>{{ eventoActivo.fechaEvento | date:'dd/MM/yyyy' }} - {{ eventoActivo.horaInicio }}</small>
+    </div>
+
+    <div class="block wide timer" *ngIf="eventoActivo">
+      <span>{{ tituloTiempo }}</span>
+      <strong>{{ tiempoRestante }}</strong>
+      <small>
+        Duración por subasta: {{ eventoActivo.duracionSubastaMinutos }} minutos
+      </small>
+    </div>
+
+    <div class="block wide neutral" *ngIf="subastasPendientes > 0">
+      <strong>Subastas en revisión</strong>
+      <p>
+        Aún hay subastas pendientes de evaluación.
+      </p>
+    </div>
+
+    <div class="block wide action" *ngIf="subastasPendientes === 0 && subastas.length > 0">
+      <strong>Subastas revisadas</strong>
+      <p>
+        Todas tus subastas ya fueron evaluadas.
+      </p>
+
+      <button class="btn-secondary" (click)="go('/components/ver-subastas')">
+        Ver mis subastas
+      </button>
+    </div>
+
+  </div>
+</div>
