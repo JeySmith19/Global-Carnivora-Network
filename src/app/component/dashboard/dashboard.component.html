@@ -17,8 +17,8 @@
         Crear subasta
       </button>
 
-      <button class="btn-primary" *ngIf="isAdmin()" (click)="goOrganizarEvento()">
-        Organizar un evento
+      <button class="btn-evento" *ngIf="isAdmin()" (click)="goOrganizarEvento()">
+        Administrar eventos
       </button>
 
       <div class="profile-icon" (click)="go('/components/perfil')">
