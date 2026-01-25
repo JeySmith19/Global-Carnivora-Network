@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'detalles', component: InformacionSubastaComponent },
   { path: 'organizar-subastas/:idEvento', component: OrganizarSubastasComponent },
   { path: 'subastas-aceptadas/:idEvento', component: SubastasAceptadasComponent },
-  { path: 'mi-informacion', component: MyDataComponent },
+  { path: 'perfil', component: MyDataComponent },
   { path: 'dashboard', component: DashboardComponent }
 
   

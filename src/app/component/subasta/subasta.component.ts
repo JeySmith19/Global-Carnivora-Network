@@ -118,6 +118,6 @@ export class SubastaComponent implements OnInit {
     this.subasta = new Subasta();
     this.subastaEditando = null;
     this.previewUrl = null;
-    this.router.navigate(['/components/ver-subastas']);
+    history.back();
   }
 }

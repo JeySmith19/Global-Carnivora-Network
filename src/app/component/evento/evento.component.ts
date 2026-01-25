@@ -14,6 +14,7 @@ export class EventoComponent implements OnInit {
   eventos: Evento[] = [];
   editando = false;
   showForm = false;
+  hayEventoAbierto = false;
 
   constructor(
     private eventoService: EventoService,
@@ -37,14 +38,17 @@ export class EventoComponent implements OnInit {
   listar() {
     this.eventoService.list().subscribe(data => {
       this.eventos = data;
+      this.hayEventoAbierto = this.eventos.some(e => e.estado === 'ABIERTO');
     });
   }
 
   guardar() {
+    if (this.hayEventoAbierto) return;
+
     this.eventoService.insert(this.evento).subscribe(() => {
       this.limpiar();
       this.listar();
-      this.showForm = !this.showForm;
+      this.showForm = false;
     });
   }
 
@@ -57,7 +61,7 @@ export class EventoComponent implements OnInit {
     this.eventoService.insert(this.evento).subscribe(() => {
       this.limpiar();
       this.listar();
-      this.showForm = !this.showForm;
+      this.showForm = false;
     });
   }
 
@@ -78,10 +82,9 @@ export class EventoComponent implements OnInit {
   }
 
   toggleForm() {
+    if (this.hayEventoAbierto && !this.editando) return;
     this.showForm = !this.showForm;
-    if (!this.showForm) {
-      this.limpiar();
-    }
+    if (!this.showForm) this.limpiar();
   }
 
   limpiar() {

@@ -1,19 +1,17 @@
-/* register.component.css */
-
 .register-wrapper {
   max-width: 400px;
   margin: 50px auto;
   padding: 30px 25px;
-  background: #ffffff;
+  background: var(--color-bg);
   border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .register-wrapper h2 {
   text-align: center;
   margin-bottom: 25px;
-  color: #333;
+  color: var(--color-title);
 }
 
 .register-form .form-group {
@@ -25,21 +23,23 @@
 .register-form label {
   font-weight: 500;
   margin-bottom: 6px;
-  color: #555;
+  color: var(--color-text-muted);
 }
 
 .register-form input {
   padding: 10px 12px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   font-size: 14px;
+  background: var(--color-bg);
+  color: var(--color-text);
   transition: all 0.2s;
 }
 
 .register-form input:focus {
-  border-color: #4caf50;
+  border-color: var(--color-primary);
   outline: none;
-  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+  box-shadow: 0 0 6px rgba(44, 122, 123, 0.3);
 }
 
 .password-wrapper {
@@ -54,9 +54,9 @@
 .password-wrapper .toggle-btn {
   margin-left: 8px;
   padding: 8px 10px;
-  background-color: #4caf50;
+  background-color: var(--color-primary);
   border: none;
-  color: white;
+  color: var(--color-btn-text-light);
   border-radius: 8px;
   cursor: pointer;
   font-size: 12px;
@@ -64,11 +64,11 @@
 }
 
 .password-wrapper .toggle-btn:hover {
-  background-color: #43a047;
+  background-color: var(--color-primary-light);
 }
 
 .register-form small {
-  color: #e53935;
+  color: var(--color-estado-rechazado);
   margin-top: 3px;
   font-size: 12px;
 }
@@ -76,8 +76,8 @@
 .btn-submit {
   width: 100%;
   padding: 12px;
-  background-color: #4caf50;
-  color: white;
+  background-color: var(--color-btn-primary);
+  color: var(--color-btn-text-light);
   font-size: 16px;
   font-weight: 600;
   border: none;
@@ -87,15 +87,15 @@
 }
 
 .btn-submit:hover:not([disabled]) {
-  background-color: #43a047;
+  background-color: var(--color-btn-primary-light);
 }
 
 .btn-submit:disabled {
-  background-color: #a5d6a7;
+  background-color: var(--color-muted);
   cursor: not-allowed;
 }
 
-/* Mensajes de éxito y error */
+/* Mensajes */
 .success-message,
 .error-message {
   margin-top: 20px;
@@ -106,13 +106,13 @@
 }
 
 .success-message {
-  background-color: #e8f5e9;
-  color: #2e7d32;
-  border: 1px solid #a5d6a7;
+  background-color: var(--color-success);
+  color: var(--color-secondary);
+  border: 1px solid var(--color-primary-light);
 }
 
 .error-message {
   background-color: #ffebee;
-  color: #c62828;
+  color: var(--color-estado-rechazado);
   border: 1px solid #ef9a9a;
 }

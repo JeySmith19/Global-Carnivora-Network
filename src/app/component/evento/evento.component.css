@@ -340,7 +340,10 @@
   }
 }
 
-/* ===== OPCIONAL: DOBLE COLUMNA PARA LISTA EN DESKTOP ===== */
+.warning{
+  color: var(--color-estado-rechazado);
+}
+
 @media (min-width: 1024px){
   .evento-page .lista-eventos{
     display: grid;

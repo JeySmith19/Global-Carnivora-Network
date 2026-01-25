@@ -10,7 +10,7 @@ import { OrganizarSubastasComponent } from './administracion/organizar-subastas/
 import { SubastasAceptadasComponent } from './administracion/subastas-aceptadas/subastas-aceptadas.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MyDataComponent } from './my-data/my-data.component';
-
+import { VolverComponent } from './elementos/botones/volver/volver.component';
 
 
 
@@ -23,7 +23,8 @@ import { MyDataComponent } from './my-data/my-data.component';
     OrganizarSubastasComponent,
     SubastasAceptadasComponent,
     DashboardComponent,
-    MyDataComponent
+    MyDataComponent,
+    VolverComponent,
   ],
   
   imports: [

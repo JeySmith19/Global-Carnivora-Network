@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit{
       sessionStorage.setItem("username", data.username);
       sessionStorage.setItem("rol", data.rol);
       this.loginService.getUserDetails().subscribe(() => {
-        this.router.navigate(['components/ver-subastas']);
+        this.router.navigate(['components/dashboard']);
       });
     }, error => {
       this.mensaje = "Credenciales incorrectas!!!"

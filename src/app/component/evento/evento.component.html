@@ -1,12 +1,19 @@
-<div class="evento-page">
 
-  <div class="top-bar">
-    <h2>Eventos de Subasta</h2>
-    <button class="btn-new" (click)="toggleForm()">
+<div class="evento-page">
+<app-volver></app-volver> 
+  <div class="top-bar"><br>
+    <h2> Eventos de Subasta</h2>
+    <button class="btn-new"
+            [disabled]="hayEventoAbierto"
+            (click)="toggleForm()">
       <i class="fa-solid fa-plus"></i>
       Nuevo evento
     </button>
   </div>
+
+  <strong><p class="warning" *ngIf="hayEventoAbierto">
+    Ya existe un evento abierto
+  </p></strong>
 
   <div class="lista-eventos">
 
@@ -30,7 +37,7 @@
 
       <div class="row-right">
 
-        <span class="estado-chip" 
+        <span class="estado-chip"
               [class.abierto]="e.estado === 'ABIERTO'"
               [class.cerrado]="e.estado === 'CERRADO'">
           {{ e.estado }}
@@ -38,12 +45,12 @@
 
         <div class="acciones">
 
-          <button class="icon-btn edit" 
+          <button class="icon-btn edit"
                   (click)="seleccionar(e); toggleForm()">
             <i class="fa-solid fa-pen"></i>
           </button>
 
-          <button class="icon-btn lock" 
+          <button class="icon-btn lock"
                   *ngIf="e.estado === 'ABIERTO'"
                   (click)="cerrarManual(e.id)">
             <i class="fa-solid fa-lock"></i>
@@ -54,7 +61,7 @@
             <i class="fa-solid fa-list"></i>
           </button>
 
-          <button class="icon-btn delete" 
+          <button class="icon-btn delete"
                   (click)="eliminar(e.id)">
             <i class="fa-solid fa-trash"></i>
           </button>
@@ -79,7 +86,7 @@
 
       <div class="form-section">
         <label>Nombre del evento</label>
-        <input [(ngModel)]="evento.nombre" placeholder="Ej: Subasta Carnívora #18" />
+        <input [(ngModel)]="evento.nombre" />
       </div>
 
       <div class="form-grid">
@@ -95,12 +102,12 @@
         </div>
 
         <div class="form-section">
-          <label>Duración por subasta (min)</label>
+          <label>Duración por subasta</label>
           <input type="number" [(ngModel)]="evento.duracionSubastaMinutos" />
         </div>
 
         <div class="form-section">
-          <label>Descanso entre subastas (min)</label>
+          <label>Descanso</label>
           <input type="number" [(ngModel)]="evento.descansoMinutos" />
         </div>
 

@@ -1,4 +1,5 @@
 <div class="detalle-container" *ngIf="subasta">
+  <app-volver></app-volver>
   <div class="detalle-card">
 
     <header class="detalle-header">
@@ -54,10 +55,6 @@
         <p>{{ subasta.observaciones }}</p>
       </div>
 
-    </div>
-
-    <div class="detalle-footer">
-      <button class="btn-volver" (click)="volver()">Volver</button>
     </div>
 
   </div>
