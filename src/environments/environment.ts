@@ -1,4 +1,5 @@
 export const environment = {
-    production:false,
-    base:"http://localhost:8080"
+    production: true, // Cambiado a true porque ya estás apuntando a producción
+    // base: "http://localhost:8080"
+    base: "https://gcn-backend-production.up.railway.app"
 }
