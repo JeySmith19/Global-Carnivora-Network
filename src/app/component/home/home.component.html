@@ -2,8 +2,7 @@
   <div class="container header-container">
     <h1>Global Carnívora Network</h1>
     <nav>
-      <button class="btn login" (click)="goLogin()">Iniciar sesión</button>
-      <button class="btn register" (click)="goRegister()">Registrarse</button>
+     <button class="btn login" (click)="goLogin()">Acceder</button>
     </nav>
   </div>
 </header>
@@ -57,7 +56,7 @@
 <section class="cta">
   <div class="container">
     <h3>Únete y contribuye a la comunidad</h3>
-    <button class="btn register">Regístrate ahora</button>
+    <button class="btn register" (click)="goRegister()" style="color: var(--color-success); border: 2px solid var(--color-success);">Regístrate ahora</button>
   </div>
 </section>
 

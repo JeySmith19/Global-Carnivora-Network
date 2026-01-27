@@ -118,3 +118,44 @@
   font-weight: 600;
   text-align: center;
 }
+
+@media (max-width: 992px) {
+  .subasta-container {
+    padding: 24px;
+  }
+  .preview img {
+    max-width: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .subasta-container {
+    margin: 24px 16px;
+    padding: 20px;
+  }
+  .acciones-form {
+    flex-direction: column;
+  }
+  .btn-crear,
+  .btn-cancelar {
+    width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .subasta-container h2 {
+    font-size: 18px;
+  }
+  .form-group input,
+  .form-group select {
+    font-size: 13px;
+    padding: 10px;
+  }
+  .upload-box {
+    font-size: 13px;
+    padding: 12px;
+  }
+  .preview img {
+    max-width: 180px;
+  }
+}

@@ -2,6 +2,7 @@
   max-width: 1200px;
   margin: 24px auto;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  padding: 0 16px;
 }
 
 .subastas-header {
@@ -9,6 +10,8 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .subastas-header h2 {
@@ -131,6 +134,7 @@
   gap: 10px;
   padding: 14px 16px;
   border-top: 1px solid var(--color-border);
+  flex-wrap: wrap;
 }
 
 .card-footer button {
@@ -167,8 +171,36 @@
   background: #fecaca;
 }
 
+@media (max-width: 1024px) {
+  .subastas-header h2 {
+    font-size: 20px;
+  }
+}
+
 @media (max-width: 768px) {
   .card-info-row {
     grid-template-columns: 1fr;
+  }
+  .card-body h3 {
+    font-size: 15px;
+  }
+  .btn-crear {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 520px) {
+  .subastas-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .subastas-header h2 {
+    font-size: 18px;
+  }
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 }

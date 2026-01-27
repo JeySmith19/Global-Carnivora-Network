@@ -10,6 +10,13 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+
+.topbar-left {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .topbar-left h1 {
@@ -20,7 +27,6 @@
 }
 
 .subtitle {
-  margin-top: 6px;
   font-size: 14px;
   color: var(--color-subtitle);
 }
@@ -29,6 +35,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
+  flex-wrap: wrap;
 }
 
 .profile-icon {
@@ -152,6 +159,20 @@
   cursor: pointer;
 }
 
+/* Large devices (3 col) */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .block.wide {
+    grid-column: span 3;
+  }
+  .topbar-left h1 {
+    font-size: 24px;
+  }
+}
+
+/* Medium devices (2 col) */
 @media (max-width: 900px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
@@ -159,8 +180,12 @@
   .block.wide {
     grid-column: span 2;
   }
+  .topbar-left h1 {
+    font-size: 22px;
+  }
 }
 
+/* Small devices (1 col) */
 @media (max-width: 520px) {
   .topbar {
     flex-direction: column;
@@ -172,5 +197,17 @@
   }
   .block.wide {
     grid-column: span 1;
+  }
+  .topbar-left h1 {
+    font-size: 20px;
+  }
+  .subtitle {
+    font-size: 12px;
+  }
+  .block strong {
+    font-size: 24px;
+  }
+  .block.timer strong {
+    font-size: 20px;
   }
 }

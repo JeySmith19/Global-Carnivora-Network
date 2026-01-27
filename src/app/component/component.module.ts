@@ -12,6 +12,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MyDataComponent } from './my-data/my-data.component';
 import { VolverComponent } from './elementos/botones/volver/volver.component';
 import { SinAccesoComponent } from './sin-acceso/sin-acceso.component';
+import { MantenimientoComponent } from './mantenimiento/mantenimiento.component';
 
 
 
@@ -27,6 +28,7 @@ import { SinAccesoComponent } from './sin-acceso/sin-acceso.component';
     MyDataComponent,
     VolverComponent,
     SinAccesoComponent,
+    MantenimientoComponent,
   ],
   
   imports: [

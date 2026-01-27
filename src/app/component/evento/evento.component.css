@@ -318,15 +318,41 @@
   transform: translateY(-1px);
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px){
-  .evento-page .form-grid{
+.warning{
+  color: var(--color-estado-rechazado);
+}
+
+@media (max-width: 1024px){
+  .evento-page .lista-eventos{
+    display: grid;
     grid-template-columns: 1fr;
+    gap: 14px;
   }
-  .evento-page .top-bar{
+  .evento-page .evento-row{
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
+    padding: 14px;
+  }
+  .evento-page .row-left{
+    width: 100%;
+    gap: 10px;
+  }
+  .evento-page .row-right{
+    width: 100%;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+  .evento-page .acciones{
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px){
+  .evento-page .top-bar{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
   }
   .evento-page .btn-new{
     width: 100%;
@@ -335,19 +361,39 @@
   .evento-page .drawer{
     width: 95%;
   }
+  .evento-page .drawer-body{
+    padding: 12px;
+  }
   .evento-page .drawer-header h3{
     font-size: 16px;
   }
+  .evento-page .form-grid{
+    grid-template-columns: 1fr;
+  }
+  .evento-page .form-section input{
+    font-size: 14px;
+  }
 }
 
-.warning{
-  color: var(--color-estado-rechazado);
-}
-
-@media (min-width: 1024px){
-  .evento-page .lista-eventos{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+@media (max-width: 480px){
+  .evento-page .top-bar h2{
+    font-size: 18px;
+  }
+  .evento-page .evento-info h3{
+    font-size: 14px;
+  }
+  .evento-page .fecha-badge .dia{
+    font-size: 13px;
+  }
+  .evento-page .fecha-badge .mes{
+    font-size: 10px;
+  }
+  .evento-page .estado-chip{
+    font-size: 10px;
+    padding: 3px 7px;
+  }
+  .evento-page .icon-btn{
+    padding: 4px;
+    font-size: 12px;
   }
 }

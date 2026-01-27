@@ -63,9 +63,12 @@
     </div>
 
     <!-- Botón registrar -->
-    <button type="submit" [disabled]="loading" class="btn-submit">
-      {{ loading ? 'Registrando...' : 'Registrar' }}
-    </button>
+    <div class="btn-group">
+  <button type="submit" [disabled]="loading" class="btn-submit">
+    {{ loading ? 'Registrando...' : 'Registrar' }}
+  </button>
+  <button type="button" class="btn-cancel" (click)="cancelarRegistro()" *ngIf="!loading">Cancelar</button>
+</div>
   </form>
 
   <!-- Mensajes de éxito y error -->

@@ -82,5 +82,10 @@ export class RegisterComponent implements OnInit {
     this.errorMessage = 'Por favor completa todos los campos correctamente.';
   }
 }
+  
+cancelarRegistro(){
+    this.router.navigate(['login']);
+  }
+  
 
 }

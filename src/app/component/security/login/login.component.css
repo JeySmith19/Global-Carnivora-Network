@@ -105,3 +105,61 @@ html, body {
   color: var(--color-secondary);
   text-decoration: underline;
 }
+
+@media (max-width: 768px) {
+  .login-card {
+    padding: 40px 30px;
+    max-width: 320px;
+  }
+
+  .login-card h2 {
+    font-size: 24px;
+  }
+
+  .login-card .subtitle {
+    font-size: 13px;
+  }
+
+  .input-group input {
+    padding: 12px 16px;
+    font-size: 13px;
+  }
+
+  .login-btn {
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  .text-small {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: 30px 20px;
+    max-width: 280px;
+  }
+
+  .login-card h2 {
+    font-size: 22px;
+  }
+
+  .login-card .subtitle {
+    font-size: 12px;
+  }
+
+  .input-group input {
+    padding: 10px 14px;
+    font-size: 12px;
+  }
+
+  .login-btn {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .text-small {
+    font-size: 11px;
+  }
+}

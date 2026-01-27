@@ -73,8 +73,14 @@
   font-size: 12px;
 }
 
+.btn-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
 .btn-submit {
-  width: 100%;
+  flex: 1;
   padding: 12px;
   background-color: var(--color-btn-primary);
   color: var(--color-btn-text-light);
@@ -95,7 +101,23 @@
   cursor: not-allowed;
 }
 
-/* Mensajes */
+.btn-cancel {
+  flex: 1;
+  padding: 12px;
+  background-color: var(--color-muted);
+  color: var(--color-text);
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-cancel:hover {
+  background-color: #d1d5db;
+}
+
 .success-message,
 .error-message {
   margin-top: 20px;
@@ -115,4 +137,73 @@
   background-color: #ffebee;
   color: var(--color-estado-rechazado);
   border: 1px solid #ef9a9a;
+}
+
+@media (max-width: 768px) {
+  .register-wrapper {
+    padding: 25px 20px;
+    max-width: 350px;
+  }
+
+  .register-wrapper h2 {
+    font-size: 22px;
+  }
+
+  .register-form input,
+  .password-wrapper input {
+    padding: 9px 10px;
+    font-size: 13px;
+  }
+
+  .password-wrapper .toggle-btn {
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+
+  .btn-group {
+    flex-direction: column;
+  }
+
+  .btn-submit,
+  .btn-cancel {
+    padding: 11px;
+    font-size: 15px;
+    width: 100%;
+  }
+
+  .register-form small {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .register-wrapper {
+    padding: 20px 15px;
+    max-width: 300px;
+  }
+
+  .register-wrapper h2 {
+    font-size: 20px;
+  }
+
+  .register-form input,
+  .password-wrapper input {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .password-wrapper .toggle-btn {
+    padding: 5px 6px;
+    font-size: 10px;
+  }
+
+  .btn-submit,
+  .btn-cancel {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .register-form small {
+    font-size: 10px;
+  }
 }

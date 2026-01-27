@@ -1,9 +1,14 @@
-/* Reset y fuente */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Roboto', sans-serif;
+}
+
+html, body {
+  height: 100%;
+  background-color: var(--color-bg);
+  color: var(--color-text);
 }
 
 .container {
@@ -14,8 +19,8 @@
 
 /* Header */
 .header {
-  background-color: #ffffff;
-  border-bottom: 1px solid #e0e0e0;
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
   padding: 20px 0;
 }
 
@@ -26,7 +31,7 @@
 }
 
 .header h1 {
-  color: #2c3e50;
+  color: var(--color-primary);
   font-weight: 700;
   font-size: 1.9rem;
 }
@@ -37,8 +42,8 @@
 
 /* Botones */
 .btn {
-  background: linear-gradient(135deg, #2ecc71, #27ae60);
-  color: white;
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-light);
   border: none;
   padding: 14px 24px;
   border-radius: 10px;
@@ -49,16 +54,22 @@
 }
 
 .btn:hover {
+  background: var(--color-btn-primary-light);
   transform: translateY(-3px);
   box-shadow: 0 6px 18px rgba(0,0,0,0.15);
 }
 
 /* Hero */
 .hero {
-  background: linear-gradient(135deg, #f0faf8, #e6f2f1);
-  text-align: center;
-  padding: 140px 20px;
-  color: #2c3e50;
+position: relative;
+text-align: center;
+padding: 140px 20px;
+color: #fff;
+
+
+/* Fondo con imagen + sombra */
+background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+url('/assets/fondo.png') center/cover no-repeat;
 }
 
 .hero h2 {
@@ -80,13 +91,13 @@
 .features {
   padding: 100px 0;
   text-align: center;
-  background-color: #ffffff;
+  background-color: var(--color-bg);
 }
 
 .features h3 {
   font-size: 2.2rem;
   margin-bottom: 50px;
-  color: #2c3e50;
+  color: var(--color-primary);
 }
 
 .feature-cards {
@@ -97,7 +108,7 @@
 }
 
 .card {
-  background-color: #ffffff;
+  background-color: var(--color-bg-alt);
   padding: 35px 25px;
   width: 280px;
   border-radius: 16px;
@@ -113,32 +124,32 @@
 
 .card h4 {
   margin-bottom: 12px;
-  color: #2ecc71;
+  color: var(--color-primary);
   font-size: 1.3rem;
 }
 
 .card p {
-  color: #555555;
+  color: var(--color-text-muted);
   font-size: 1rem;
 }
 
 .icon {
   font-size: 2.4rem;
-  color: #2ecc71;
+  color: var(--color-primary);
   margin-bottom: 14px;
 }
 
 /* Upcoming */
 .upcoming {
   padding: 80px 0;
-  background-color: #f7f9f9;
+  background-color: var(--color-bg-alt);
   text-align: center;
 }
 
 .upcoming h3 {
   font-size: 2.2rem;
   margin-bottom: 30px;
-  color: #2c3e50;
+  color: var(--color-primary);
 }
 
 .upcoming ul {
@@ -156,8 +167,8 @@
 
 /* Call to Action */
 .cta {
-  background: linear-gradient(135deg, #2ecc71, #27ae60);
-  color: white;
+  background: var(--color-primary);
+  color: var(--color-btn-text-light);
   text-align: center;
   padding: 120px 20px;
   border-radius: 12px 12px 0 0;
@@ -170,10 +181,31 @@
 
 /* Footer */
 .footer {
-  background-color: #ffffff;
-  border-top: 1px solid #e0e0e0;
-  color: #555555;
+  background-color: var(--color-bg);
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-muted);
   text-align: center;
   padding: 30px 0;
   font-size: 0.95rem;
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+  .hero h2 { font-size: 2.5rem; }
+  .features h3, .upcoming h3 { font-size: 2rem; }
+}
+
+@media (max-width: 768px) {
+  .hero h2 { font-size: 2rem; }
+  .hero p { font-size: 1.1rem; }
+  .feature-cards { flex-direction: column; gap: 20px; }
+  .card { width: 90%; }
+}
+
+@media (max-width: 480px) {
+  .header h1 { font-size: 1.5rem; }
+  .hero h2 { font-size: 1.6rem; }
+  .hero p { font-size: 1rem; }
+  .cta h3 { font-size: 1.8rem; }
+  .btn { padding: 10px 18px; font-size: 0.9rem; }
 }
