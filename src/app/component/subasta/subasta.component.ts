@@ -17,6 +17,10 @@ export class SubastaComponent implements OnInit {
   previewUrl: string | ArrayBuffer | null = null;
   subastaEditando: Subasta | null = null;
 
+  isLoading: boolean = false;
+  mensajeEstado: string = '';
+  registroExitoso: boolean = false;
+
   constructor(
     private subastaService: SubastaService,
     private eventoService: EventoService,
@@ -26,8 +30,6 @@ export class SubastaComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarEventosAbiertos();
-
-    // Leer id desde la ruta si es edición
     const idEdicion = this.route.snapshot.paramMap.get('id');
     if (idEdicion) {
       this.cargarSubasta(+idEdicion);
@@ -44,10 +46,10 @@ export class SubastaComponent implements OnInit {
     this.subastaService.getById(id).subscribe({
       next: (data) => {
         this.subastaEditando = data;
-        this.subasta = { ...data }; // llenar formulario
+        this.subasta = { ...data };
         this.previewUrl = data.imagen || null;
       },
-      error: (err) => console.error('Error al cargar subasta', err)
+      error: () => {}
     });
   }
 
@@ -57,7 +59,6 @@ export class SubastaComponent implements OnInit {
 
     const reader = new FileReader();
     reader.readAsDataURL(file);
-
     reader.onload = () => {
       this.previewUrl = reader.result;
       this.subasta.imagen = reader.result as string;
@@ -65,59 +66,63 @@ export class SubastaComponent implements OnInit {
   }
 
   crear() {
-    if (!this.subasta.eventoId) {
-      alert("Selecciona un evento válido");
-      return;
-    }
-    if (!this.subasta.planta?.trim()) {
-      alert("La planta es obligatoria");
-      return;
-    }
-    if (!this.subasta.precioBase || this.subasta.precioBase <= 0) {
-      alert("El precio base debe ser mayor a 0");
-      return;
-    }
-    if (!this.subasta.imagen) {
-      alert("Debes subir una imagen");
-      return;
-    }
-    if (!this.subasta.observaciones?.trim()) {
-      this.subasta.observaciones = "-";
-    }
+    if (!this.validarSubasta()) return;
+
+    this.isLoading = true;
+    this.registroExitoso = false;
+    this.mensajeEstado = 'Registrando subasta... esto puede tardar unos segundos';
 
     this.subastaService.insert(this.subasta).subscribe({
-      next: () => this.cancelarEdicion(),
-      error: err => console.error("Error al crear subasta", err)
+      next: () => {
+        this.isLoading = false;
+        this.registroExitoso = true;
+        this.mensajeEstado = 'Subasta registrada correctamente ✔';
+        setTimeout(() => this.cancelarEdicion(), 1500);
+      },
+      error: () => {
+        this.isLoading = false;
+        this.mensajeEstado = 'Ocurrió un error al registrar la subasta';
+      }
     });
   }
 
   guardarEdicion() {
     if (!this.subastaEditando) return;
+    if (!this.validarSubasta()) return;
 
-    if (!this.subasta.planta?.trim()) {
-      alert("La planta es obligatoria");
-      return;
-    }
-    if (!this.subasta.precioBase || this.subasta.precioBase <= 0) {
-      alert("El precio base debe ser mayor a 0");
-      return;
-    }
-    if (!this.subasta.imagen) {
-      alert("Debes subir una imagen");
-      return;
-    }
-    if (!this.subasta.observaciones?.trim()) {
-      this.subasta.observaciones = "-";
-    }
+    this.isLoading = true;
+    this.registroExitoso = false;
+    this.mensajeEstado = 'Guardando cambios... esto puede tardar unos segundos';
 
-    this.subastaService.update(this.subastaEditando.id, this.subasta)
-      .subscribe(() => this.cancelarEdicion());
+    this.subastaService.update(this.subastaEditando.id, this.subasta).subscribe({
+      next: () => {
+        this.isLoading = false;
+        this.registroExitoso = true;
+        this.mensajeEstado = 'Cambios guardados correctamente ✔';
+        setTimeout(() => this.cancelarEdicion(), 1500);
+      },
+      error: () => {
+        this.isLoading = false;
+        this.mensajeEstado = 'Ocurrió un error al guardar los cambios';
+      }
+    });
+  }
+
+  validarSubasta(): boolean {
+    if (!this.subasta.eventoId) return false;
+    if (!this.subasta.planta?.trim()) return false;
+    if (!this.subasta.precioBase || this.subasta.precioBase <= 0) return false;
+    if (!this.subasta.imagen) return false;
+    if (!this.subasta.observaciones?.trim()) this.subasta.observaciones = '-';
+    return true;
   }
 
   cancelarEdicion() {
     this.subasta = new Subasta();
     this.subastaEditando = null;
     this.previewUrl = null;
+    this.mensajeEstado = '';
+    this.registroExitoso = false;
     history.back();
   }
 }
