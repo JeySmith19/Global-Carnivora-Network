@@ -12,6 +12,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { GuardService } from '../service/security/guard.service';
 import { Roles } from '../model/security/roles';
 import { SinAccesoComponent } from './sin-acceso/sin-acceso.component';
+import { MantenimientoComponent } from './mantenimiento/mantenimiento.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },

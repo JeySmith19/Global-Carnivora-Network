@@ -1,0 +1,42 @@
+.mantenimiento-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  background-color: var(--color-bg-alt);
+  font-family: Arial, sans-serif;
+}
+
+.mantenimiento-container img {
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+.mantenimiento-container h1 {
+  font-size: 2em;
+  margin-bottom: 10px;
+  color: var(--color-title);
+}
+
+.mantenimiento-container p {
+  font-size: 1.2em;
+  color: var(--color-subtitle);
+  margin-bottom: 20px;
+}
+
+.btn-volver {
+  background-color: var(--color-btn-primary);
+  color: var(--color-btn-text-light);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s;
+}
+
+.btn-volver:hover {
+  background-color: var(--color-btn-primary-light);
+}

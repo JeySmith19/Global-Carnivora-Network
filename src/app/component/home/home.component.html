@@ -2,12 +2,19 @@
   <div class="container header-container">
     <h1>Global Carnívora Network</h1>
     <nav>
-     <button class="btn login" (click)="goLogin()">Acceder</button>
+      <button class="btn login" (click)="goLogin()">Acceder</button>
     </nav>
   </div>
 </header>
 
-<section class="hero">
+<section class="hero"
+  [ngStyle]="{
+    'background': 'linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(assets/fondo.png) center/cover no-repeat',
+    'position': 'relative',
+    'text-align': 'center',
+    'padding': '120px 20px',
+    'color': '#fff'
+  }">
   <div class="container hero-container">
     <h2>Descubre y participa en subastas de plantas carnívoras</h2>
     <p>Registra tus plantas, participa en subastas y califica subastadores para mejorar su reputación dentro de la comunidad.</p>
@@ -62,6 +69,6 @@
 
 <footer class="footer">
   <div class="container">
-    <p>&copy; 2026 Global Carnívora Network. Herramienta para subastadores y usuarios registrados.</p>
+    <p>&copy; 2026 Global Carnívora Network. Herramienta exclusiva para miembros de la comunidad.</p>
   </div>
 </footer>

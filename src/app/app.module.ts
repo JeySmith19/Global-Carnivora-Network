@@ -14,13 +14,15 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { RegisterComponent } from './component/security/register/register.component';
 import { HomeComponent } from './component/home/home.component';
 import { ReceptorService } from './service/security/receptor.service';
+import { MantenimientoComponent } from './component/mantenimiento/mantenimiento.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    MantenimientoComponent
   ],
   imports: [
     BrowserModule,

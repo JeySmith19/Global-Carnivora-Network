@@ -17,17 +17,21 @@ html, body {
   margin: 0 auto;
 }
 
-/* Header */
 .header {
   background-color: var(--color-bg);
   border-bottom: 1px solid var(--color-border);
   padding: 20px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .header h1 {
@@ -36,11 +40,12 @@ html, body {
   font-size: 1.9rem;
 }
 
-.header nav button {
-  margin-left: 12px;
+.header nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-/* Botones */
 .btn {
   background: var(--color-btn-primary);
   color: var(--color-btn-text-light);
@@ -59,19 +64,6 @@ html, body {
   box-shadow: 0 6px 18px rgba(0,0,0,0.15);
 }
 
-/* Hero */
-.hero {
-position: relative;
-text-align: center;
-padding: 140px 20px;
-color: #fff;
-
-
-/* Fondo con imagen + sombra */
-background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-url('/assets/fondo.png') center/cover no-repeat;
-}
-
 .hero h2 {
   font-size: 3rem;
   margin-bottom: 20px;
@@ -87,16 +79,15 @@ url('/assets/fondo.png') center/cover no-repeat;
   margin: 8px;
 }
 
-/* Features */
 .features {
-  padding: 100px 0;
+  padding: 80px 0;
   text-align: center;
   background-color: var(--color-bg);
 }
 
 .features h3 {
   font-size: 2.2rem;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
   color: var(--color-primary);
 }
 
@@ -104,17 +95,17 @@ url('/assets/fondo.png') center/cover no-repeat;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 30px;
+  gap: 25px;
 }
 
 .card {
   background-color: var(--color-bg-alt);
-  padding: 35px 25px;
+  padding: 30px 20px;
   width: 280px;
   border-radius: 16px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
   text-align: center;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 .card:hover {
@@ -139,9 +130,8 @@ url('/assets/fondo.png') center/cover no-repeat;
   margin-bottom: 14px;
 }
 
-/* Upcoming */
 .upcoming {
-  padding: 80px 0;
+  padding: 60px 0;
   background-color: var(--color-bg-alt);
   text-align: center;
 }
@@ -165,12 +155,11 @@ url('/assets/fondo.png') center/cover no-repeat;
   margin: 12px 0;
 }
 
-/* Call to Action */
 .cta {
   background: var(--color-primary);
   color: var(--color-btn-text-light);
   text-align: center;
-  padding: 120px 20px;
+  padding: 100px 20px;
   border-radius: 12px 12px 0 0;
 }
 
@@ -179,7 +168,6 @@ url('/assets/fondo.png') center/cover no-repeat;
   margin-bottom: 25px;
 }
 
-/* Footer */
 .footer {
   background-color: var(--color-bg);
   border-top: 1px solid var(--color-border);
@@ -189,7 +177,6 @@ url('/assets/fondo.png') center/cover no-repeat;
   font-size: 0.95rem;
 }
 
-/* Media Queries */
 @media (max-width: 1024px) {
   .hero h2 { font-size: 2.5rem; }
   .features h3, .upcoming h3 { font-size: 2rem; }
@@ -198,8 +185,10 @@ url('/assets/fondo.png') center/cover no-repeat;
 @media (max-width: 768px) {
   .hero h2 { font-size: 2rem; }
   .hero p { font-size: 1.1rem; }
-  .feature-cards { flex-direction: column; gap: 20px; }
+  .feature-cards { flex-direction: column; align-items: center; gap: 20px; }
   .card { width: 90%; }
+  .header-container { flex-direction: column; align-items: flex-start; }
+  .header nav { width: 100%; justify-content: flex-start; }
 }
 
 @media (max-width: 480px) {

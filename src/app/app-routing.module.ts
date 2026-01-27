@@ -4,12 +4,14 @@ import { GuardService } from './service/security/guard.service';
 import { LoginComponent } from './component/security/login/login.component';
 import { RegisterComponent } from './component/security/register/register.component';
 import { HomeComponent } from './component/home/home.component';
+import { MantenimientoComponent } from './component/mantenimiento/mantenimiento.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegisterComponent },
+  { path: 'mantenimiento', component: MantenimientoComponent },
   {
     path: 'components',
     loadChildren: () => import('./component/component.module').then((m) => m.ComponentModule),
