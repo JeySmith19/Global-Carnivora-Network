@@ -1,6 +1,4 @@
 <div class="organizar-container">
-
-  <!-- HEADER -->
   <header class="organizar-header">
     <div class="header-left">
       <app-volver></app-volver>
@@ -13,64 +11,54 @@
     </button>
   </header>
 
-  <!-- LISTA -->
   <div class="lista-subastas">
-
     <div class="fila-subasta" *ngFor="let s of subastas">
-
-      <!-- IMAGEN -->
       <input type="checkbox" id="img-{{ s.id }}" hidden>
       <label class="img-box" for="img-{{ s.id }}">
         <span class="badge-numero">#{{ s.numeroSubasta || '-' }}</span>
-
         <img *ngIf="s.imagen; else noImg" [src]="s.imagen">
         <ng-template #noImg>
           <div class="img-empty">Sin imagen</div>
         </ng-template>
       </label>
 
-      <!-- INFO -->
       <div class="info">
-
         <h3 class="planta">{{ s.planta }}</h3>
-
         <div class="precio-row">
           <span class="precio">S/ {{ s.precioBase }}</span>
           <span class="estado estado-aceptado">ACEPTADA</span>
         </div>
-
         <p class="sub">
           Subastador: <b>{{ s.username }}</b>
         </p>
-
       </div>
 
-      <!-- ACCIONES -->
       <div class="acciones">
         <input type="checkbox" id="det-{{ s.id }}" hidden>
-        <label for="det-{{ s.id }}" class="btn-detalle primary">
-          Ver detalle
-        </label>
+        <label for="det-{{ s.id }}" class="btn-detalle primary">Ver detalle</label>
+
+        <button 
+          *ngIf="s.numeroSubasta" 
+          class="btn-whatsapp" 
+          (click)="copiarSubasta(s)">
+          <i class="fab fa-whatsapp"></i> Copiar
+        </button>
 
         <div class="drawer">
           <div class="drawer-header">
             <h3>{{ s.planta }}</h3>
             <label for="det-{{ s.id }}">×</label>
           </div>
-
           <div class="drawer-body">
             <p><b>N° Subasta:</b> {{ s.numeroSubasta || '-' }}</p>
             <p><b>Fecha:</b> {{ s.fechaEvento | date:'dd/MM/yyyy' }}</p>
             <p><b>Hora:</b> {{ s.horaInicioAsignada || '-' }} - {{ s.horaFinAsignada || '-' }}</p>
             <p><b>Duración:</b> {{ s.duracionSubastaMinutos }} min</p>
             <p><b>Descanso:</b> {{ s.descansoMinutos }} min</p>
-
             <hr>
-
             <p><b>Contacto:</b> {{ s.username }}</p>
             <p><b>Ciudad:</b> {{ s.city }}</p>
             <p><b>Teléfono:</b> {{ s.phone }}</p>
-
             <p *ngIf="s.observaciones">
               <b>Observaciones:</b> {{ s.observaciones }}
             </p>
@@ -78,18 +66,15 @@
         </div>
       </div>
 
-      <!-- ZOOM -->
       <div class="zoom">
         <div class="zoom-bg"></div>
         <label for="img-{{ s.id }}" class="zoom-close">×</label>
         <img [src]="s.imagen">
       </div>
-
     </div>
 
     <p *ngIf="!subastas.length" class="sin-datos">
       No hay subastas aceptadas.
     </p>
-
   </div>
 </div>
