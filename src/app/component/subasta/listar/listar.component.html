@@ -1,14 +1,22 @@
 <div class="container">
   <div class="subastas-header">
-    <h2><app-volver></app-volver>  Tus Subastas</h2>
+    <h2><app-volver></app-volver> Tus Subastas</h2>
     <button class="btn-crear" (click)="crearSubasta()">+ Crear Subasta</button>
   </div>
 
-  <div class="cards-grid">
+  <div *ngIf="cargando" class="estado-lista">
+    <p>Cargando tus subastas… ⏳</p>
+  </div>
+
+  <div *ngIf="!cargando && subastas.length === 0" class="estado-lista">
+    <p>No tienes subastas registradas aún 🌱</p>
+  </div>
+
+  <div class="cards-grid" *ngIf="!cargando && subastas.length > 0">
     <div *ngFor="let s of subastas" class="card">
 
       <div class="card-image-wrapper">
-        <img *ngIf="s.imagen; else sinImagen" [src]="s.imagen" alt="Imagen subasta" class="card-image"/>
+        <img *ngIf="s.imagen; else sinImagen" [src]="s.imagen" alt="Imagen subasta" class="card-image" />
         <ng-template #sinImagen>
           <div class="sin-imagen">Sin imagen</div>
         </ng-template>
@@ -19,6 +27,7 @@
 
       <div class="card-body">
         <h3>Subasta #{{ s.numeroSubasta || 'Por definir' }}</h3>
+
         <div class="card-info-row">
           <div class="info-item">
             <strong>Evento:</strong>
@@ -33,6 +42,7 @@
             <span>{{ s.horaInicio || 'Por definir' }}</span>
           </div>
         </div>
+
         <div class="card-info-row">
           <div class="info-item">
             <strong>Planta:</strong>
@@ -50,20 +60,18 @@
       </div>
 
       <div class="card-footer">
-        <!-- Detalles siempre disponibles -->
         <button class="btn-detalles" (click)="verDetalles(s)">Ver Detalles</button>
 
-        <!-- Editar y Eliminar solo si NO es aceptada y NO es rechazada respectivamente -->
-        <button 
-          class="btn-editar" 
-          *ngIf="s.estado !== 'ACEPTADA' && s.estado !== 'RECHAZADA'" 
+        <button
+          class="btn-editar"
+          *ngIf="s.estado !== 'ACEPTADA' && s.estado !== 'RECHAZADA'"
           (click)="editar(s)">
           Editar
         </button>
 
-        <button 
-          class="btn-eliminar" 
-          *ngIf="s.estado !== 'ACEPTADA'" 
+        <button
+          class="btn-eliminar"
+          *ngIf="s.estado !== 'ACEPTADA'"
           (click)="eliminar(s.id)">
           Eliminar
         </button>

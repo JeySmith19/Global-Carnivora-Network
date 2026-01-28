@@ -15,6 +15,8 @@ import { RegisterComponent } from './component/security/register/register.compon
 import { HomeComponent } from './component/home/home.component';
 import { ReceptorService } from './service/security/receptor.service';
 import { MantenimientoComponent } from './component/mantenimiento/mantenimiento.component';
+import { RecoverPasswordComponent } from './component/security/recover-password/recover-password.component';
+import { CodeRecoverPasswordComponent } from './component/security/code-recover-password/code-recover-password.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { MantenimientoComponent } from './component/mantenimiento/mantenimiento.
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    MantenimientoComponent
+    MantenimientoComponent,
+    RecoverPasswordComponent,
+    CodeRecoverPasswordComponent,
   ],
   imports: [
     BrowserModule,

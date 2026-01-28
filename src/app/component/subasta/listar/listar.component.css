@@ -171,6 +171,34 @@
   background: #fecaca;
 }
 
+.estado-lista {
+  margin: 40px 0;
+  padding: 28px 20px;
+  border-radius: 18px;
+  border: 2px dashed var(--color-primary);
+  background: var(--color-bg-alt);
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.estado-lista p {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 1024px) {
   .subastas-header h2 {
     font-size: 20px;
