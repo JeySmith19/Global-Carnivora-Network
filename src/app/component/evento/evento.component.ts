@@ -58,7 +58,7 @@ export class EventoComponent implements OnInit {
   }
 
   actualizar() {
-    this.eventoService.insert(this.evento).subscribe(() => {
+    this.eventoService.update(this.evento).subscribe(() => {
       this.limpiar();
       this.listar();
       this.showForm = false;
@@ -72,9 +72,11 @@ export class EventoComponent implements OnInit {
   }
 
   cerrarManual(id: number) {
-    this.eventoService.updateEstado(id, 'CERRADO').subscribe(() => {
-      this.listar();
-    });
+    if (confirm('¿Estás seguro de que quieres cerrar este evento?')) {
+      this.eventoService.updateEstado(id, 'CERRADO').subscribe(() => {
+        this.listar();
+      });
+    }
   }
 
   irAOrganizarSubastas(idEvento: number) {
