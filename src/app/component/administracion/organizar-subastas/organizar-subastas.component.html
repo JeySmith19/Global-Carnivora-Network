@@ -5,7 +5,7 @@
     <div class="header-left">
       <app-volver></app-volver>
       <h2>Subastas del Evento</h2>
-      <span class="evento-id">Evento #{{ idEvento }}</span>
+      <span class="evento-id">{{ evento.nombre || 'Evento sin nombre' }}</span>
     </div>
 
     <button class="btn-secundario" (click)="verAceptadas()">
@@ -39,23 +39,22 @@
               'estado-aceptado': s.estado === 'ACEPTADA',
               'estado-rechazado': s.estado === 'RECHAZADA'
             }">
-            {{ s.estado }}
+            {{ s.estado || 'Por definir' }}
           </span>
 
-          <span class="precio">S/ {{ s.precioBase }}</span>
+          <span class="precio">S/ {{ s.precioBase || '-' }}</span>
         </p>
 
-        <p class="sub">Subastador: {{ s.username }}</p>
+        <p class="sub">Subastador: {{ s.username || '-' }}</p>
       </div>
 
       <!-- ACCIONES -->
       <div class="acciones">
         <input type="checkbox" id="det-{{ s.id }}" hidden>
-        <label for="det-{{ s.id }}" class="btn-detalle">
+        <label for="det-{{ s.id }}" class="btn-detalle primary">
           Ver Detalle
         </label>
 
-        <!-- DRAWER -->
         <div class="drawer">
           <div class="drawer-header">
             <h3>{{ s.planta }}</h3>
@@ -67,23 +66,20 @@
             <p><b>Fecha:</b> {{ s.fechaEvento | date:'dd/MM/yyyy' }}</p>
             <p><b>Hora Inicio:</b> {{ s.horaInicioAsignada || '-' }}</p>
             <p><b>Hora Fin:</b> {{ s.horaFinAsignada || '-' }}</p>
-            <p><b>Duración:</b> {{ s.duracionSubastaMinutos }} min</p>
-            <p><b>Descanso:</b> {{ s.descansoMinutos }} min</p>
+            <p><b>Duración:</b> {{ s.duracionSubastaMinutos || '-' }} min</p>
+            <p><b>Descanso:</b> {{ s.descansoMinutos || '-' }} min</p>
 
             <hr>
 
-            <p><b>Contacto:</b> {{ s.username }}</p>
-            <p><b>Ciudad:</b> {{ s.city }}</p>
-            <p><b>Teléfono:</b> {{ s.phone }}</p>
+            <p><b>Contacto:</b> {{ s.username || '-' }}</p>
+            <p><b>Ciudad:</b> {{ s.city || '-' }}</p>
+            <p><b>Teléfono:</b> {{ s.phone || '-' }}</p>
 
             <p *ngIf="s.observaciones">
               <b>Observaciones:</b> {{ s.observaciones }}
             </p>
 
-            <!-- ACCIONES SEGÚN ESTADO -->
             <div class="drawer-acciones">
-
-              <!-- PENDIENTE -->
               <ng-container *ngIf="s.estado === 'PENDIENTE'">
                 <button class="btn-aceptar" (click)="aceptar(s)">
                   Aceptar
@@ -93,17 +89,14 @@
                 </button>
               </ng-container>
 
-              <!-- RECHAZADA -->
               <p *ngIf="s.estado === 'RECHAZADA'" class="mensaje-rechazada">
                 Esta subasta ha sido rechazada por un administrador.
               </p>
-
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ZOOM -->
       <div class="zoom">
         <div class="zoom-bg"></div>
         <label for="img-{{ s.id }}" class="zoom-close">×</label>
@@ -112,7 +105,6 @@
 
     </div>
 
-    <!-- SIN DATOS -->
     <p *ngIf="!subastas.length" class="sin-datos">
       No hay subastas registradas.
     </p>

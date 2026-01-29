@@ -19,4 +19,5 @@ export class Subasta {
   numeroSubasta?: number;
   horaInicioAsignada?: string;
   horaFinAsignada?: string;
+  showModal?: boolean;
 }

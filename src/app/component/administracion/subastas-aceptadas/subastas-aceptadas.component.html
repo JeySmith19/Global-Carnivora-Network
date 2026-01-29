@@ -5,16 +5,12 @@
       <h2>Subastas Aceptadas</h2>
       <span class="evento-id">Listado general</span>
     </div>
-
-    <button class="btn-secundario" (click)="Generar()">
-      Generar subastas
-    </button>
+    <button class="btn-secundario" (click)="Generar()">Generar subastas</button>
   </header>
 
   <div class="lista-subastas">
     <div class="fila-subasta" *ngFor="let s of subastas">
-      <input type="checkbox" id="img-{{ s.id }}" hidden>
-      <label class="img-box" for="img-{{ s.id }}">
+      <label class="img-box" (click)="zoomSrc = s.imagen; showZoom = true">
         <span class="badge-numero">#{{ s.numeroSubasta || '-' }}</span>
         <img *ngIf="s.imagen; else noImg" [src]="s.imagen">
         <ng-template #noImg>
@@ -28,28 +24,24 @@
           <span class="precio">S/ {{ s.precioBase }}</span>
           <span class="estado estado-aceptado">ACEPTADA</span>
         </div>
-        <p class="sub">
-          Subastador: <b>{{ s.username }}</b>
-        </p>
+        <p class="sub">Subastador: <b>{{ s.username }}</b></p>
       </div>
 
       <div class="acciones">
-        <input type="checkbox" id="det-{{ s.id }}" hidden>
-        <label for="det-{{ s.id }}" class="btn-detalle primary">Ver detalle</label>
-
-        <button 
-          *ngIf="s.numeroSubasta" 
-          class="btn-whatsapp" 
-          (click)="copiarSubasta(s)">
+        <button class="btn-detalle primary" (click)="s.showModal = true">Ver detalle</button>
+        <button *ngIf="s.numeroSubasta" class="btn-whatsapp" (click)="copiarSubasta(s)">
           <i class="fab fa-whatsapp"></i> Copiar
         </button>
+      </div>
 
-        <div class="drawer">
-          <div class="drawer-header">
+      <div class="modal" *ngIf="s.showModal">
+        <div class="modal-bg" (click)="s.showModal = false"></div>
+        <div class="modal-content">
+          <div class="modal-header">
             <h3>{{ s.planta }}</h3>
-            <label for="det-{{ s.id }}">×</label>
+            <button class="modal-close" (click)="s.showModal = false">×</button>
           </div>
-          <div class="drawer-body">
+          <div class="modal-body">
             <p><b>N° Subasta:</b> {{ s.numeroSubasta || '-' }}</p>
             <p><b>Fecha:</b> {{ s.fechaEvento | date:'dd/MM/yyyy' }}</p>
             <p><b>Hora:</b> {{ s.horaInicioAsignada || '-' }} - {{ s.horaFinAsignada || '-' }}</p>
@@ -59,22 +51,20 @@
             <p><b>Contacto:</b> {{ s.username }}</p>
             <p><b>Ciudad:</b> {{ s.city }}</p>
             <p><b>Teléfono:</b> {{ s.phone }}</p>
-            <p *ngIf="s.observaciones">
-              <b>Observaciones:</b> {{ s.observaciones }}
-            </p>
+            <p *ngIf="s.observaciones"><b>Observaciones:</b> {{ s.observaciones }}</p>
           </div>
         </div>
       </div>
-
-      <div class="zoom">
-        <div class="zoom-bg"></div>
-        <label for="img-{{ s.id }}" class="zoom-close">×</label>
-        <img [src]="s.imagen">
-      </div>
     </div>
 
-    <p *ngIf="!subastas.length" class="sin-datos">
-      No hay subastas aceptadas.
-    </p>
+    <div *ngIf="!subastas.length" class="estado-lista">
+      <p>No hay subastas aceptadas</p>
+    </div>
+  </div>
+
+  <div class="zoom-image" *ngIf="showZoom" (click)="showZoom = false">
+    <div class="zoom-image-bg"></div>
+    <img [src]="zoomSrc" (click)="$event.stopPropagation()">
+    <button class="zoom-close" (click)="showZoom = false">×</button>
   </div>
 </div>

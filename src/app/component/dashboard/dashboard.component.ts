@@ -15,7 +15,7 @@ import { Roles } from 'src/app/model/security/roles';
 export class DashboardComponent implements OnInit, OnDestroy {
 
   user: any;
-
+  showMenu = false;
   subastas: Subasta[] = [];
   totalSubastas = 0;
   subastasPendientes = 0;

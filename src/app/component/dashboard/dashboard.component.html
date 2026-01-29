@@ -1,5 +1,4 @@
 <div class="dashboard">
-
   <div class="topbar">
     <div class="topbar-left">
       <h1>Hola, {{ user?.name }}</h1>
@@ -9,25 +8,33 @@
     </div>
 
     <div class="top-actions">
-      <button class="btn-secondary" (click)="go('/components/ver-subastas')">
-        Mis subastas
-      </button>
+      <button class="btn-primary desktop-only" (click)="go('/components/ver-subastas')">Mis subastas</button>
+      <button class="btn-secondary desktop-only" (click)="go('/components/subastas')" *ngIf="eventoActivo?.estado === 'ABIERTO'">Crear subasta</button>
+      <button class="btn-evento desktop-only" *ngIf="isAdmin()" (click)="goOrganizarEvento()">Administrar eventos</button>
 
-      <button class="btn-primary" (click)="go('/components/subastas')" *ngIf="eventoActivo?.estado === 'ABIERTO'">
-        Crear subasta
-      </button>
+      <div class="hamburger mobile-only" (click)="showMenu = !showMenu">≡</div>
+      <div class="profile-icon" (click)="go('/components/perfil')">{{ user?.name?.charAt(0) }}</div>
+    </div>
 
-      <button class="btn-evento" *ngIf="isAdmin()" (click)="goOrganizarEvento()">
-        Administrar eventos
-      </button>
-
-      <div class="profile-icon" (click)="go('/components/perfil')">
-        {{ user?.name?.charAt(0) }}
-      </div>
+    <div class="mobile-menu" *ngIf="showMenu">
+      <button class="btn-primary" (click)="go('/components/ver-subastas')">Mis subastas</button>
+      <button class="btn-secondary" *ngIf="eventoActivo?.estado === 'ABIERTO'" (click)="go('/components/subastas')">Crear subasta</button>
+      <button class="btn-evento" *ngIf="isAdmin()" (click)="goOrganizarEvento()">Administrar eventos</button>
     </div>
   </div>
 
   <div class="grid">
+    <div class="block wide info" *ngIf="eventoActivo">
+      <span>Evento</span>
+      <strong>{{ eventoActivo.nombre }}</strong>
+      <small>{{ eventoActivo.fechaEvento | date:'dd/MM/yyyy' }} - {{ eventoActivo.horaInicio }}</small>
+    </div>
+
+    <div class="block wide timer" *ngIf="eventoActivo">
+      <span>{{ tituloTiempo }}</span>
+      <strong>{{ tiempoRestante }}</strong>
+      <small>Duración por subasta: {{ eventoActivo.duracionSubastaMinutos }} minutos</small>
+    </div>
 
     <div class="block">
       <span>Total enviadas</span>
@@ -50,37 +57,15 @@
       <strong>{{ subastasRechazadas }}</strong>
     </div>
 
-    <div class="block wide info" *ngIf="eventoActivo">
-      <span>Evento</span>
-      <strong>{{ eventoActivo.nombre }}</strong>
-      <small>{{ eventoActivo.fechaEvento | date:'dd/MM/yyyy' }} - {{ eventoActivo.horaInicio }}</small>
-    </div>
-
-    <div class="block wide timer" *ngIf="eventoActivo">
-      <span>{{ tituloTiempo }}</span>
-      <strong>{{ tiempoRestante }}</strong>
-      <small>
-        Duración por subasta: {{ eventoActivo.duracionSubastaMinutos }} minutos
-      </small>
-    </div>
-
     <div class="block wide neutral" *ngIf="subastasPendientes > 0">
       <strong>Subastas en revisión</strong>
-      <p>
-        Aún hay subastas pendientes de evaluación.
-      </p>
+      <p>Aún hay subastas pendientes de evaluación.</p>
     </div>
 
     <div class="block wide action" *ngIf="subastasPendientes === 0 && subastas.length > 0">
       <strong>Subastas revisadas</strong>
-      <p>
-        Todas tus subastas ya fueron evaluadas.
-      </p>
-
-      <button class="btn-secondary" (click)="go('/components/ver-subastas')">
-        Ver mis subastas
-      </button>
+      <p>Todas tus subastas ya fueron evaluadas.</p>
+      <button class="btn-secondary" (click)="go('/components/ver-subastas')">Ver mis subastas</button>
     </div>
-
   </div>
 </div>
