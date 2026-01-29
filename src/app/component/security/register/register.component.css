@@ -26,7 +26,8 @@
   color: var(--color-text-muted);
 }
 
-.register-form input {
+.register-form input,
+.register-form select {
   padding: 10px 12px;
   border: 1px solid var(--color-border);
   border-radius: 8px;
@@ -36,7 +37,8 @@
   transition: all 0.2s;
 }
 
-.register-form input:focus {
+.register-form input:focus,
+.register-form select:focus {
   border-color: var(--color-primary);
   outline: none;
   box-shadow: 0 0 6px rgba(44, 122, 123, 0.3);
@@ -65,6 +67,28 @@
 
 .password-wrapper .toggle-btn:hover {
   background-color: var(--color-primary-light);
+}
+
+.phone-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.phone-wrapper .country-code {
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px 0 0 8px;
+  background: var(--color-bg);
+  color: var(--color-text-muted);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.phone-wrapper input {
+  flex: 1;
+  border-radius: 0 8px 8px 0;
+  border-left: none;
 }
 
 .register-form small {
@@ -150,6 +174,7 @@
   }
 
   .register-form input,
+  .register-form select,
   .password-wrapper input {
     padding: 9px 10px;
     font-size: 13px;
@@ -174,6 +199,11 @@
   .register-form small {
     font-size: 11px;
   }
+
+  .phone-wrapper .country-code {
+    padding: 9px 10px;
+    font-size: 13px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -187,6 +217,7 @@
   }
 
   .register-form input,
+  .register-form select,
   .password-wrapper input {
     padding: 8px 10px;
     font-size: 12px;
@@ -205,5 +236,10 @@
 
   .register-form small {
     font-size: 10px;
+  }
+
+  .phone-wrapper .country-code {
+    padding: 8px 10px;
+    font-size: 12px;
   }
 }

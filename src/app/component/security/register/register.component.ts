@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegistroService } from 'src/app/service/security/registro.service';
-
+import { COUNTRIES, Country, Region } from './location-data';
 
 @Component({
   selector: 'app-register',
@@ -13,8 +13,12 @@ export class RegisterComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   loading: boolean = false;
   passwordVisible: boolean = false;
-  successMessage: string = '';  // Mensaje de éxito
-  errorMessage: string = '';    // Mensaje de error
+  successMessage: string = '';
+  errorMessage: string = '';
+  countries: Country[] = COUNTRIES;
+  selectedRegions: Region[] = [];
+  selectedCities: string[] = [];
+  countryCode: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -29,12 +33,13 @@ export class RegisterComponent implements OnInit {
       confirmPassword: ['', Validators.required],
       name: ['', Validators.required],
       lastName: ['', Validators.required],
-      phone: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(15)]],
-      city: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
+      country: ['', Validators.required],
+      department: ['', Validators.required],
+      city: ['']
     }, { validator: this.passwordMatchValidator });
   }
 
-  // Valida que password y confirmPassword sean iguales
   passwordMatchValidator(form: FormGroup) {
     const password = form.get('password')?.value;
     const confirmPassword = form.get('confirmPassword')?.value;
@@ -45,47 +50,61 @@ export class RegisterComponent implements OnInit {
     this.passwordVisible = !this.passwordVisible;
   }
 
-  registrar() {
-  this.successMessage = '';
-  this.errorMessage = '';
-
-  if (this.form.valid) {
-    this.loading = true;
-    const registro = {
-      id: 0,
-      username: this.form.value.username,
-      password: this.form.value.password,
-      roles: ['SUBASTADOR'],
-      name: this.form.value.name,
-      lastName: this.form.value.lastName,
-      phone: this.form.value.phone,
-      city: this.form.value.city
-    };
-
-    this.registroService.insert(registro).subscribe(
-      (data) => {
-        this.loading = false;
-        this.successMessage = data.message || 'Registro exitoso';
-        this.form.reset();
-
-        // Redirigir al login después de 2 segundos
-        setTimeout(() => {
-          this.router.navigate(['/login']);
-        }, 2000);
-      },
-      (error) => {
-        this.loading = false;
-        this.errorMessage = error.error?.message || 'Ocurrió un error';
-      }
-    );
-  } else {
-    this.errorMessage = 'Por favor completa todos los campos correctamente.';
+  onCountryChange() {
+    const country = this.countries.find(c => c.name === this.form.value.country);
+    this.selectedRegions = country ? country.regions : [];
+    this.selectedCities = [];
+    this.countryCode = country ? country.code : '';
+    this.form.patchValue({ department: '', city: '' });
   }
-}
-  
-cancelarRegistro(){
+
+  onDepartmentChange() {
+    const dept = this.selectedRegions.find(d => d.name === this.form.value.department);
+    this.selectedCities = dept ? dept.mainCities : [];
+    this.form.patchValue({ city: '' });
+  }
+
+  registrar() {
+    this.successMessage = '';
+    this.errorMessage = '';
+
+    if (this.form.valid) {
+      this.loading = true;
+      const formattedPhone = `+${this.countryCode}${this.form.value.phone.replace(/\D/g, '')}`;
+      const formattedCity = this.form.value.city ? `${this.form.value.city}, ${this.form.value.department}, ${this.form.value.country}` : `${this.form.value.department}, ${this.form.value.country}`;
+
+      const registro = {
+        id: 0,
+        username: this.form.value.username,
+        password: this.form.value.password,
+        roles: ['SUBASTADOR'],
+        name: this.form.value.name,
+        lastName: this.form.value.lastName,
+        phone: formattedPhone,
+        city: formattedCity
+      };
+
+      this.registroService.insert(registro).subscribe(
+        (data) => {
+          this.loading = false;
+          this.successMessage = data.message || 'Registro exitoso';
+          this.form.reset();
+          this.selectedRegions = [];
+          this.selectedCities = [];
+          this.countryCode = '';
+          setTimeout(() => this.router.navigate(['/login']), 2000);
+        },
+        (error) => {
+          this.loading = false;
+          this.errorMessage = error.error?.message || 'Ocurrió un error';
+        }
+      );
+    } else {
+      this.errorMessage = 'Por favor completa todos los campos correctamente.';
+    }
+  }
+
+  cancelarRegistro() {
     this.router.navigate(['login']);
   }
-  
-
 }
