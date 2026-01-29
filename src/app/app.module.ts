@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +17,7 @@ import { ReceptorService } from './service/security/receptor.service';
 import { MantenimientoComponent } from './component/mantenimiento/mantenimiento.component';
 import { RecoverPasswordComponent } from './component/security/recover-password/recover-password.component';
 import { CodeRecoverPasswordComponent } from './component/security/code-recover-password/code-recover-password.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,12 @@ import { CodeRecoverPasswordComponent } from './component/security/code-recover-
     ReactiveFormsModule,
     MatButtonModule,
     MatNativeDateModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
 
   ],
   providers: [
