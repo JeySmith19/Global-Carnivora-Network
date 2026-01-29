@@ -1,8 +1,8 @@
 {
-  "name": "CarnivoraCommunity",
-  "short_name": "CarnivoraCommunity",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "CarniNet",
+  "short_name": "CarniNet",
+  "theme_color": "#2c7a7b",
+  "background_color": "#f9fafb",
   "display": "standalone",
   "scope": "/Global-Carnivora-Network/",
   "start_url": "/Global-Carnivora-Network/login",
