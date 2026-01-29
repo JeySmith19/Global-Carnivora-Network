@@ -1,0 +1,89 @@
+{
+  "configVersion": 1,
+  "timestamp": 1769646207122,
+  "index": "/Global-Carnivora-Network/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/Global-Carnivora-Network/281.7321b43e8e96f2f5.js",
+        "/Global-Carnivora-Network/favicon.ico",
+        "/Global-Carnivora-Network/index.html",
+        "/Global-Carnivora-Network/main.70491c317efd8899.js",
+        "/Global-Carnivora-Network/manifest.webmanifest",
+        "/Global-Carnivora-Network/polyfills.6a0bb8ce17618789.js",
+        "/Global-Carnivora-Network/runtime.7a9ba01047ac4364.js",
+        "/Global-Carnivora-Network/styles.51e35880f414b3f3.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/Global-Carnivora-Network/assets/cono.png",
+        "/Global-Carnivora-Network/assets/fondo.png",
+        "/Global-Carnivora-Network/assets/icon.png",
+        "/Global-Carnivora-Network/assets/icons/icon-128x128.png",
+        "/Global-Carnivora-Network/assets/icons/icon-144x144.png",
+        "/Global-Carnivora-Network/assets/icons/icon-152x152.png",
+        "/Global-Carnivora-Network/assets/icons/icon-192x192.png",
+        "/Global-Carnivora-Network/assets/icons/icon-384x384.png",
+        "/Global-Carnivora-Network/assets/icons/icon-512x512.png",
+        "/Global-Carnivora-Network/assets/icons/icon-72x72.png",
+        "/Global-Carnivora-Network/assets/icons/icon-96x96.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/Global-Carnivora-Network/281.7321b43e8e96f2f5.js": "9cd59c6b1b51246917677daea355694fb25c82ec",
+    "/Global-Carnivora-Network/assets/cono.png": "c7e6adc01e54bf5f528a7d7b996009783ea4b3ed",
+    "/Global-Carnivora-Network/assets/fondo.png": "4388877d136e03facc1ced5c7571a587c57f64f9",
+    "/Global-Carnivora-Network/assets/icon.png": "93d28d1366f62d128e0f6e10343c994b2ccbccdf",
+    "/Global-Carnivora-Network/assets/icons/icon-128x128.png": "93d28d1366f62d128e0f6e10343c994b2ccbccdf",
+    "/Global-Carnivora-Network/assets/icons/icon-144x144.png": "93d28d1366f62d128e0f6e10343c994b2ccbccdf",
+    "/Global-Carnivora-Network/assets/icons/icon-152x152.png": "93d28d1366f62d128e0f6e10343c994b2ccbccdf",
+    "/Global-Carnivora-Network/assets/icons/icon-192x192.png": "93d28d1366f62d128e0f6e10343c994b2ccbccdf",
+    "/Global-Carnivora-Network/assets/icons/icon-384x384.png": "93d28d1366f62d128e0f6e10343c994b2ccbccdf",
+    "/Global-Carnivora-Network/assets/icons/icon-512x512.png": "93d28d1366f62d128e0f6e10343c994b2ccbccdf",
+    "/Global-Carnivora-Network/assets/icons/icon-72x72.png": "93d28d1366f62d128e0f6e10343c994b2ccbccdf",
+    "/Global-Carnivora-Network/assets/icons/icon-96x96.png": "93d28d1366f62d128e0f6e10343c994b2ccbccdf",
+    "/Global-Carnivora-Network/favicon.ico": "1a6e561628cb58895db9d40d43e8c210b6920a29",
+    "/Global-Carnivora-Network/index.html": "0dbda70278e8b741eec58f4ac5a5c49b09458498",
+    "/Global-Carnivora-Network/main.70491c317efd8899.js": "6c36856824bf722d84c95db13ddbf78fd1dc3a66",
+    "/Global-Carnivora-Network/manifest.webmanifest": "687492fe5ce8b5fe363703705fca15bf6de5d23d",
+    "/Global-Carnivora-Network/polyfills.6a0bb8ce17618789.js": "bbf20da8ef0817c96358fd2b031127bf484fb100",
+    "/Global-Carnivora-Network/runtime.7a9ba01047ac4364.js": "c3298618b548be4e510098ac274a927f23e8caa1",
+    "/Global-Carnivora-Network/styles.51e35880f414b3f3.css": "8f04ac68bb3bdc932feb811d4c1bfa1a9d87c1ae"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
