@@ -1,0 +1,32 @@
+<div class="revision-container">
+  <h2>Solicitudes de subastador</h2>
+
+  <p *ngIf="loading">Cargando...</p>
+  <p *ngIf="!loading && pendientes.length === 0">
+    No hay solicitudes pendientes
+  </p>
+
+  <table *ngIf="pendientes.length > 0">
+    <thead>
+      <tr>
+        <th>Correo</th>
+        <th>Nombre</th>
+        <th>Teléfono</th>
+        <th>Ciudad</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let u of pendientes">
+        <td>{{ u.username }}</td>
+        <td>{{ u.name }} {{ u.lastName }}</td>
+        <td>{{ u.phone }}</td>
+        <td>{{ u.city }}</td>
+        <td>
+          <button (click)="aprobar(u.id)">Aprobar</button>
+          <button (click)="rechazar(u.id)">Rechazar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

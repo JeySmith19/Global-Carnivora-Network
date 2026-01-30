@@ -1,0 +1,30 @@
+<app-volver></app-volver>
+<div class="solicitud-container">
+  <div class="card">
+    <h2>Solicitud para ser subastador</h2>
+    <p class="subtitle">
+      Antes de continuar, lee atentamente los siguientes requisitos.
+    </p>
+
+    <ul class="rules">
+      <li>Todos tus datos deben ser reales y verificables.</li>
+      <li>La solicitud será revisada manualmente por los administradores.</li>
+      <li>Podrían contactarte para una entrevista o validación adicional.</li>
+      <li>Al enviar la solicitud aceptas los términos y normas de la comunidad.</li>
+    </ul>
+
+    <label class="check">
+      <input type="checkbox" [(ngModel)]="accepted">
+      <span>Acepto los términos y condiciones de la comunidad</span>
+    </label>
+
+    <button
+      (click)="solicitar()"
+      [disabled]="loading || !accepted"
+    >
+      {{ loading ? 'Enviando solicitud...' : 'Enviar solicitud' }}
+    </button>
+
+    <p class="message" *ngIf="message">{{ message }}</p>
+  </div>
+</div>

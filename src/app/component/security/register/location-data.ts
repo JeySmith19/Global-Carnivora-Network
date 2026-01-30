@@ -110,5 +110,35 @@ export const COUNTRIES: Country[] = [
       { name: 'Tierra del Fuego', mainCities: ['Ushuaia', 'Río Grande', 'Tolhuin'] },
       { name: 'Tucumán', mainCities: ['San Miguel de Tucumán', 'Yerba Buena', 'Tafí Viejo', 'Concepción'] }
     ]
+  },
+  {
+    name: 'Ecuador',
+    code: '593',
+    regions: [
+      { name: 'Azuay', mainCities: ['Cuenca', 'Gualaceo', 'Paute', 'Santa Isabel'] },
+      { name: 'Bolívar', mainCities: ['Guaranda', 'San Miguel', 'Chimbo'] },
+      { name: 'Cañar', mainCities: ['Azogues', 'La Troncal', 'Cañar'] },
+      { name: 'Carchi', mainCities: ['Tulcán', 'Bolívar', 'Huaca'] },
+      { name: 'Chimborazo', mainCities: ['Riobamba', 'Guano', 'Alausí', 'Chunchi'] },
+      { name: 'Cotopaxi', mainCities: ['Latacunga', 'Pujilí', 'Salcedo', 'La Maná'] },
+      { name: 'El Oro', mainCities: ['Machala', 'Pasaje', 'Santa Rosa', 'Huaquillas', 'Arenillas'] },
+      { name: 'Esmeraldas', mainCities: ['Esmeraldas', 'Quinindé', 'Atacames', 'San Lorenzo'] },
+      { name: 'Galápagos', mainCities: ['Puerto Baquerizo Moreno', 'Puerto Ayora', 'Puerto Villamil'] },
+      { name: 'Guayas', mainCities: ['Guayaquil', 'Durán', 'Samborondón', 'Milagro', 'Daule', 'Playas', 'Empalme'] },
+      { name: 'Imbabura', mainCities: ['Ibarra', 'Otavalo', 'Cotacachi', 'Atuntaqui'] },
+      { name: 'Loja', mainCities: ['Loja', 'Catamayo', 'Cariamanga', 'Macará'] },
+      { name: 'Los Ríos', mainCities: ['Babahoyo', 'Quevedo', 'Ventanas', 'Vinces', 'Buena Fe'] },
+      { name: 'Manabí', mainCities: ['Portoviejo', 'Manta', 'Chone', 'Montecristi', 'Bahía de Caráquez', 'Jipijapa', 'El Carmen'] },
+      { name: 'Morona Santiago', mainCities: ['Macas', 'Gualaquiza', 'Sucúa'] },
+      { name: 'Napo', mainCities: ['Tena', 'Archidona', 'Baeza'] },
+      { name: 'Orellana', mainCities: ['Puerto Francisco de Orellana', 'La Joya de los Sachas', 'Loreto'] },
+      { name: 'Pastaza', mainCities: ['Puyo', 'Mera', 'Santa Clara'] },
+      { name: 'Pichincha', mainCities: ['Quito', 'Sangolquí', 'Machachi', 'Cayambe', 'Puerto Quito'] },
+      { name: 'Santa Elena', mainCities: ['Santa Elena', 'La Libertad', 'Salinas'] },
+      { name: 'Santo Domingo de los Tsáchilas', mainCities: ['Santo Domingo', 'La Concordia'] },
+      { name: 'Sucumbíos', mainCities: ['Nueva Loja', 'Shushufindi', 'Putumayo'] },
+      { name: 'Tungurahua', mainCities: ['Ambato', 'Baños de Agua Santa', 'Pelileo', 'Píllaro'] },
+      { name: 'Zamora Chinchipe', mainCities: ['Zamora', 'Yantzaza', 'Zumba'] }
+    ]
   }
 ];

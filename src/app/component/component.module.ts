@@ -12,7 +12,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MyDataComponent } from './my-data/my-data.component';
 import { VolverComponent } from './elementos/botones/volver/volver.component';
 import { SinAccesoComponent } from './sin-acceso/sin-acceso.component';
-
+import { SolicitudComponent } from './sin-acceso/solicitud/solicitud.component';
+import { RevisionComponent } from './administracion/revision/revision.component';
+import { HttpClientModule } from '@angular/common/http';
+import { InicioComponent } from './inicio/inicio.component';
+import { TerminosCondicionesComponent } from './sin-acceso/terminos-condiciones/terminos-condiciones.component';
 
 
 
@@ -29,13 +33,18 @@ import { SinAccesoComponent } from './sin-acceso/sin-acceso.component';
     MyDataComponent,
     VolverComponent,
     SinAccesoComponent,
+    SolicitudComponent,
+    RevisionComponent,
+    InicioComponent,
+    TerminosCondicionesComponent,
   ],
   
   imports: [
     CommonModule,
     ComponentRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ]
 })
 export class ComponentModule { }

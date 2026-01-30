@@ -13,6 +13,9 @@ import { GuardService } from '../service/security/guard.service';
 import { Roles } from '../model/security/roles';
 import { SinAccesoComponent } from './sin-acceso/sin-acceso.component';
 import { MantenimientoComponent } from './mantenimiento/mantenimiento.component';
+import { SolicitudComponent } from './sin-acceso/solicitud/solicitud.component';
+import { RevisionComponent } from './administracion/revision/revision.component';
+import { InicioComponent } from './inicio/inicio.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -80,7 +83,28 @@ const routes: Routes = [
     component: DashboardComponent, 
     canActivate: [GuardService], 
     data: { roles: [Roles.ADMIN, Roles.SUBASTADOR] } 
-  }
+  },
+
+  {
+  path: 'solicitud-subastador',
+  component: SolicitudComponent,
+  canActivate: [GuardService],
+  data: { roles: [Roles.USER] }
+},
+
+{
+  path: 'revision-solicitudes',
+  component: RevisionComponent,
+  canActivate: [GuardService],
+  data: { roles: [Roles.ADMIN] }
+},
+
+{
+  path: 'inicio',
+  component: InicioComponent,
+  canActivate: [GuardService],
+  data: { roles: [Roles.USER] }
+},
 ];
 
 @NgModule({

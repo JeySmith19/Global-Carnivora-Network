@@ -3,9 +3,15 @@
 
   <form [formGroup]="form" (ngSubmit)="registrar()" class="register-form">
     <div class="form-group">
-      <label>Correo</label>
+      <label>Correo Electrónico</label>
       <input type="email" formControlName="username" placeholder="usuario@correo.com">
       <small *ngIf="form.get('username')?.touched && form.get('username')?.invalid">Ingresa un correo válido</small>
+    </div>
+
+    <div class="form-group">
+      <label>Confirmar Correo Electrónico</label>
+      <input type="email" formControlName="confirmEmail" placeholder="Repite tu correo">
+      <small *ngIf="form.get('confirmEmail')?.touched && form.errors?.['emailMismatch']">Los correos no coinciden</small>
     </div>
 
     <div class="form-group">
@@ -20,7 +26,7 @@
     <div class="form-group">
       <label>Confirmar Contraseña</label>
       <input [type]="passwordVisible ? 'text' : 'password'" formControlName="confirmPassword" placeholder="Repite la contraseña">
-      <small *ngIf="form.errors?.['mismatch'] && form.get('confirmPassword')?.touched">Las contraseñas no coinciden</small>
+      <small *ngIf="form.get('confirmPassword')?.touched && form.errors?.['passwordMismatch']">Las contraseñas no coinciden</small>
     </div>
 
     <div class="form-group">

@@ -1,0 +1,82 @@
+.solicitud-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-alt);
+  padding: 16px;
+}
+
+.card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 32px;
+  max-width: 520px;
+  width: 100%;
+}
+
+h2 {
+  margin-bottom: 8px;
+  font-size: 1.6rem;
+  color: var(--color-title);
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: var(--color-subtitle);
+  margin-bottom: 20px;
+}
+
+.rules {
+  padding-left: 18px;
+  margin-bottom: 20px;
+}
+
+.rules li {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  color: var(--color-text);
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  color: var(--color-text);
+}
+
+.check input {
+  width: 16px;
+  height: 16px;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-light);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+button:disabled {
+  background: var(--color-muted);
+  cursor: not-allowed;
+}
+
+button:not(:disabled):hover {
+  background: var(--color-btn-primary-light);
+}
+
+.message {
+  margin-top: 16px;
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--color-primary);
+}
