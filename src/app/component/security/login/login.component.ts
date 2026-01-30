@@ -23,19 +23,19 @@ export class LoginComponent implements OnInit{
     request.password = this.password;
 
     this.loginService.login(request).subscribe((data: any) => {
-      console.log('Token recibido:', data.jwttoken);
-      console.log('Username recibido:', data.username);
-      console.log('Rol recibido:', data.rol);
       sessionStorage.setItem("token", data.jwttoken);
       sessionStorage.setItem("username", data.username);
       sessionStorage.setItem("rol", data.rol);
-      this.loginService.getUserDetails().subscribe(() => {
-        this.router.navigate(['components/dashboard']);
-      });
+
+      const rol = data.rol;
+      if (rol === 'USER' || rol === 'SUBASTADOR_PENDIENTE') {
+        this.router.navigate(['/components/inicio']);
+      } else {
+        this.router.navigate(['/components/dashboard']);
+      }
     }, error => {
       this.mensaje = "Credenciales incorrectas!!!"
       this.snackBar.open(this.mensaje, "Aviso", { duration: 2000 });
     });
   }
-
 }
