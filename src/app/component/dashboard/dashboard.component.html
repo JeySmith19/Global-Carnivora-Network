@@ -11,6 +11,7 @@
       <button class="btn-primary desktop-only" (click)="go('/components/ver-subastas')">Mis subastas</button>
       <button class="btn-secondary desktop-only" (click)="go('/components/subastas')" *ngIf="eventoActivo?.estado === 'ABIERTO'">Crear subasta</button>
       <button class="btn-evento desktop-only" *ngIf="isAdmin()" (click)="goOrganizarEvento()">Administrar eventos</button>
+      <button class="btn-primary desktop-only" (click)="go('/components/revision-solicitudes')">Aprobar subastadores</button>
 
       <div class="hamburger mobile-only" (click)="showMenu = !showMenu">≡</div>
       <div class="profile-icon" (click)="go('/components/perfil')">{{ user?.name?.charAt(0) }}</div>

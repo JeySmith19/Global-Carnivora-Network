@@ -1,32 +1,28 @@
+<app-volver></app-volver>
 <div class="revision-container">
   <h2>Solicitudes de subastador</h2>
 
-  <p *ngIf="loading">Cargando...</p>
-  <p *ngIf="!loading && pendientes.length === 0">
+  <p *ngIf="loading" class="loading">Cargando...</p>
+  <p *ngIf="!loading && pendientes.length === 0" class="no-data">
     No hay solicitudes pendientes
   </p>
 
-  <table *ngIf="pendientes.length > 0">
-    <thead>
-      <tr>
-        <th>Correo</th>
-        <th>Nombre</th>
-        <th>Teléfono</th>
-        <th>Ciudad</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let u of pendientes">
-        <td>{{ u.username }}</td>
-        <td>{{ u.name }} {{ u.lastName }}</td>
-        <td>{{ u.phone }}</td>
-        <td>{{ u.city }}</td>
-        <td>
-          <button (click)="aprobar(u.id)">Aprobar</button>
-          <button (click)="rechazar(u.id)">Rechazar</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="users-list" *ngIf="pendientes.length > 0">
+    <div class="user-item" *ngFor="let u of pendientes">
+      <div class="user-main">
+        <h3>{{ u.name }} {{ u.lastName }}</h3>
+      </div>
+      <div class="user-info">
+        <span><strong>Email:</strong> {{ u.username }}</span>
+        <span><strong>Nombre:</strong> {{ u.name }}</span>
+        <span><strong>Teléfono:</strong> {{ u.phone }}</span>
+        <span><strong>Ciudad:</strong> {{ u.city }}</span>
+      </div>
+      <div class="user-actions">
+        <button class="approve" (click)="aprobar(u.id)">Aprobar</button>
+        <button class="reject" (click)="rechazar(u.id)">Rechazar</button>
+      </div>
+    </div>
+  </div>
 </div>
+
