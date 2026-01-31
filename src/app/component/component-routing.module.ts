@@ -103,8 +103,9 @@ const routes: Routes = [
   path: 'inicio',
   component: InicioComponent,
   canActivate: [GuardService],
-  data: { roles: [Roles.USER] }
-},
+  data: { roles: [Roles.USER, Roles.SUBASTADOR_PENDIENTE] }
+}
+
 ];
 
 @NgModule({

@@ -9,33 +9,43 @@ import { JwtRequest } from 'src/app/model/security/jwtRequest';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit{
-  constructor(private loginService: LoginService, private router: Router, private snackBar: MatSnackBar) { }
-  username: string = ""
-  password: string = ""
-  mensaje: string = ""
+export class LoginComponent implements OnInit {
 
-  ngOnInit(): void { }
+  username: string = '';
+  password: string = '';
+  mensaje: string = '';
+
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {}
+
+  ngOnInit(): void {}
 
   login() {
-    let request = new JwtRequest();
+    const request = new JwtRequest();
     request.username = this.username;
     request.password = this.password;
 
-    this.loginService.login(request).subscribe((data: any) => {
-      sessionStorage.setItem("token", data.jwttoken);
-      sessionStorage.setItem("username", data.username);
-      sessionStorage.setItem("rol", data.rol);
+    this.loginService.login(request).subscribe(
+      (data: any) => {
 
-      const rol = data.rol;
-      if (rol === 'USER' || rol === 'SUBASTADOR_PENDIENTE') {
-        this.router.navigate(['/components/inicio']);
-      } else {
-        this.router.navigate(['/components/dashboard']);
+        sessionStorage.setItem('token', data.jwttoken);
+        sessionStorage.setItem('username', this.username);
+
+        const rol = this.loginService.showRole();
+
+        if (rol === 'ADMIN' || rol === 'SUBASTADOR') {
+          this.router.navigate(['/components/dashboard']);
+        } else {
+          this.router.navigate(['/components/inicio']);
+        }
+      },
+      () => {
+        this.mensaje = 'Credenciales incorrectas!!!';
+        this.snackBar.open(this.mensaje, 'Aviso', { duration: 2000 });
       }
-    }, error => {
-      this.mensaje = "Credenciales incorrectas!!!"
-      this.snackBar.open(this.mensaje, "Aviso", { duration: 2000 });
-    });
+    );
   }
 }

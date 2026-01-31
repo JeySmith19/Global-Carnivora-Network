@@ -4,20 +4,20 @@
   <form [formGroup]="form" (ngSubmit)="registrar()" class="register-form">
     <div class="form-group">
       <label>Correo Electrónico</label>
-      <input type="email" formControlName="username" placeholder="usuario@correo.com">
+      <input type="email" formControlName="username" placeholder="usuario@correo.com" autocomplete="email">
       <small *ngIf="form.get('username')?.touched && form.get('username')?.invalid">Ingresa un correo válido</small>
     </div>
 
     <div class="form-group">
       <label>Confirmar Correo Electrónico</label>
-      <input type="email" formControlName="confirmEmail" placeholder="Repite tu correo">
+      <input type="email" formControlName="confirmEmail" placeholder="Repite tu correo" autocomplete="email">
       <small *ngIf="form.get('confirmEmail')?.touched && form.errors?.['emailMismatch']">Los correos no coinciden</small>
     </div>
 
     <div class="form-group">
       <label>Contraseña</label>
       <div class="password-wrapper">
-        <input [type]="passwordVisible ? 'text' : 'password'" formControlName="password" placeholder="Contraseña">
+        <input [type]="passwordVisible ? 'text' : 'password'" formControlName="password" placeholder="Contraseña" autocomplete="new-password">
         <button type="button" class="toggle-btn" (click)="togglePassword()">{{ passwordVisible ? 'Ocultar' : 'Mostrar' }}</button>
       </div>
       <small *ngIf="form.get('password')?.touched && form.get('password')?.invalid">La contraseña debe tener al menos 5 caracteres</small>
@@ -25,18 +25,18 @@
 
     <div class="form-group">
       <label>Confirmar Contraseña</label>
-      <input [type]="passwordVisible ? 'text' : 'password'" formControlName="confirmPassword" placeholder="Repite la contraseña">
+      <input [type]="passwordVisible ? 'text' : 'password'" formControlName="confirmPassword" placeholder="Repite la contraseña" autocomplete="new-password">
       <small *ngIf="form.get('confirmPassword')?.touched && form.errors?.['passwordMismatch']">Las contraseñas no coinciden</small>
     </div>
 
     <div class="form-group">
       <label>Nombre</label>
-      <input type="text" formControlName="name" placeholder="Nombre">
+      <input type="text" formControlName="name" placeholder="Nombre" autocomplete="given-name">
     </div>
 
     <div class="form-group">
       <label>Apellido</label>
-      <input type="text" formControlName="lastName" placeholder="Apellido">
+      <input type="text" formControlName="lastName" placeholder="Apellido" autocomplete="family-name">
     </div>
 
     <div class="form-group">
@@ -67,7 +67,7 @@
       <label>Teléfono</label>
       <div class="phone-wrapper">
         <span class="country-code">+{{ countryCode }}</span>
-        <input type="text" formControlName="phone" placeholder="999999999">
+        <input type="text" formControlName="phone" placeholder="999999999" autocomplete="tel">
       </div>
       <small *ngIf="form.get('phone')?.touched && form.get('phone')?.invalid">Ingresa un teléfono válido</small>
     </div>

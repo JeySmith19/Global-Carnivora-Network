@@ -27,15 +27,16 @@ export class LoginService {
     return token != null;
   }
 
-  showRole() {
-    let token = sessionStorage.getItem("token");
-    if (!token) {
-      return null;
-    }
-    const helper = new JwtHelperService();
-    const decodedToken = helper.decodeToken(token);
-    return decodedToken?.role;
-  }
+  showRole(): string | null {
+  const token = sessionStorage.getItem('token');
+  if (!token) return null;
+
+  const helper = new JwtHelperService();
+  const decoded: any = helper.decodeToken(token);
+
+  return decoded?.role ?? null;
+}
+
 
   showUser() {
     let token = sessionStorage.getItem("token");
