@@ -17,9 +17,10 @@
     </p>
 
     <div class="fila-subasta" *ngFor="let s of subastas">
-      <label class="img-box" (click)="zoomSrc = s.imagen; showZoom = true">
+      <!-- Usamos método zoom(s) en lugar de asignar directamente -->
+      <label class="img-box" (click)="zoom(s)">
         <span class="badge-numero">#{{ s.numeroSubasta || '-' }}</span>
-        <img *ngIf="s.imagen; else noImg" [src]="s.imagen">
+        <img *ngIf="getImagenSrc(s); else noImg" [src]="getImagenSrc(s)">
         <ng-template #noImg>
           <div class="img-empty">Sin imagen</div>
         </ng-template>

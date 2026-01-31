@@ -47,22 +47,39 @@ export class SubastaComponent implements OnInit {
       next: (data) => {
         this.subastaEditando = data;
         this.subasta = { ...data };
-        this.previewUrl = data.imagen || null;
+        this.previewUrl = typeof data.imagen === 'string' ? data.imagen : null;
       },
       error: () => {}
     });
   }
 
   onFileSelected(event: any) {
-    const file = event.target.files[0];
+    const file: File = event.target.files[0];
     if (!file) return;
 
+    this.subasta.imagen = file; // guardamos el File real
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-      this.previewUrl = reader.result;
-      this.subasta.imagen = reader.result as string;
+      this.previewUrl = reader.result; // preview base64
     };
+  }
+
+  private buildFormData(subasta: Subasta): FormData {
+    const formData = new FormData();
+
+    // Enviar archivo si existe
+    if (subasta.imagen instanceof File) {
+      formData.append('archivo', subasta.imagen);
+    }
+
+    // Crear DTO limpio sin 'imagen'
+    const dto: any = { ...subasta };
+    if (dto.imagen instanceof File) delete dto.imagen;
+
+    formData.append('dto', new Blob([JSON.stringify(dto)], { type: 'application/json' }));
+
+    return formData;
   }
 
   crear() {
@@ -70,18 +87,21 @@ export class SubastaComponent implements OnInit {
 
     this.isLoading = true;
     this.registroExitoso = false;
-    this.mensajeEstado = 'Registrando subasta... esto puede tardar unos segundos';
+    this.mensajeEstado = 'Registrando subasta...';
 
-    this.subastaService.insert(this.subasta).subscribe({
+    const formData = this.buildFormData(this.subasta);
+
+    this.subastaService.insertFormData(formData).subscribe({
       next: () => {
         this.isLoading = false;
         this.registroExitoso = true;
-        this.mensajeEstado = 'Subasta registrada correctamente ✔';
+        this.mensajeEstado = 'Subasta registrada ✔';
         setTimeout(() => this.cancelarEdicion(), 1500);
       },
-      error: () => {
+      error: (err) => {
+        console.error(err);
         this.isLoading = false;
-        this.mensajeEstado = 'Ocurrió un error al registrar la subasta';
+        this.mensajeEstado = 'Error al registrar la subasta';
       }
     });
   }
@@ -92,18 +112,21 @@ export class SubastaComponent implements OnInit {
 
     this.isLoading = true;
     this.registroExitoso = false;
-    this.mensajeEstado = 'Guardando cambios... esto puede tardar unos segundos';
+    this.mensajeEstado = 'Guardando cambios...';
 
-    this.subastaService.update(this.subastaEditando.id, this.subasta).subscribe({
+    const formData = this.buildFormData(this.subasta);
+
+    this.subastaService.updateFormData(this.subastaEditando.id, formData).subscribe({
       next: () => {
         this.isLoading = false;
         this.registroExitoso = true;
-        this.mensajeEstado = 'Cambios guardados correctamente ✔';
+        this.mensajeEstado = 'Cambios guardados ✔';
         setTimeout(() => this.cancelarEdicion(), 1500);
       },
-      error: () => {
+      error: (err) => {
+        console.error(err);
         this.isLoading = false;
-        this.mensajeEstado = 'Ocurrió un error al guardar los cambios';
+        this.mensajeEstado = 'Error al guardar los cambios';
       }
     });
   }

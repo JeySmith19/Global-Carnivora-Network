@@ -13,7 +13,7 @@ export class Subasta {
   planta: string = "";
   maceta: string = "";
   observaciones: string = "";
-  imagen: string = "";   
+  imagen: string | File = "";   // <-- cambio aquí
   estado: string = "PENDIENTE";
   precioBase: number = 0;
   numeroSubasta?: number;

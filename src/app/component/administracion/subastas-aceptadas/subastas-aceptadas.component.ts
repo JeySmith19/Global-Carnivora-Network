@@ -29,9 +29,21 @@ export class SubastasAceptadasComponent implements OnInit {
   }
 
   cargarSubastasAceptadas() {
+    this.cargando = true;
     this.adminService.listarSubastasAceptadas().subscribe(data => {
-      this.subastas = data.filter(s => s.eventoId === this.eventoId);
-    });
+      this.subastas = data
+        .filter(s => s.eventoId === this.eventoId)
+        .map(s => {
+          // Aseguramos que imagen sea solo string para mostrar
+          if (s.imagen instanceof File) {
+            const reader = new FileReader();
+            reader.readAsDataURL(s.imagen);
+            reader.onload = () => s.imagen = reader.result as string;
+          }
+          return s;
+        });
+      this.cargando = false;
+    }, () => this.cargando = false);
   }
 
   Generar() {
@@ -53,6 +65,22 @@ export class SubastasAceptadasComponent implements OnInit {
 
   volver() {
     this.router.navigate(['/components/eventos']);
+  }
+
+  zoom(s: Subasta) {
+    if (!s.imagen) return;
+
+    if (typeof s.imagen === 'string') {
+      this.zoomSrc = s.imagen;
+      this.showZoom = true;
+    } else if (s.imagen instanceof File) {
+      const reader = new FileReader();
+      reader.readAsDataURL(s.imagen);
+      reader.onload = () => {
+        this.zoomSrc = reader.result as string;
+        this.showZoom = true;
+      };
+    }
   }
 
   copiarSubasta(s: Subasta) {
@@ -93,7 +121,9 @@ ${s.observaciones || '-'}
 
     navigator.clipboard.writeText(texto);
 
-    if (s.imagen) {
+    if (!s.imagen) return;
+
+    if (typeof s.imagen === 'string') {
       try {
         const base64Data = s.imagen.split(',')[1];
         const blob = new Blob(
@@ -106,6 +136,27 @@ ${s.observaciones || '-'}
         link.click();
         URL.revokeObjectURL(link.href);
       } catch {}
+    } else if (s.imagen instanceof File) {
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(s.imagen);
+      link.download = `subasta_${s.numeroSubasta || 'imagen'}.jpg`;
+      link.click();
+      URL.revokeObjectURL(link.href);
     }
   }
+
+  getImagenSrc(s: Subasta): string | null {
+  if (!s.imagen) return null;
+  // Si es File, convertir a base64 usando FileReader (o ya lo tenías en otro lado)
+  if (s.imagen instanceof File) {
+    const reader = new FileReader();
+    reader.readAsDataURL(s.imagen);
+    reader.onload = () => {
+      s.imagen = reader.result as string; // reemplaza File con base64
+    };
+    return null; // hasta que FileReader termine
+  }
+  return s.imagen as string; // si ya es string
+}
+
 }

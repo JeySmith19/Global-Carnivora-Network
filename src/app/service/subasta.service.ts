@@ -17,13 +17,14 @@ export class SubastaService {
 
   constructor(private http: HttpClient) {}
 
-  private getHeaders() {
+  private getHeaders(json = true) {
     const token = sessionStorage.getItem('token');
-    return new HttpHeaders()
-      .set('Authorization', `Bearer ${token}`)
-      .set('Content-Type', 'application/json');
+    let headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    if (json) headers = headers.set('Content-Type', 'application/json');
+    return headers;
   }
 
+  // ================= LISTADOS =================
   listMisSubastas(): Observable<Subasta[]> {
     return this.http.get<Subasta[]>(`${this.url}/mis-subastas`, { headers: this.getHeaders() });
   }
@@ -32,28 +33,37 @@ export class SubastaService {
     return this.http.get<Subasta[]>(`${this.url}/estado/${estado}`, { headers: this.getHeaders() });
   }
 
-  insert(s: Subasta) {
-    return this.http.post(this.url, s, { headers: this.getHeaders() }).pipe(
-      catchError(err => throwError(err))
-    );
+  listByEvento(idEvento: number): Observable<Subasta[]> {
+    return this.http.get<Subasta[]>(`${this.url}/evento/${idEvento}`, { headers: this.getHeaders() });
   }
 
   getById(id: number) {
     return this.http.get<Subasta>(`${this.url}/${id}`, { headers: this.getHeaders() });
   }
 
-  update(id: number, s: Subasta) {
-    return this.http.put(`${this.url}/${id}`, s, { headers: this.getHeaders() });
+  // ================= INSERT / UPDATE =================
+  insertFormData(formData: FormData) {
+    // No Content-Type: angular lo pone automáticamente con multipart/form-data
+    return this.http.post(this.url, formData, { headers: this.getHeaders(false) })
+      .pipe(catchError(err => throwError(err)));
   }
 
+  updateFormData(id: number, formData: FormData) {
+    return this.http.put(`${this.url}/${id}`, formData, { headers: this.getHeaders(false) })
+      .pipe(catchError(err => throwError(err)));
+  }
+
+  // ================= ESTADO =================
   updateEstado(id: number, estado: string) {
     return this.http.put(`${this.url}/${id}/estado/${estado}`, {}, { headers: this.getHeaders() });
   }
 
+  // ================= ELIMINAR =================
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`, { headers: this.getHeaders() });
   }
 
+  // ================= OBSERVABLE =================
   setList(listaNueva: Subasta[]) {
     this.listaCambio.next(listaNueva);
   }
@@ -61,12 +71,4 @@ export class SubastaService {
   getList() {
     return this.listaCambio.asObservable();
   }
-
-  listByEvento(idEvento: number): Observable<Subasta[]> {
-  return this.http.get<Subasta[]>(
-    `${this.url}/evento/${idEvento}`,
-    { headers: this.getHeaders() }
-  );
-}
-
 }
