@@ -5,10 +5,17 @@
       <h2>Subastas Aceptadas</h2>
       <span class="evento-id">Listado general</span>
     </div>
-    <button class="btn-secundario" (click)="Generar()">Generar subastas</button>
+    <button class="btn-secundario" (click)="Generar()" [disabled]="generando">
+      {{ generando ? 'Generando...' : 'Generar subastas' }}
+    </button>
   </header>
 
   <div class="lista-subastas">
+
+    <p *ngIf="cargando" class="estado-lista">
+      Cargando subastas aceptadas...
+    </p>
+
     <div class="fila-subasta" *ngFor="let s of subastas">
       <label class="img-box" (click)="zoomSrc = s.imagen; showZoom = true">
         <span class="badge-numero">#{{ s.numeroSubasta || '-' }}</span>
@@ -28,9 +35,11 @@
       </div>
 
       <div class="acciones">
-        <button class="btn-detalle primary" (click)="s.showModal = true">Ver detalle</button>
+        <button class="btn-detalle primary" (click)="s.showModal = true">
+          Ver detalle
+        </button>
         <button *ngIf="s.numeroSubasta" class="btn-whatsapp" (click)="copiarSubasta(s)">
-          <i class="fab fa-whatsapp"></i> Copiar
+          Copiar
         </button>
       </div>
 
@@ -46,18 +55,15 @@
             <p><b>Fecha:</b> {{ s.fechaEvento | date:'dd/MM/yyyy' }}</p>
             <p><b>Hora:</b> {{ s.horaInicioAsignada || '-' }} - {{ s.horaFinAsignada || '-' }}</p>
             <p><b>Duración:</b> {{ s.duracionSubastaMinutos }} min</p>
-            <p><b>Descanso:</b> {{ s.descansoMinutos }} min</p>
-            <hr>
             <p><b>Contacto:</b> {{ s.username }}</p>
             <p><b>Ciudad:</b> {{ s.city }}</p>
             <p><b>Teléfono:</b> {{ s.phone }}</p>
-            <p *ngIf="s.observaciones"><b>Observaciones:</b> {{ s.observaciones }}</p>
           </div>
         </div>
       </div>
     </div>
 
-    <div *ngIf="!subastas.length" class="estado-lista">
+    <div *ngIf="!cargando && !subastas.length" class="estado-lista">
       <p>No hay subastas aceptadas</p>
     </div>
   </div>
@@ -65,6 +71,6 @@
   <div class="zoom-image" *ngIf="showZoom" (click)="showZoom = false">
     <div class="zoom-image-bg"></div>
     <img [src]="zoomSrc" (click)="$event.stopPropagation()">
-    <button class="zoom-close" (click)="showZoom = false">×</button>
+    <button class="zoom-close">×</button>
   </div>
 </div>

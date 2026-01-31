@@ -1,6 +1,5 @@
 <div class="organizar-container">
 
-  <!-- HEADER -->
   <header class="organizar-header">
     <div class="header-left">
       <app-volver></app-volver>
@@ -13,12 +12,14 @@
     </button>
   </header>
 
-  <!-- LISTA -->
   <div class="lista-subastas">
+
+    <p *ngIf="loadingSubastas" class="sin-datos">
+      Cargando subastas...
+    </p>
 
     <div class="fila-subasta" *ngFor="let s of subastas">
 
-      <!-- IMAGEN -->
       <input type="checkbox" id="img-{{ s.id }}" hidden>
       <label class="img-box" for="img-{{ s.id }}">
         <img *ngIf="s.imagen; else noImg" [src]="s.imagen">
@@ -27,7 +28,6 @@
         </ng-template>
       </label>
 
-      <!-- INFO -->
       <div class="info">
         <h3>{{ s.planta }}</h3>
 
@@ -39,7 +39,7 @@
               'estado-aceptado': s.estado === 'ACEPTADA',
               'estado-rechazado': s.estado === 'RECHAZADA'
             }">
-            {{ s.estado || 'Por definir' }}
+            {{ s.estado }}
           </span>
 
           <span class="precio">S/ {{ s.precioBase || '-' }}</span>
@@ -48,7 +48,6 @@
         <p class="sub">Subastador: {{ s.username || '-' }}</p>
       </div>
 
-      <!-- ACCIONES -->
       <div class="acciones">
         <input type="checkbox" id="det-{{ s.id }}" hidden>
         <label for="det-{{ s.id }}" class="btn-detalle primary">
@@ -66,8 +65,6 @@
             <p><b>Fecha:</b> {{ s.fechaEvento | date:'dd/MM/yyyy' }}</p>
             <p><b>Hora Inicio:</b> {{ s.horaInicioAsignada || '-' }}</p>
             <p><b>Hora Fin:</b> {{ s.horaFinAsignada || '-' }}</p>
-            <p><b>Duración:</b> {{ s.duracionSubastaMinutos || '-' }} min</p>
-            <p><b>Descanso:</b> {{ s.descansoMinutos || '-' }} min</p>
 
             <hr>
 
@@ -75,16 +72,19 @@
             <p><b>Ciudad:</b> {{ s.city || '-' }}</p>
             <p><b>Teléfono:</b> {{ s.phone || '-' }}</p>
 
-            <p *ngIf="s.observaciones">
-              <b>Observaciones:</b> {{ s.observaciones }}
-            </p>
-
             <div class="drawer-acciones">
               <ng-container *ngIf="s.estado === 'PENDIENTE'">
-                <button class="btn-aceptar" (click)="aceptar(s)">
-                  Aceptar
+                <button
+                  class="btn-aceptar"
+                  (click)="aceptar(s)"
+                  [disabled]="accionandoId === s.id">
+                  {{ accionandoId === s.id ? 'Procesando...' : 'Aceptar' }}
                 </button>
-                <button class="btn-rechazar" (click)="rechazar(s)">
+
+                <button
+                  class="btn-rechazar"
+                  (click)="rechazar(s)"
+                  [disabled]="accionandoId === s.id">
                   Rechazar
                 </button>
               </ng-container>
@@ -97,15 +97,9 @@
         </div>
       </div>
 
-      <div class="zoom">
-        <div class="zoom-bg"></div>
-        <label for="img-{{ s.id }}" class="zoom-close">×</label>
-        <img [src]="s.imagen">
-      </div>
-
     </div>
 
-    <p *ngIf="!subastas.length" class="sin-datos">
+    <p *ngIf="!loadingSubastas && !subastas.length" class="sin-datos">
       No hay subastas registradas.
     </p>
 

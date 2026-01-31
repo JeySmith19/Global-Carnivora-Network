@@ -17,6 +17,9 @@ export class OrganizarSubastasComponent implements OnInit {
   subastas: Subasta[] = [];
   evento: Evento = new Evento();
 
+  loadingSubastas = true;
+  accionandoId: number | null = null;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -32,41 +35,42 @@ export class OrganizarSubastasComponent implements OnInit {
   }
 
   cargarEvento() {
-    this.eventoService.listId(this.idEvento).subscribe(
-      data => {
-        this.evento = data;
-      },
-      err => {
-        console.error('Error al cargar el evento', err);
-      }
-    );
+    this.eventoService.listId(this.idEvento).subscribe(data => {
+      this.evento = data;
+    });
   }
 
   cargarSubastas() {
+    this.loadingSubastas = true;
     this.subastaService.listByEvento(this.idEvento).subscribe(
       data => {
         this.subastas = data.filter(s =>
           s.estado === 'PENDIENTE' || s.estado === 'RECHAZADA'
         );
+        this.loadingSubastas = false;
       },
-      err => {
-        console.error('Error al cargar subastas', err);
+      () => {
+        this.loadingSubastas = false;
       }
     );
   }
 
-  volver() {
-    this.router.navigate(['/components/eventos']);
-  }
-
   aceptar(subasta: Subasta) {
+    this.accionandoId = subasta.id;
     this.adminService.decidirSubasta(subasta.id, 'ACEPTADA')
-      .subscribe(() => this.cargarSubastas());
+      .subscribe(() => {
+        this.accionandoId = null;
+        this.cargarSubastas();
+      });
   }
 
   rechazar(subasta: Subasta) {
+    this.accionandoId = subasta.id;
     this.adminService.decidirSubasta(subasta.id, 'RECHAZADA')
-      .subscribe(() => this.cargarSubastas());
+      .subscribe(() => {
+        this.accionandoId = null;
+        this.cargarSubastas();
+      });
   }
 
   verAceptadas() {
