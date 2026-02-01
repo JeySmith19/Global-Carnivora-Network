@@ -162,7 +162,7 @@
 }
 
 .evento-page .drawer.open{
-  display:flex;
+  display:flex
 }
 
 .evento-page .drawer-header{
@@ -220,23 +220,6 @@
   gap:16px
 }
 
-.evento-page .form-section.compact input{
-  max-width:110px;
-  text-align:center
-}
-
-.evento-page input[type="date"]{
-  padding-right:38px
-}
-
-.evento-page input[type="time"]{
-  padding-right:34px
-}
-
-.evento-page input[type="number"]{
-  padding-right:10px
-}
-
 .evento-page .drawer-footer{
   display:flex;
   gap:14px;
@@ -265,15 +248,14 @@
   cursor:pointer
 }
 
-/* ===== POPUP PREDICCIÓN ===== */
-
 .evento-page .modal{
   position:fixed;
   inset:0;
   z-index:1200;
   display:flex;
   align-items:center;
-  justify-content:center
+  justify-content:center;
+  padding:24px
 }
 
 .evento-page .modal-bg{
@@ -286,47 +268,36 @@
   position:relative;
   background:var(--color-bg);
   border-radius:22px;
-  padding:24px;
-  width:92%;
+  padding:22px;
+  width:100%;
   max-width:420px;
   box-shadow:0 30px 60px rgba(0,0,0,.35);
   display:flex;
   flex-direction:column;
-  gap:14px;
-  animation:popupIn .25s ease-out
+  gap:8px
 }
 
 .evento-page .modal-content h3{
-  margin:0;
+  margin:0 0 6px 0;
   font-size:20px;
   font-weight:600
 }
 
 .evento-page .modal-content p{
-  margin:0;
+  margin:4px 0;
   font-size:14px;
   color:var(--color-text-muted)
 }
 
-.evento-page .modal-content b{
-  color:var(--color-text)
-}
-
-@keyframes popupIn{
-  from{
-    opacity:0;
-    transform:scale(.95)
-  }
-  to{
-    opacity:1;
-    transform:scale(1)
-  }
-}
-
 @media(max-width:768px){
+  .evento-page{
+    padding:14px
+  }
+
   .evento-page .top-bar{
     flex-direction:column;
-    gap:12px
+    gap:12px;
+    align-items:stretch
   }
 
   .evento-page .btn-new{
@@ -335,24 +306,45 @@
   }
 
   .evento-page .evento-row{
-    flex-direction:column
+    flex-direction:column;
+    gap:12px
+  }
+
+  .evento-page .row-left{
+    align-items:flex-start
   }
 
   .evento-page .row-right{
     width:100%;
-    justify-content:space-between
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px
   }
 
   .evento-page .acciones{
     width:100%;
-    justify-content:space-between
+    flex-wrap:wrap;
+    gap:8px
+  }
+
+  .evento-page .icon-btn{
+    flex:1
   }
 
   .evento-page .form-grid{
     grid-template-columns:1fr
   }
 
-  .evento-page .form-section.compact input{
-    max-width:100%
+  .evento-page .drawer{
+    width:95%;
+    max-height:90vh
+  }
+
+  .evento-page .modal{
+    padding:28px
+  }
+
+  .evento-page .modal-content{
+    max-width:none
   }
 }
