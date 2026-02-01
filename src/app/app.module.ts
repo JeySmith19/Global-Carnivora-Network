@@ -18,6 +18,7 @@ import { MantenimientoComponent } from './component/mantenimiento/mantenimiento.
 import { RecoverPasswordComponent } from './component/security/recover-password/recover-password.component';
 import { CodeRecoverPasswordComponent } from './component/security/code-recover-password/code-recover-password.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { TerminosCondicionesComponent } from './component/sin-acceso/terminos-condiciones/terminos-condiciones.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     MantenimientoComponent,
     RecoverPasswordComponent,
     CodeRecoverPasswordComponent,
+    TerminosCondicionesComponent,
   ],
   imports: [
     BrowserModule,

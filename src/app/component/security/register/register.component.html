@@ -72,8 +72,20 @@
       <small *ngIf="form.get('phone')?.touched && form.get('phone')?.invalid">Ingresa un teléfono válido</small>
     </div>
 
+    <div class="form-group">
+      <label>
+        <input type="checkbox" formControlName="acceptTerms">
+        Acepto los <a [routerLink]="['/terminos']" target="_blank">Términos y Condiciones</a>
+      </label>
+      <small *ngIf="form.get('acceptTerms')?.touched && form.get('acceptTerms')?.invalid">
+        Debes aceptar los términos para registrarte
+      </small>
+    </div>
+
     <div class="btn-group">
-      <button type="submit" [disabled]="loading" class="btn-submit">{{ loading ? 'Registrando...' : 'Registrar' }}</button>
+      <button type="submit" [disabled]="loading || !form.get('acceptTerms')?.value" class="btn-submit">
+        {{ loading ? 'Registrando...' : 'Registrar' }}
+      </button>
       <button type="button" class="btn-cancel" (click)="cancelarRegistro()" *ngIf="!loading">Cancelar</button>
     </div>
   </form>

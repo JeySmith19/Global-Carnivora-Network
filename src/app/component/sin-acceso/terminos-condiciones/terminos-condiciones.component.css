@@ -1,0 +1,74 @@
+.terminos-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 40px 35px;
+  background-color: var(--color-bg-alt);
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  color: var(--color-text);
+  font-size: 1rem;
+  line-height: 1.7;
+  overflow-y: auto;
+}
+
+.terminos-container h2 {
+  font-size: 2rem;
+  color: var(--color-title);
+  margin-bottom: 25px;
+  text-align: center;
+  border-bottom: 3px solid var(--color-primary);
+  padding-bottom: 12px;
+}
+
+.terminos-container h3 {
+  font-size: 1.3rem;
+  color: var(--color-primary);
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+
+.terminos-container p {
+  color: var(--color-text-muted);
+  margin-bottom: 18px;
+}
+
+.terminos-container ul {
+  list-style-type: disc;
+  padding-left: 25px;
+  margin-bottom: 18px;
+}
+
+.terminos-container ul li {
+  margin-bottom: 10px;
+}
+
+.terminos-container span.resaltar {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.terminos-container em {
+  color: var(--color-secondary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .terminos-container {
+    padding: 25px 20px;
+    margin: 20px;
+  }
+
+  .terminos-container h2 {
+    font-size: 1.6rem;
+    padding-bottom: 8px;
+  }
+
+  .terminos-container h3 {
+    font-size: 1.1rem;
+  }
+
+  .terminos-container p,
+  .terminos-container ul li {
+    font-size: 0.95rem;
+  }
+}

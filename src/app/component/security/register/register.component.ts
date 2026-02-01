@@ -37,7 +37,8 @@ export class RegisterComponent implements OnInit {
       phone: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
       country: ['', Validators.required],
       department: ['', Validators.required],
-      city: ['']
+      city: [''],
+      acceptTerms: [false, Validators.requiredTrue] // <-- validación de términos
     }, { validators: [this.passwordMatchValidator, this.emailMatchValidator] });
   }
 
