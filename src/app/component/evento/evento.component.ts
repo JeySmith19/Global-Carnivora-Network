@@ -30,16 +30,6 @@ export class EventoComponent implements OnInit {
 
   ngOnInit(): void {
     this.listar();
-
-    setInterval(() => {
-      this.eventos.forEach(e => {
-        if (e.estado === 'ABIERTO') {
-          this.eventoService.autoCerrar(e.id).subscribe(() => {
-            this.listar();
-          });
-        }
-      });
-    }, 60000);
   }
 
   listar() {
@@ -153,5 +143,4 @@ export class EventoComponent implements OnInit {
       hour12: true
     });
   }
-
 }
