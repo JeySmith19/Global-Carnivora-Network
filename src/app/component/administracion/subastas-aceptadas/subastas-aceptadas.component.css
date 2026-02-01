@@ -54,6 +54,29 @@
   transform: translateY(-2px);
 }
 
+.contador-subastas {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 14px;
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  font-weight: 600;
+  margin: -20px 0 24px auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.contador-subastas .label {
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.contador-subastas .valor {
+  font-size: 18px;
+  color: var(--color-primary);
+}
+
 .lista-subastas {
   display: flex;
   flex-direction: column;
@@ -359,6 +382,9 @@
   }
   .btn-secundario {
     width: 100%;
+  }
+  .contador-subastas {
+    margin: 0 0 20px 0;
   }
   .fila-subasta {
     grid-template-columns: 1fr;

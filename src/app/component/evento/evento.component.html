@@ -1,8 +1,8 @@
-
 <div class="evento-page">
-<app-volver></app-volver> 
+  <app-volver></app-volver>
+
   <div class="top-bar"><br>
-    <h2> Eventos de Subasta</h2>
+    <h2>Eventos de Subasta</h2>
     <button class="btn-new"
             [disabled]="hayEventoAbierto"
             (click)="toggleForm()">
@@ -11,9 +11,11 @@
     </button>
   </div>
 
-  <strong><p class="warning" *ngIf="hayEventoAbierto">
-    Ya existe un evento abierto
-  </p></strong>
+  <strong>
+    <p class="warning" *ngIf="hayEventoAbierto">
+      Ya existe un evento abierto
+    </p>
+  </strong>
 
   <div class="lista-eventos">
 
@@ -29,8 +31,12 @@
           <h3>{{ e.nombre }}</h3>
           <p>
             <i class="fa-regular fa-clock"></i>
-            {{ e.horaInicio }} • 
+            {{ formatearHora(e.horaInicio) }} •
             {{ e.duracionSubastaMinutos }} min + {{ e.descansoMinutos }} min descanso
+          </p>
+          <p>
+            <b>Subastas aceptadas:</b>
+            {{ getTotalSubastas(e.id) }}
           </p>
         </div>
       </div>
@@ -59,6 +65,11 @@
           <button class="icon-btn organize"
                   (click)="irAOrganizarSubastas(e.id)">
             <i class="fa-solid fa-list"></i>
+          </button>
+
+          <button class="icon-btn organize"
+                  (click)="eventoPrediccion = e; showPrediccion = true">
+            <i class="fa-solid fa-chart-line"></i>
           </button>
 
           <button class="icon-btn delete"
@@ -122,6 +133,33 @@
       <button class="btn-cancel" (click)="toggleForm()">Cancelar</button>
     </div>
 
+  </div>
+
+  <div class="modal" *ngIf="showPrediccion">
+    <div class="modal-bg" (click)="showPrediccion=false"></div>
+
+    <div class="modal-content">
+      <h3>Predicción del evento</h3>
+
+      <p>
+        <b>Subastas aceptadas:</b>
+        {{ getTotalSubastas(eventoPrediccion.id) }}
+      </p>
+
+      <p>
+        <b>Inicio:</b>
+        {{ formatearHora(eventoPrediccion.horaInicio) }}
+      </p>
+
+      <p>
+        <b>Fin estimado:</b>
+        {{ calcularHoraFin(eventoPrediccion) }}
+      </p>
+
+      <button class="btn-save" (click)="showPrediccion=false">
+        Cerrar
+      </button>
+    </div>
   </div>
 
 </div>
