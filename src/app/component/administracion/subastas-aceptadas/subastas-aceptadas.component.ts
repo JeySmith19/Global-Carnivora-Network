@@ -33,24 +33,14 @@ export class SubastasAceptadasComponent implements OnInit {
     this.adminService.listarSubastasAceptadas().subscribe(data => {
       this.subastas = data
         .filter(s => s.eventoId === this.eventoId)
-        .map(s => {
-          // Aseguramos que imagen sea solo string para mostrar
-          if (s.imagen instanceof File) {
-            const reader = new FileReader();
-            reader.readAsDataURL(s.imagen);
-            reader.onload = () => s.imagen = reader.result as string;
-          }
-          return s;
-        });
+        .sort((a, b) => (a.numeroSubasta ?? 0) - (b.numeroSubasta ?? 0));
       this.cargando = false;
     }, () => this.cargando = false);
   }
 
   Generar() {
     if (this.generando) return;
-
     this.generando = true;
-
     this.adminService.organizarSubastas(this.eventoId).subscribe({
       next: () => {
         this.cargarSubastasAceptadas();
@@ -69,30 +59,27 @@ export class SubastasAceptadasComponent implements OnInit {
 
   zoom(s: Subasta) {
     if (!s.imagen) return;
-
-    if (typeof s.imagen === 'string') {
-      this.zoomSrc = s.imagen;
-      this.showZoom = true;
-    } else if (s.imagen instanceof File) {
-      const reader = new FileReader();
-      reader.readAsDataURL(s.imagen);
-      reader.onload = () => {
-        this.zoomSrc = reader.result as string;
-        this.showZoom = true;
-      };
-    }
+    this.zoomSrc = s.imagen as string;
+    this.showZoom = true;
   }
 
   copiarSubasta(s: Subasta) {
-    const fecha = s.fechaEvento ? new Date(s.fechaEvento).toLocaleDateString('es-PE') : '-';
-    const horaInicio = s.horaInicioAsignada ? s.horaInicioAsignada.slice(0, 5) : '-';
-    const horaFin = s.horaFinAsignada ? s.horaFinAsignada.slice(0, 5) : '-';
+    const fecha = s.fechaEvento ?? '-';
+    const formatHora = (hora: string | undefined) => {
+      if (!hora) return '-';
+      const [hh, mm] = hora.split(':').map(Number);
+      const period = hh >= 12 ? 'pm' : 'am';
+      const h12 = hh % 12 || 12;
+      return `${h12}:${mm.toString().padStart(2, '0')} ${period}`;
+    };
+    const horaInicio = formatHora(s.horaInicioAsignada);
+    const horaFin = formatHora(s.horaFinAsignada);
 
     const texto = `*🌱ᑭᑌᒍᗩ ᑕᗩᖇᑎíᐯᗝᖇᗩ N° ${s.numeroSubasta || '-'}*
 
 📅 Fecha: ${fecha}
 
-⏰ Hora: ${horaInicio} pm – ${horaFin} pm
+⏰ Hora: ${horaInicio} – ${horaFin}
 
 ⏳ Tiempo: ${s.duracionSubastaMinutos ?? '-'} minutos
 
@@ -123,40 +110,20 @@ ${s.observaciones || '-'}
 
     if (!s.imagen) return;
 
-    if (typeof s.imagen === 'string') {
-      try {
-        const base64Data = s.imagen.split(',')[1];
-        const blob = new Blob(
-          [Uint8Array.from(atob(base64Data), c => c.charCodeAt(0))],
-          { type: 'image/jpeg' }
-        );
+    fetch(s.imagen as string)
+      .then(res => res.blob())
+      .then(blob => {
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
         link.download = `subasta_${s.numeroSubasta || 'imagen'}.jpg`;
         link.click();
         URL.revokeObjectURL(link.href);
-      } catch {}
-    } else if (s.imagen instanceof File) {
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(s.imagen);
-      link.download = `subasta_${s.numeroSubasta || 'imagen'}.jpg`;
-      link.click();
-      URL.revokeObjectURL(link.href);
-    }
+      })
+      .catch(() => console.error('No se pudo descargar la imagen'));
   }
 
   getImagenSrc(s: Subasta): string | null {
-  if (!s.imagen) return null;
-  // Si es File, convertir a base64 usando FileReader (o ya lo tenías en otro lado)
-  if (s.imagen instanceof File) {
-    const reader = new FileReader();
-    reader.readAsDataURL(s.imagen);
-    reader.onload = () => {
-      s.imagen = reader.result as string; // reemplaza File con base64
-    };
-    return null; // hasta que FileReader termine
+    return s.imagen as string || null;
   }
-  return s.imagen as string; // si ya es string
-}
 
 }
