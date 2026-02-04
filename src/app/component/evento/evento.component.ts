@@ -34,7 +34,12 @@ export class EventoComponent implements OnInit {
 
   listar() {
     this.eventoService.list().subscribe(data => {
-      this.eventos = data;
+      this.eventos = data.sort((a, b) => {
+        if (a.estado === 'ABIERTO' && b.estado !== 'ABIERTO') return -1;
+        if (a.estado !== 'ABIERTO' && b.estado === 'ABIERTO') return 1;
+        return 0;
+      });
+
       this.hayEventoAbierto = this.eventos.some(e => e.estado === 'ABIERTO');
       this.cargarSubastasAceptadas();
     });
@@ -43,7 +48,6 @@ export class EventoComponent implements OnInit {
   cargarSubastasAceptadas() {
     this.adminService.listarSubastasAceptadas().subscribe(subs => {
       this.subastasAceptadasPorEvento = {};
-
       subs.forEach(s => {
         if (s.eventoId == null) return;
         const id = s.eventoId;
@@ -79,19 +83,28 @@ export class EventoComponent implements OnInit {
       this.showForm = false;
     });
   }
-
+  
   eliminar(id: number) {
-    this.eventoService.delete(id).subscribe(() => {
-      this.listar();
-    });
+  const total = this.getTotalSubastas(id);
+
+  if (total > 0) {
+    alert('No se puede borrar este evento porque existen subastas asociadas.');
+    return;
   }
 
+  if (!confirm('¿Estás seguro de eliminar este evento?')) return;
+
+  this.eventoService.delete(id).subscribe(() => {
+    this.listar();
+  });
+}
+
   cerrarManual(id: number) {
-    if (confirm('¿Estás seguro de que quieres cerrar este evento?')) {
-      this.eventoService.updateEstado(id, 'CERRADO').subscribe(() => {
-        this.listar();
-      });
-    }
+    if (!confirm('¿Estás seguro de que quieres cerrar este evento?')) return;
+
+    this.eventoService.updateEstado(id, 'CERRADO').subscribe(() => {
+      this.listar();
+    });
   }
 
   irAOrganizarSubastas(idEvento: number) {

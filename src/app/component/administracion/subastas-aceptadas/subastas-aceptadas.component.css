@@ -347,6 +347,11 @@
   cursor: pointer;
 }
 
+.zoom-close:hover {
+  background: rgba(0,0,0,0.8);
+  transform: scale(1.1);
+}
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
@@ -410,6 +415,17 @@
 }
 
 @media (max-width: 768px) {
+    .organizar-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .header-left {
+    align-items: center;
+  }
+  
   .fila-subasta {
     gap: 14px;
   }

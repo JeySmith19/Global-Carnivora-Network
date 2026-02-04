@@ -290,6 +290,23 @@
 }
 
 @media(max-width:768px){
+    .evento-page .top-bar {
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .evento-page .top-bar h2 {
+    text-align: center;
+    width: 100%;
+  }
+
+  .evento-page .btn-new {
+    width: 100%;
+    justify-content: center;
+  }
+  
   .evento-page{
     padding:14px
   }

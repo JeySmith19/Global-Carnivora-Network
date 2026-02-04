@@ -21,12 +21,19 @@
     <div class="fila-subasta" *ngFor="let s of subastas">
 
       <input type="checkbox" id="img-{{ s.id }}" hidden>
+
       <label class="img-box" for="img-{{ s.id }}">
         <img *ngIf="s.imagen; else noImg" [src]="s.imagen">
         <ng-template #noImg>
           <div class="img-empty">Sin imagen</div>
         </ng-template>
       </label>
+
+      <div class="zoom">
+        <label class="zoom-bg" for="img-{{ s.id }}"></label>
+        <img *ngIf="s.imagen" [src]="s.imagen">
+        <label class="zoom-close" for="img-{{ s.id }}">×</label>
+      </div>
 
       <div class="info">
         <h3>{{ s.planta }}</h3>
@@ -50,6 +57,7 @@
 
       <div class="acciones">
         <input type="checkbox" id="det-{{ s.id }}" hidden>
+
         <label for="det-{{ s.id }}" class="btn-detalle primary">
           Ver Detalle
         </label>

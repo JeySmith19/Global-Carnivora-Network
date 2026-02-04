@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UserData } from 'src/app/model/security/userdata';
 import { MydataService } from 'src/app/service/mydata.service';
 import { Router } from '@angular/router';
-import { LoginService } from 'src/app/service/security/login.service';
 
 @Component({
   selector: 'app-my-data',
@@ -12,10 +11,14 @@ import { LoginService } from 'src/app/service/security/login.service';
 export class MyDataComponent implements OnInit {
 
   user: UserData = new UserData();
-  loading: boolean = true;
-  error: string = '';
+  loading = true;
+  error = '';
+  closing = false;
 
-  constructor(private mydataService: MydataService, private router: Router, private loginService: LoginService) { }
+  constructor(
+    private mydataService: MydataService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loadUserData();
@@ -24,11 +27,11 @@ export class MyDataComponent implements OnInit {
   loadUserData() {
     this.loading = true;
     this.mydataService.getMyData().subscribe({
-      next: (data) => {
+      next: data => {
         this.user = data;
         this.loading = false;
       },
-      error: (err) => {
+      error: err => {
         this.error = err;
         this.loading = false;
       }
@@ -36,7 +39,14 @@ export class MyDataComponent implements OnInit {
   }
 
   logout() {
-    sessionStorage.removeItem('token');
-    this.router.navigate(['/login']);
+    if (!confirm('¿Seguro que deseas cerrar sesión?')) return;
+
+    this.closing = true;
+    sessionStorage.clear();
+    localStorage.clear();
+
+    setTimeout(() => {
+      this.router.navigate(['/login']);
+    }, 600);
   }
 }
