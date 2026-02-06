@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1770177279544,
+  "timestamp": 1770349349158,
   "index": "/Global-Carnivora-Network/index.html",
   "assetGroups": [
     {
@@ -11,13 +11,13 @@
         "ignoreVary": true
       },
       "urls": [
-        "/Global-Carnivora-Network/978.97336ef026d313d2.js",
+        "/Global-Carnivora-Network/178.38a740af45a83b27.js",
         "/Global-Carnivora-Network/favicon.ico",
         "/Global-Carnivora-Network/index.html",
-        "/Global-Carnivora-Network/main.1a1301cccd9e0c66.js",
+        "/Global-Carnivora-Network/main.994a40bf5e08a2b5.js",
         "/Global-Carnivora-Network/manifest.webmanifest",
         "/Global-Carnivora-Network/polyfills.6a0bb8ce17618789.js",
-        "/Global-Carnivora-Network/runtime.da465d19b670c1c5.js",
+        "/Global-Carnivora-Network/runtime.930b9eaace6a34fd.js",
         "/Global-Carnivora-Network/styles.51e35880f414b3f3.css"
       ],
       "patterns": []
@@ -40,14 +40,15 @@
         "/Global-Carnivora-Network/assets/icons/icon-384x384.png",
         "/Global-Carnivora-Network/assets/icons/icon-512x512.png",
         "/Global-Carnivora-Network/assets/icons/icon-72x72.png",
-        "/Global-Carnivora-Network/assets/icons/icon-96x96.png"
+        "/Global-Carnivora-Network/assets/icons/icon-96x96.png",
+        "/Global-Carnivora-Network/assets/logo.png"
       ],
       "patterns": []
     }
   ],
   "dataGroups": [],
   "hashTable": {
-    "/Global-Carnivora-Network/978.97336ef026d313d2.js": "bae76b036b8e97cc08284a8de1b73564aebc85f5",
+    "/Global-Carnivora-Network/178.38a740af45a83b27.js": "c8a6deec17f2acf3578b23b608781abd0c848554",
     "/Global-Carnivora-Network/assets/cono.png": "c7e6adc01e54bf5f528a7d7b996009783ea4b3ed",
     "/Global-Carnivora-Network/assets/fondo.png": "4388877d136e03facc1ced5c7571a587c57f64f9",
     "/Global-Carnivora-Network/assets/icon.png": "93d28d1366f62d128e0f6e10343c994b2ccbccdf",
@@ -59,12 +60,13 @@
     "/Global-Carnivora-Network/assets/icons/icon-512x512.png": "93d28d1366f62d128e0f6e10343c994b2ccbccdf",
     "/Global-Carnivora-Network/assets/icons/icon-72x72.png": "93d28d1366f62d128e0f6e10343c994b2ccbccdf",
     "/Global-Carnivora-Network/assets/icons/icon-96x96.png": "93d28d1366f62d128e0f6e10343c994b2ccbccdf",
+    "/Global-Carnivora-Network/assets/logo.png": "ccd4a075740cce20098cada4478d6a5db95929f3",
     "/Global-Carnivora-Network/favicon.ico": "1a6e561628cb58895db9d40d43e8c210b6920a29",
-    "/Global-Carnivora-Network/index.html": "e9d3dc9b418b5c1d6a0d953c67461556f3d8f723",
-    "/Global-Carnivora-Network/main.1a1301cccd9e0c66.js": "259ab88cb326dc5da0dcfaa3433acb5cc4d724e9",
+    "/Global-Carnivora-Network/index.html": "42babbddfae4dd53bd3febb975043bbbd247ad57",
+    "/Global-Carnivora-Network/main.994a40bf5e08a2b5.js": "607048c69481854181e6dcb0df449fe396879d68",
     "/Global-Carnivora-Network/manifest.webmanifest": "1d1aaf2ca5aee4d37cc6d81de8ce20bf3a45b8a6",
     "/Global-Carnivora-Network/polyfills.6a0bb8ce17618789.js": "bbf20da8ef0817c96358fd2b031127bf484fb100",
-    "/Global-Carnivora-Network/runtime.da465d19b670c1c5.js": "5b26780ab01ea86a1edbe4ec7161099aab17757e",
+    "/Global-Carnivora-Network/runtime.930b9eaace6a34fd.js": "5b6eda3854a739b5c0f54c79fa781d56763f7902",
     "/Global-Carnivora-Network/styles.51e35880f414b3f3.css": "8f04ac68bb3bdc932feb811d4c1bfa1a9d87c1ae"
   },
   "navigationUrls": [
