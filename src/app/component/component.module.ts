@@ -16,6 +16,7 @@ import { SolicitudComponent } from './sin-acceso/solicitud/solicitud.component';
 import { RevisionComponent } from './administracion/revision/revision.component';
 import { HttpClientModule } from '@angular/common/http';
 import { InicioComponent } from './inicio/inicio.component';
+import { TerminosCondicionesSubastadoresComponent } from './sin-acceso/terminos-condiciones-subastadores/terminos-condiciones-subastadores.component';
 
 
 
@@ -35,6 +36,7 @@ import { InicioComponent } from './inicio/inicio.component';
     SolicitudComponent,
     RevisionComponent,
     InicioComponent,
+    TerminosCondicionesSubastadoresComponent,
     
   ],
   

@@ -16,6 +16,7 @@ import { MantenimientoComponent } from './mantenimiento/mantenimiento.component'
 import { SolicitudComponent } from './sin-acceso/solicitud/solicitud.component';
 import { RevisionComponent } from './administracion/revision/revision.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { TerminosCondicionesSubastadoresComponent } from './sin-acceso/terminos-condiciones-subastadores/terminos-condiciones-subastadores.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -104,6 +105,13 @@ const routes: Routes = [
   component: InicioComponent,
   canActivate: [GuardService],
   data: { roles: [Roles.USER, Roles.SUBASTADOR_PENDIENTE] }
+},
+
+{
+  path: 'terminos-subastador',
+  component: TerminosCondicionesSubastadoresComponent,
+  canActivate: [GuardService],
+  data: { roles: [Roles.ADMIN, Roles.SUBASTADOR] }
 }
 
 ];

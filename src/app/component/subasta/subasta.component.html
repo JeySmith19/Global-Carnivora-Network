@@ -45,6 +45,20 @@
       <img [src]="previewUrl" />
     </div>
 
+    <!-- Aceptación de términos -->
+    <div class="terminos-check">
+      <label>
+        <input type="checkbox"
+               [(ngModel)]="aceptaTerminos"
+               name="aceptaTerminos" />
+        Acepto los términos y condiciones
+      </label>
+
+      <span class="link-terminos" (click)="mostrarTerminos = true">
+        Leer términos
+      </span>
+    </div>
+
     <div *ngIf="isLoading || mensajeEstado" class="estado-proceso">
       <p [class.exito]="registroExitoso">
         {{ mensajeEstado }}
@@ -54,9 +68,10 @@
     <div class="acciones-form">
       <button class="btn-crear"
               (click)="subastaEditando ? guardarEdicion() : crear()"
-              [disabled]="isLoading">
+              [disabled]="isLoading || !aceptaTerminos">
         {{ isLoading ? 'Procesando...' : (subastaEditando ? 'Guardar cambios' : 'Crear Subasta') }}
       </button>
+
       <button class="btn-cancelar"
               (click)="cancelarEdicion()"
               [disabled]="isLoading">
@@ -68,10 +83,34 @@
 
   <ng-template #noEventos>
     <div class="no-eventos-wrapper">
-      <p class="no-eventos">🚫 Por el momento no hay eventos abiertos, vuelve más tarde.</p>
+      <p class="no-eventos">
+        🚫 Por el momento no hay eventos abiertos, vuelve más tarde.
+      </p>
       <div class="acciones-form">
-        <button class="btn-cancelar" (click)="cancelarEdicion()">Volver</button>
+        <button class="btn-cancelar" (click)="cancelarEdicion()">
+          Volver
+        </button>
       </div>
     </div>
   </ng-template>
+</div>
+
+<!-- MODAL TÉRMINOS -->
+<div class="modal-backdrop" *ngIf="mostrarTerminos">
+  <div class="modal modal-grande">
+    <div class="modal-header">
+      <h3>Términos y Condiciones para Subastadores</h3>
+      <button class="cerrar" (click)="mostrarTerminos = false" style="background: none; border: none;">✖</button>
+    </div>
+
+    <div class="modal-body">
+      <app-terminos-condiciones-subastadores></app-terminos-condiciones-subastadores>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-crear" (click)="mostrarTerminos = false">
+        Cerrar
+      </button>
+    </div>
+  </div>
 </div>

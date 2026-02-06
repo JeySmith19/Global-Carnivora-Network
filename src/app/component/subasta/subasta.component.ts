@@ -17,9 +17,12 @@ export class SubastaComponent implements OnInit {
   previewUrl: string | ArrayBuffer | null = null;
   subastaEditando: Subasta | null = null;
 
+  aceptaTerminos: boolean = false;
+
   isLoading: boolean = false;
   mensajeEstado: string = '';
   registroExitoso: boolean = false;
+  mostrarTerminos = false;
 
   constructor(
     private subastaService: SubastaService,
@@ -57,23 +60,21 @@ export class SubastaComponent implements OnInit {
     const file: File = event.target.files[0];
     if (!file) return;
 
-    this.subasta.imagen = file; // guardamos el File real
+    this.subasta.imagen = file;
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-      this.previewUrl = reader.result; // preview base64
+      this.previewUrl = reader.result;
     };
   }
 
   private buildFormData(subasta: Subasta): FormData {
     const formData = new FormData();
 
-    // Enviar archivo si existe
     if (subasta.imagen instanceof File) {
       formData.append('archivo', subasta.imagen);
     }
 
-    // Crear DTO limpio sin 'imagen'
     const dto: any = { ...subasta };
     if (dto.imagen instanceof File) delete dto.imagen;
 
@@ -98,8 +99,7 @@ export class SubastaComponent implements OnInit {
         this.mensajeEstado = 'Subasta registrada ✔';
         setTimeout(() => this.cancelarEdicion(), 1500);
       },
-      error: (err) => {
-        console.error(err);
+      error: () => {
         this.isLoading = false;
         this.mensajeEstado = 'Error al registrar la subasta';
       }
@@ -123,8 +123,7 @@ export class SubastaComponent implements OnInit {
         this.mensajeEstado = 'Cambios guardados ✔';
         setTimeout(() => this.cancelarEdicion(), 1500);
       },
-      error: (err) => {
-        console.error(err);
+      error: () => {
         this.isLoading = false;
         this.mensajeEstado = 'Error al guardar los cambios';
       }
@@ -132,6 +131,7 @@ export class SubastaComponent implements OnInit {
   }
 
   validarSubasta(): boolean {
+    if (!this.aceptaTerminos) return false;
     if (!this.subasta.eventoId) return false;
     if (!this.subasta.planta?.trim()) return false;
     if (!this.subasta.precioBase || this.subasta.precioBase <= 0) return false;
