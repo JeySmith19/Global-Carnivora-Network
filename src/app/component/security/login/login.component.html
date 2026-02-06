@@ -1,25 +1,31 @@
 <div class="login-wrapper">
-  <div class="login-card">
-    <h2>Bienvenido</h2>
-    <p class="subtitle">Inicia sesión para continuar</p>
+  <div class="login-container">
 
-    <form (ngSubmit)="login()">
-      <div class="input-group">
-        <input type="text" placeholder="Correo" [(ngModel)]="username" name="username" autocomplete="email" />
+    <div class="login-side">
+      <div class="logo-box">
+        <img src="assets/logo.png" alt="CarniNet">
+      </div>
+      <h1>CarniNet</h1>
+      <p class="tagline">La red que conecta la comunidad carnívora</p>
+    </div>
+
+    <div class="login-form">
+      <h2>Acceso al sistema</h2>
+      <span class="subtitle">Inicia sesión para continuar</span>
+
+      <form (ngSubmit)="login()">
+        <input type="text" placeholder="Correo" [(ngModel)]="username" name="username">
+        <input type="password" placeholder="Contraseña" [(ngModel)]="password" name="password">
+        <button type="submit">Ingresar</button>
+      </form>
+
+      <div class="links">
+        <span class="link-strong" routerLink="/reset">¿Olvidaste tu contraseña?</span>
+        <span class="link-strong" routerLink="/registro">Crear cuenta</span>
       </div>
 
-      <div class="input-group">
-        <input type="password" placeholder="Contraseña" [(ngModel)]="password" name="password" autocomplete="current-password" />
-      </div>
+      <footer>Desarrollado por Jarol S.</footer>
+    </div>
 
-      <button class="login-btn" type="submit">Iniciar sesión</button>
-    </form>
-
-    <p class="text-small">
-      ¿No tienes cuenta? <span class="link-text" routerLink="/registro">Regístrate</span>
-    </p>
-    <p class="text-small">
-      <span class="link-text" routerLink="/reset">¿Olvidaste tu contraseña?</span>
-    </p>
   </div>
 </div>
