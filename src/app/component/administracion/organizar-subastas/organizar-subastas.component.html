@@ -64,21 +64,22 @@
 
         <div class="drawer">
           <div class="drawer-header">
-            <h3>{{ s.planta }}</h3>
+            <h3>Información</h3>
             <label for="det-{{ s.id }}">×</label>
           </div>
 
           <div class="drawer-body">
-            <p><b>Subasta:</b> {{ s.numeroSubasta || '-' }}</p>
-            <p><b>Fecha:</b> {{ s.fechaEvento | date:'dd/MM/yyyy' }}</p>
-            <p><b>Hora Inicio:</b> {{ s.horaInicioAsignada || '-' }}</p>
-            <p><b>Hora Fin:</b> {{ s.horaFinAsignada || '-' }}</p>
-
-            <hr>
-
-            <p><b>Contacto:</b> {{ s.username || '-' }}</p>
+            <h3>Datos del subastador</h3>
+            <p><b>Subastador:</b> {{ s.username || '-' }}</p>
             <p><b>Ciudad:</b> {{ s.city || '-' }}</p>
             <p><b>Teléfono:</b> {{ s.phone || '-' }}</p>
+
+            <hr>
+            <h3>Datos de la subasta</h3>
+            <p><b>Planta:</b> {{ s.planta || '-' }}</p>
+            <p><b>Maceta:</b> {{ s.maceta || '-' }}</p>
+            <p><b>Observaciones:</b> {{ s.observaciones || '-' }}</p>
+            <p><b>Precio Base:</b> {{ s.precioBase || '-' }}</p>
 
             <div class="drawer-acciones">
               <ng-container *ngIf="s.estado === 'PENDIENTE'">

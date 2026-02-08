@@ -1,3 +1,7 @@
+h3{
+  color: var(--color-primary);
+}
+
 .organizar-container {
   max-width: 1200px;
   margin: 20px auto;

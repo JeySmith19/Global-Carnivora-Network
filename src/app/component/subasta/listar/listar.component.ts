@@ -28,7 +28,7 @@ export class ListarComponent implements OnInit {
   this.subastaService.listMisSubastas().subscribe({
     next: (data) => {
       this.subastas = data;
-      console.log('Mis subastas actualizadas:', this.subastas); // ahora incluye numeroSubasta, horaInicioAsignada y horaFinAsignada
+      console.log('Mis subastas actualizadas:', this.subastas);
       this.cargando = false;
     },
     error: () => {
@@ -40,7 +40,6 @@ export class ListarComponent implements OnInit {
 
 
   editar(s: Subasta) {
-    // ahora usamos parámetro de ruta
     this.router.navigate(['/components/subastas', s.id]);
   }
 
