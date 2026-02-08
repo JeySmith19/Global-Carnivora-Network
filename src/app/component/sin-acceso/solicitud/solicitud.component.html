@@ -1,30 +1,59 @@
 <app-volver></app-volver>
+
 <div class="solicitud-container">
   <div class="card">
-    <h2>Solicitud para ser subastador</h2>
-    <p class="subtitle">
-      Antes de continuar, lee atentamente los siguientes requisitos.
-    </p>
 
-    <ul class="rules">
-      <li>Todos tus datos deben ser reales y verificables.</li>
-      <li>La solicitud será revisada manualmente por los administradores.</li>
-      <li>Podrían contactarte para una entrevista o validación adicional.</li>
-      <li>Al enviar la solicitud aceptas los términos y normas de la comunidad.</li>
-    </ul>
+    <div *ngIf="esSubastador" class="success-box">
+      <div class="icon">🎉</div>
+      <h2>¡Felicidades!</h2>
+      <p>
+        Fuiste aceptado como uno de los subastadores de la comunidad.
+      </p>
+      <p class="hint">
+        Para desbloquear tus herramientas, vuelve a iniciar sesión.
+      </p>
 
-    <label class="check">
-      <input type="checkbox" [(ngModel)]="accepted">
-      <span>Acepto los términos y condiciones de la comunidad</span>
-    </label>
+      <button
+        class="btn-logout"
+        (click)="logout()"
+        [disabled]="closing">
+        {{ closing ? 'Cerrando sesión…' : 'Cerrar sesión' }}
+      </button>
+    </div>
 
-    <button
-      (click)="solicitar()"
-      [disabled]="loading || !accepted"
-    >
-      {{ loading ? 'Enviando solicitud...' : 'Enviar solicitud' }}
-    </button>
+    <ng-container *ngIf="!esSubastador">
+      <h2>Solicitud para ser subastador</h2>
 
-    <p class="message" *ngIf="message">{{ message }}</p>
+      <p class="subtitle">
+        Antes de continuar, lee atentamente los siguientes requisitos.
+      </p>
+
+      <ul class="rules">
+        <li>Todos tus datos deben ser reales y verificables.</li>
+        <li>La solicitud será revisada manualmente por los administradores.</li>
+        <li>Podrían contactarte para una entrevista o validación adicional.</li>
+        <li>Al enviar la solicitud aceptas los términos y normas de la comunidad.</li>
+      </ul>
+
+      <div *ngIf="tieneSolicitudPendiente" class="message info">
+        Estamos revisando tu solicitud, gracias por tu paciencia.
+      </div>
+
+      <label class="check" *ngIf="!tieneSolicitudPendiente">
+        <input type="checkbox" [(ngModel)]="accepted">
+        <span>Acepto los términos y condiciones de la comunidad</span>
+      </label>
+
+      <button
+        (click)="solicitar()"
+        [disabled]="loading || !accepted || tieneSolicitudPendiente">
+        {{ loading ? 'Enviando solicitud...' : 'Enviar solicitud' }}
+      </button>
+
+      <p class="message" *ngIf="message && !tieneSolicitudPendiente">
+        {{ message }}
+      </p>
+    </ng-container>
+
   </div>
 </div>
