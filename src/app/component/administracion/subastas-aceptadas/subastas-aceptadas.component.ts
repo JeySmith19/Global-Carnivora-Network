@@ -30,17 +30,31 @@ export class SubastasAceptadasComponent implements OnInit {
 
   cargarSubastasAceptadas() {
     this.cargando = true;
-    this.adminService.listarSubastasAceptadas().subscribe(data => {
-      this.subastas = data
-        .filter(s => s.eventoId === this.eventoId)
-        .sort((a, b) => (a.numeroSubasta ?? 0) - (b.numeroSubasta ?? 0));
-      this.cargando = false;
-    }, () => this.cargando = false);
+    this.adminService.listarSubastasAceptadas().subscribe(
+      data => {
+        this.subastas = data
+          .filter(s => s.eventoId === this.eventoId)
+          .sort((a, b) => (a.numeroSubasta ?? 0) - (b.numeroSubasta ?? 0));
+        this.cargando = false;
+      },
+      () => this.cargando = false
+    );
   }
 
   Generar() {
     if (this.generando) return;
+
+    const haySubastas = this.subastas.length > 0;
+
+    if (haySubastas) {
+      const confirmacion = window.confirm(
+        'Ya se han generado subastas. ¿Estás seguro de que quieres generarlas de nuevo?'
+      );
+      if (!confirmacion) return;
+    }
+
     this.generando = true;
+
     this.adminService.organizarSubastas(this.eventoId).subscribe({
       next: () => {
         this.cargarSubastasAceptadas();

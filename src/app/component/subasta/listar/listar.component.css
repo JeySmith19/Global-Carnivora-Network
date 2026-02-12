@@ -7,7 +7,7 @@
 
 .subastas-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin-bottom: 24px;
   flex-wrap: wrap;
@@ -21,20 +21,40 @@
   text-align: center;
 }
 
-.btn-crear {
-  padding: 10px 18px;
+.select-evento {
+  padding: 10px 16px;
   border-radius: 12px;
-  background: var(--color-btn-primary);
-  color: var(--color-btn-text-light);
+  border: 1px solid var(--color-border);
+  font-size: 15px;
+  color: var(--color-text);
+  background: var(--color-bg-alt);
+  cursor: pointer;
+  min-width: 220px;
+  transition: all 0.2s ease;
+}
+
+.select-evento:hover {
+  background: var(--color-muted);
+  border-color: var(--color-btn-secondary);
+}
+
+
+.btn-crear {
+  padding: 12px 24px;
+  border-radius: 16px;
+  background: #2c7a7b;
+  color: #ffffff;
   border: none;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+  transition: all 0.2s ease;
 }
 
 .btn-crear:hover {
-  background: var(--color-btn-primary-light);
+  background: #276d6e;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.16);
 }
 
 .cards-grid {
@@ -231,5 +251,12 @@
   .cards-grid {
     grid-template-columns: 1fr;
     gap: 16px;
+  }
+  .select-evento {
+    width: 100%;
+  }
+  .btn-crear {
+    width: 100%;
+    text-align: center;
   }
 }

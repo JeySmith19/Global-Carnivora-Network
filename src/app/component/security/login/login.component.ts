@@ -30,17 +30,21 @@ export class LoginComponent implements OnInit {
 
     this.loginService.login(request).subscribe(
       (data: any) => {
-
         sessionStorage.setItem('token', data.jwttoken);
         sessionStorage.setItem('username', this.username);
 
+        // Mantener la lógica del rol para el futuro
         const rol = this.loginService.showRole();
 
-        if (rol === 'ADMIN' || rol === 'SUBASTADOR') {
-          this.router.navigate(['/components/dashboard']);
-        } else {
-          this.router.navigate(['/components/inicio']);
-        }
+        // Actualmente, todos los roles van al dashboard
+        this.router.navigate(['/components/dashboard']);
+
+        // Ejemplo futuro: si quieres redirigir según rol
+        // if (rol === 'ADMIN' || rol === 'SUBASTADOR') {
+        //   this.router.navigate(['/components/dashboard']);
+        // } else {
+        //   this.router.navigate(['/components/inicio']);
+        // }
       },
       () => {
         this.mensaje = 'Credenciales incorrectas!!!';

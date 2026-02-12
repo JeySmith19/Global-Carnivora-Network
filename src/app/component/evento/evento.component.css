@@ -1,7 +1,6 @@
 .evento-page{
   padding:20px;
   font-family:'Inter','Segoe UI',sans-serif;
-  background:var(--color-bg-alt);
   min-height:100vh;
   color:var(--color-text)
 }
@@ -10,11 +9,7 @@
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:20px;
-  background:var(--color-bg);
-  padding:12px 16px;
-  border-radius:14px;
-  box-shadow:0 4px 8px rgba(0,0,0,.06)
+  padding:1px 16px;
 }
 
 .evento-page .top-bar h2{
@@ -287,6 +282,27 @@
   margin:4px 0;
   font-size:14px;
   color:var(--color-text-muted)
+}
+
+.paginador {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.paginador button {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  cursor: pointer;
+}
+
+.paginador button.activa {
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-light);
+  border-color: var(--color-btn-primary);
 }
 
 @media(max-width:768px){

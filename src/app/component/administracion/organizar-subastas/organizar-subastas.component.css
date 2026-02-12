@@ -17,14 +17,15 @@ h3{
   gap: 16px;
   padding: 18px 20px;
   margin-bottom: 24px;
-  background: var(--color-bg);
   border-bottom: 1px solid var(--color-border);
 }
 
 .header-left {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  text-align: center; 
 }
 
 .organizar-header h2 {

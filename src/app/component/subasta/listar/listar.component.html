@@ -1,15 +1,19 @@
 <div class="container">
   <div class="subastas-header">
-    <h2>Tus Subastas</h2><br>
-    <button class="btn-crear" (click)="crearSubasta()">+ Crear Subasta</button>
+    <h2>Tus Subastas</h2>
+    <select [(ngModel)]="eventoSeleccionado" (change)="cargarSubastasPorEvento()" class="select-evento">
+      <option [ngValue]="null" disabled>Elige un evento</option>
+      <option *ngFor="let e of eventos" [ngValue]="e.id">{{ e.nombre }} - {{ e.fechaEvento | date:'dd/MM/yyyy' }}</option>
+    </select>
+    <button class="btn-crear" (click)="crearSubasta()" [disabled]="!eventoSeleccionado">+ Crear Subasta</button>
   </div>
 
   <div *ngIf="cargando" class="estado-lista">
-    <p>Cargando tus subastas… ⏳</p>
+    <p>Cargando tus subastas…</p>
   </div>
 
-  <div *ngIf="!cargando && subastas.length === 0" class="estado-lista">
-    <p>No tienes subastas registradas aún 🌱</p>
+  <div *ngIf="!cargando && subastas.length === 0 && eventoSeleccionado" class="estado-lista">
+    <p>No hay subastas registradas para este evento</p>
   </div>
 
   <div class="cards-grid" *ngIf="!cargando && subastas.length > 0">

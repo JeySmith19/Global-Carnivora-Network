@@ -22,6 +22,9 @@ export class EventoComponent implements OnInit {
 
   subastasAceptadasPorEvento: Record<number, number> = {};
 
+  paginaActual = 1;
+  eventosPorPagina = 5;
+
   constructor(
     private eventoService: EventoService,
     private adminService: AdministracionService,
@@ -39,7 +42,6 @@ export class EventoComponent implements OnInit {
         if (a.estado !== 'ABIERTO' && b.estado === 'ABIERTO') return 1;
         return 0;
       });
-
       this.hayEventoAbierto = this.eventos.some(e => e.estado === 'ABIERTO');
       this.cargarSubastasAceptadas();
     });
@@ -61,9 +63,21 @@ export class EventoComponent implements OnInit {
     return this.subastasAceptadasPorEvento[eventoId] || 0;
   }
 
+  get eventosPaginados(): Evento[] {
+    const inicio = (this.paginaActual - 1) * this.eventosPorPagina;
+    return this.eventos.slice(inicio, inicio + this.eventosPorPagina);
+  }
+
+  cambiarPagina(nuevaPagina: number) {
+    this.paginaActual = nuevaPagina;
+  }
+
+  totalPaginas(): number {
+    return Math.ceil(this.eventos.length / this.eventosPorPagina);
+  }
+
   guardar() {
     if (this.hayEventoAbierto) return;
-
     this.eventoService.insert(this.evento).subscribe(() => {
       this.limpiar();
       this.listar();
@@ -83,28 +97,20 @@ export class EventoComponent implements OnInit {
       this.showForm = false;
     });
   }
-  
+
   eliminar(id: number) {
-  const total = this.getTotalSubastas(id);
-
-  if (total > 0) {
-    alert('No se puede borrar este evento porque existen subastas asociadas.');
-    return;
+    const total = this.getTotalSubastas(id);
+    if (total > 0) {
+      alert('No se puede borrar este evento porque existen subastas asociadas.');
+      return;
+    }
+    if (!confirm('¿Estás seguro de eliminar este evento?')) return;
+    this.eventoService.delete(id).subscribe(() => this.listar());
   }
-
-  if (!confirm('¿Estás seguro de eliminar este evento?')) return;
-
-  this.eventoService.delete(id).subscribe(() => {
-    this.listar();
-  });
-}
 
   cerrarManual(id: number) {
     if (!confirm('¿Estás seguro de que quieres cerrar este evento?')) return;
-
-    this.eventoService.updateEstado(id, 'CERRADO').subscribe(() => {
-      this.listar();
-    });
+    this.eventoService.updateEstado(id, 'CERRADO').subscribe(() => this.listar());
   }
 
   irAOrganizarSubastas(idEvento: number) {
@@ -124,36 +130,20 @@ export class EventoComponent implements OnInit {
 
   formatearHora(hora: string): string {
     if (!hora) return '-';
-
     const [h, m] = hora.split(':').map(Number);
     const d = new Date();
     d.setHours(h, m, 0, 0);
-
-    return d.toLocaleTimeString('es-PE', {
-      hour: 'numeric',
-      minute: '2-digit',
-      hour12: true
-    });
+    return d.toLocaleTimeString('es-PE', { hour: 'numeric', minute: '2-digit', hour12: true });
   }
 
   calcularHoraFin(e: Evento): string {
     const total = this.getTotalSubastas(e.id);
     if (!total || !e.horaInicio) return '-';
-
     const [h, m] = e.horaInicio.split(':').map(Number);
     const fin = new Date();
     fin.setHours(h, m, 0, 0);
-
-    const minutosTotales =
-      total * e.duracionSubastaMinutos +
-      (total - 1) * e.descansoMinutos;
-
+    const minutosTotales = total * e.duracionSubastaMinutos + (total - 1) * e.descansoMinutos;
     fin.setMinutes(fin.getMinutes() + minutosTotales);
-
-    return fin.toLocaleTimeString('es-PE', {
-      hour: 'numeric',
-      minute: '2-digit',
-      hour12: true
-    });
+    return fin.toLocaleTimeString('es-PE', { hour: 'numeric', minute: '2-digit', hour12: true });
   }
 }
