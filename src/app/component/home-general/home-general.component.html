@@ -1,60 +1,147 @@
-<header class="top-bar">
-  <div class="welcome">
-    <h1>Hola, {{ user?.name || 'Invitado' }}</h1>
-    <p class="role-badge">Ecosistema Carnívoras</p>
-  </div>
-  <div class="top-actions">
-    <div class="notif-btn">
-      <i class="bi bi-bell"></i>
-      <span class="indicator"></span>
+<div class="dashboard-panel">
+  <header class="home-terminal-header">
+    <div class="identity-group">
+      <div class="avatar-ring">
+        <div class="avatar-core">{{ user?.name?.charAt(0) }}</div>
+      </div>
+      <div class="identity-text">
+        <span class="role-indicator">ROL {{ userRole | uppercase }}</span>
+        <h2>Hola, {{ user?.name }}</h2>
+      </div>
     </div>
-    <div class="user-pill desktop-only">
-      <span>{{ user?.name }}</span>
-      <div class="avatar">{{ user?.name?.charAt(0) }}</div>
-    </div>
-  </div>
-</header>
+  </header>
 
-<div class="search-container">
-  <div class="search-wrapper">
+  <div class="command-search">
     <i class="bi bi-search"></i>
-    <input type="text" #filter (input)="0" placeholder="¿Qué herramienta necesitas hoy?">
+    <input type="text" #filter (input)="0" placeholder="Buscar módulo..." class="input-glow">
   </div>
+
+  <main class="system-sections">
+
+    <section class="module-group" *ngIf="isAdmin() || isSubastador()">
+      <h3 class="group-title">SUBASTAS</h3>
+      <div class="system-grid">
+
+        <div class="node master" *ngIf="'gestion subastas'.includes(filter.value.toLowerCase())" (click)="go('/components/ver-subastas')">
+          <div class="node-accent"></div>
+          <div class="node-body">
+            <div class="node-icon-main"><i class="bi bi-hammer"></i></div>
+            <div class="node-content">
+              <div class="node-label">EN VIVO</div>
+              <div class="node-title">Subastas</div>
+              <div class="node-sub">Tus subastas activas</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="node" *ngIf="'dashboard metricas'.includes(filter.value.toLowerCase())" (click)="go('/components/inforcion-subastas')">
+          <div class="node-accent"></div>
+          <div class="node-icon-sm"><i class="bi bi-graph-up-arrow"></i></div>
+          <div class="node-label">ESTADÍSTICAS</div>
+          <div class="node-title">Panel</div>
+          <div class="node-sub">Resumen rápido</div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="module-group" *ngIf="isAdmin()">
+      <h3 class="group-title">ADMIN</h3>
+      <div class="system-grid">
+
+        <div class="node" *ngIf="'eventos'.includes(filter.value.toLowerCase())" (click)="go('/components/eventos')">
+          <div class="node-accent"></div>
+          <div class="node-icon-sm"><i class="bi bi-calendar-event"></i></div>
+          <div class="node-label">CALENDARIO</div>
+          <div class="node-title">Eventos</div>
+          <div class="node-sub">Fechas y horarios</div>
+        </div>
+
+        <div class="node" *ngIf="'revision solicitudes'.includes(filter.value.toLowerCase())" (click)="go('/components/revision-solicitudes')">
+          <div class="node-accent"></div>
+          <div class="node-icon-sm"><i class="bi bi-clipboard-check"></i></div>
+          <div class="node-label">SOLICITUDES</div>
+          <div class="node-title">Subastadores</div>
+          <div class="node-sub">Revisar perfiles</div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="module-group">
+      <h3 class="group-title">SEGURIDAD</h3>
+      <div class="system-grid">
+
+        <div class="node" *ngIf="'lista negra'.includes(filter.value.toLowerCase())" (click)="go('/components/lista-negra')">
+          <div class="node-accent danger"></div>
+          <div class="node-icon-sm"><i class="bi bi-shield-lock"></i></div>
+          <div class="node-label">LISTA NEGRA</div>
+          <div class="node-title">Usuarios</div>
+          <div class="node-sub">Bloqueados</div>
+        </div>
+
+        <div class="node" *ngIf="isSoloUser() && 'postular'.includes(filter.value.toLowerCase())" (click)="go('/components/solicitud-subastador')">
+          <div class="node-accent success"></div>
+          <div class="node-icon-sm"><i class="bi bi-award"></i></div>
+          <div class="node-label">APLICAR</div>
+          <div class="node-title">Subastador</div>
+          <div class="node-sub">Postular</div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="module-group">
+      <h3 class="group-title">PRÓXIMAS FUNCIONES</h3>
+      <div class="system-grid">
+
+        <div class="node pending">
+          <div class="node-accent info"></div>
+          <div class="node-icon-sm"><i class="bi bi-star-half"></i></div>
+          <div class="node-label">REPUTACIÓN</div>
+          <div class="node-title">Valoración</div>
+          <div class="node-sub">Próximamente</div>
+        </div>
+
+        <div class="node pending">
+          <div class="node-accent info"></div>
+          <div class="node-icon-sm"><i class="bi bi-people"></i></div>
+          <div class="node-label">COMUNIDAD</div>
+          <div class="node-title">Conectar</div>
+          <div class="node-sub">Próximamente</div>
+        </div>
+
+        <div class="node pending">
+          <div class="node-accent info"></div>
+          <div class="node-icon-sm"><i class="bi bi-shield-check"></i></div>
+          <div class="node-label">CONFIANZA</div>
+          <div class="node-title">Reputación</div>
+          <div class="node-sub">Próximamente</div>
+        </div>
+
+        <div class="node pending">
+          <div class="node-accent info"></div>
+          <div class="node-icon-sm"><i class="bi bi-bookmark-heart"></i></div>
+          <div class="node-label">LISTA DE DESEOS</div>
+          <div class="node-title">Favoritos</div>
+          <div class="node-sub">Próximamente</div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="module-group">
+      <h3 class="group-title">MI CUENTA</h3>
+      <div class="system-grid">
+        <div class="node" (click)="go('/components/perfil')">
+          <div class="node-accent"></div>
+          <div class="node-icon-sm"><i class="bi bi-person-badge"></i></div>
+          <div class="node-label">PERFIL</div>
+          <div class="node-title">Mis Datos</div>
+          <div class="node-sub">Editar info</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
 </div>
-
-<section class="tools-grid">
-  <div class="tool-card is-new" *ngIf="'lista negra'.includes(filter.value.toLowerCase())" (click)="go('/components/lista-negra')">
-    <div class="icon-box"><i class="fa-solid fa-user-slash"></i></div>
-    <span class="tool-name">Lista Negra</span>
-  </div>
-
-  <div class="tool-card" *ngIf="'subastas'.includes(filter.value.toLowerCase())" (click)="go('/components/ver-subastas')">
-    <div class="icon-box"><i class="bi bi-hammer"></i></div>
-    <span class="tool-name">Subastas</span>
-  </div>
-
-  <div class="tool-card" *ngIf="'eventos'.includes(filter.value.toLowerCase())" (click)="go('/components/eventos')">
-    <div class="icon-box"><i class="material-icons">calendar_today</i></div>
-    <span class="tool-name">Eventos</span>
-  </div>
-
-  <div class="tool-card" *ngIf="'estadisticas'.includes(filter.value.toLowerCase())" (click)="go('/components/detalles')">
-    <div class="icon-box"><i class="fa-solid fa-chart-pie"></i></div>
-    <span class="tool-name">Estadísticas</span>
-  </div>
-
-  <div class="tool-card" *ngIf="'comunidad'.includes(filter.value.toLowerCase())">
-    <div class="icon-box"><i class="bi bi-people"></i></div>
-    <span class="tool-name">Comunidad</span>
-  </div>
-
-  <div class="tool-card" *ngIf="'historial'.includes(filter.value.toLowerCase())">
-    <div class="icon-box"><i class="material-icons">history</i></div>
-    <span class="tool-name">Historial</span>
-  </div>
-
-  <div class="tool-card accent" *ngIf="isUser() && 'ser subastador'.includes(filter.value.toLowerCase())" (click)="go('/components/solicitud-subastador')">
-    <div class="icon-box"><i class="fa-solid fa-gavel"></i></div>
-    <span class="tool-name">Ser Subastador</span>
-  </div>
-</section>

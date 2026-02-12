@@ -15,9 +15,10 @@
 }
 
 .subastas-header h2 {
-  margin: 0;
+  margin: 0 auto;
   font-size: 22px;
   color: var(--color-title);
+  text-align: center;
 }
 
 .btn-crear {

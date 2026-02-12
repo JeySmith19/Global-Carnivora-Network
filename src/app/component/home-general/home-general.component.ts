@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MydataService } from 'src/app/service/mydata.service';
+import { LoginService } from 'src/app/service/security/login.service';
 import { Roles } from 'src/app/model/security/roles';
 
 @Component({
@@ -10,19 +11,35 @@ import { Roles } from 'src/app/model/security/roles';
 })
 export class HomeGeneralComponent implements OnInit {
   user: any;
+  userRole: string | null = null;
+  today: Date = new Date();
 
-  constructor(private mydata: MydataService, private router: Router) {}
+  constructor(
+    private mydata: MydataService, 
+    private loginService: LoginService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.mydata.getMyData().subscribe(d => this.user = d);
+    this.mydata.getMyData().subscribe(d => {
+      this.user = d;
+      this.userRole = this.loginService.showRole();
+    });
   }
 
-  go(path: string) {
+  go(path: string): void {
     this.router.navigate([path]);
   }
 
-  isUser(): boolean {
-    return this.user?.roles?.includes(Roles.USER) || 
-           this.user?.roles?.includes(Roles.SUBASTADOR_PENDIENTE);
+  isAdmin(): boolean {
+    return this.userRole === Roles.ADMIN;
+  }
+
+  isSubastador(): boolean {
+    return this.userRole === Roles.SUBASTADOR || this.userRole === Roles.ADMIN;
+  }
+
+  isSoloUser(): boolean {
+    return this.userRole === Roles.USER || this.userRole === Roles.SUBASTADOR_PENDIENTE;
   }
 }

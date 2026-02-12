@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { MydataService } from 'src/app/service/mydata.service';
+import { LoginService } from 'src/app/service/security/login.service';
+import { Roles } from 'src/app/model/security/roles';
 import { filter } from 'rxjs/operators';
 
 @Component({
@@ -10,9 +12,9 @@ import { filter } from 'rxjs/operators';
 })
 export class NavegacionComponentComponent implements OnInit {
   user: any;
+  userRole: string | null = null;
   showBackButton: boolean = false;
 
-  // Solo añade aquí los paths donde NO quieres que aparezca el botón
   private rutasSinBoton: string[] = [
     '/components/xd',
     '/components/dashboard',
@@ -20,23 +22,30 @@ export class NavegacionComponentComponent implements OnInit {
   ];
 
   constructor(
-    private mydata: MydataService, 
+    private mydata: MydataService,
+    private loginService: LoginService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    // 1. Cargar datos del usuario
     this.mydata.getMyData().subscribe(d => {
       this.user = d;
+      this.userRole = this.loginService.showRole();
     });
 
-    // 2. Lógica para detectar la ruta y mostrar/ocultar el botón "Volver"
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: any) => {
-      // Verificamos si la ruta actual coincide con alguna de la lista negra
       this.showBackButton = !this.rutasSinBoton.some(ruta => event.urlAfterRedirects.includes(ruta));
     });
+  }
+
+  isAdmin(): boolean {
+    return this.userRole === Roles.ADMIN;
+  }
+
+  isSubastador(): boolean {
+    return this.userRole === Roles.SUBASTADOR || this.userRole === Roles.ADMIN;
   }
 
   go(path: string): void {

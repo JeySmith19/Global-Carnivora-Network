@@ -28,7 +28,7 @@ const routes: Routes = [
     component: NavegacionComponentComponent,
     children: [
       {
-        path: 'xd',
+        path: 'dashboard',
         component: HomeGeneralComponent,
         canActivate: [GuardService],
         data: { roles: [Roles.ADMIN, Roles.SUBASTADOR, Roles.SUBASTADOR_PENDIENTE, Roles.USER] }
@@ -88,7 +88,7 @@ const routes: Routes = [
         data: { roles: [Roles.ADMIN, Roles.SUBASTADOR, Roles.SUBASTADOR_PENDIENTE, Roles.USER] }
       },
       {
-        path: 'dashboard',
+        path: 'inforcion-subastas',
         component: DashboardComponent,
         canActivate: [GuardService],
         data: { roles: [Roles.ADMIN, Roles.SUBASTADOR] }

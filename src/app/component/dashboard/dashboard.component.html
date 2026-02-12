@@ -1,27 +1,15 @@
 <div class="dashboard">
-  <div class="topbar">
-    <div class="topbar-left">
-      <h1>Hola, {{ user?.name }}</h1>
+  <div class="dashboard-header">
+    <div class="header-content">
+      <h1 class="page-title">Panel de Control</h1>
       <p class="subtitle" *ngIf="eventoActivo">
         {{ eventoActivo.estado === 'ABIERTO' ? 'Evento disponible' : 'Evento cerrado' }}
       </p>
     </div>
 
-    <div class="top-actions">
-      <button class="btn-primary desktop-only" (click)="go('/components/ver-subastas')">Mis subastas</button>
-      <button class="btn-secondary desktop-only" (click)="go('/components/subastas')" *ngIf="eventoActivo?.estado === 'ABIERTO'">Crear subasta</button>
-      <button class="btn-evento desktop-only" *ngIf="isAdmin()" (click)="goOrganizarEvento()">Administrar eventos</button>
-      <button class="btn-primary desktop-only" *ngIf="isAdmin()" (click)="go('/components/revision-solicitudes')">Aprobar subastadores</button>
-
-      <div class="hamburger mobile-only" (click)="showMenu = !showMenu">≡</div>
-      <div class="profile-icon" (click)="go('/components/perfil')">{{ user?.name?.charAt(0) }}</div>
-    </div>
-
-    <div class="mobile-menu" *ngIf="showMenu">
+    <div class="header-actions">
       <button class="btn-primary" (click)="go('/components/ver-subastas')">Mis subastas</button>
-      <button class="btn-secondary" *ngIf="eventoActivo?.estado === 'ABIERTO'" (click)="go('/components/subastas')">Crear subasta</button>
       <button class="btn-evento" *ngIf="isAdmin()" (click)="goOrganizarEvento()">Administrar eventos</button>
-      <button class="btn-primary" *ngIf="isAdmin()" (click)="go('/components/revision-solicitudes')">Aprobar subastadores</button>
     </div>
   </div>
 
@@ -57,11 +45,6 @@
     <div class="block danger">
       <span>Rechazadas</span>
       <strong>{{ subastasRechazadas }}</strong>
-    </div>
-
-    <div class="block wide neutral" *ngIf="subastasPendientes > 0">
-      <strong>Subastas en revisión</strong>
-      <p>Aún hay subastas pendientes de evaluación.</p>
     </div>
 
     <div class="block wide action" *ngIf="subastasPendientes === 0 && subastas.length > 0">
