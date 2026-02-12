@@ -17,6 +17,7 @@ import { RevisionComponent } from './administracion/revision/revision.component'
 import { HttpClientModule } from '@angular/common/http';
 import { InicioComponent } from './inicio/inicio.component';
 import { TerminosCondicionesSubastadoresComponent } from './sin-acceso/terminos-condiciones-subastadores/terminos-condiciones-subastadores.component';
+import { ListanegraComponent } from './listanegra/listanegra.component';
 
 
 
@@ -37,6 +38,7 @@ import { TerminosCondicionesSubastadoresComponent } from './sin-acceso/terminos-
     RevisionComponent,
     InicioComponent,
     TerminosCondicionesSubastadoresComponent,
+    ListanegraComponent,
     
   ],
   

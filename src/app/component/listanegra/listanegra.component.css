@@ -1,0 +1,343 @@
+.ln-wrapper * {
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.ln-wrapper {
+  min-height: 100vh;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.ln-wrapper main {
+  padding: 5px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.ln-wrapper .ln-header {
+  text-align: center;
+  padding: 40px 20px 10px;
+}
+
+.ln-wrapper .ln-header h1 {
+  font-size: 2.3rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--color-primary);
+}
+
+.ln-wrapper .ln-header .sub {
+  margin-top: 6px;
+  opacity: 0.6;
+  color: var(--color-subtitle);
+}
+
+.ln-wrapper .acerca-btn {
+  margin-top: 18px;
+  padding: 8px 20px;
+  border-radius: 50px;
+  border: 1px solid var(--color-primary);
+  background: transparent;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.ln-wrapper .acerca-btn:hover {
+  background: var(--color-primary);
+  color: var(--color-btn-text-light);
+}
+
+.ln-wrapper .card {
+  width: 100%;
+  max-width: 420px;
+  padding: 30px;
+  border-radius: 20px;
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+}
+
+.ln-wrapper .info-box {
+  background: var(--color-success);
+  padding: 14px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  border: 1px solid var(--color-border);
+}
+
+.ln-wrapper .form-group {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ln-wrapper label {
+  font-size: 0.8rem;
+  margin-bottom: 6px;
+  opacity: 0.7;
+  color: var(--color-text-muted);
+}
+
+.ln-wrapper input,
+.ln-wrapper select {
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-text);
+  outline: none;
+  transition: 0.3s;
+  width: 100%;
+}
+
+.ln-wrapper input:focus,
+.ln-wrapper select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-success-hover);
+}
+
+.ln-wrapper button {
+  padding: 12px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 10px;
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-light);
+  transition: 0.3s;
+}
+
+.ln-wrapper button:hover {
+  background: var(--color-btn-primary-light);
+}
+
+.ln-wrapper .resultado {
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: 14px;
+  font-size: 0.9rem;
+}
+
+.ln-wrapper .alerta {
+  background: #fee2e2;
+  border: 1px solid var(--color-estado-rechazado);
+}
+
+.ln-wrapper .ok {
+  background: var(--color-success);
+  border: 1px solid var(--color-secondary);
+}
+
+.ln-wrapper .admin-panel {
+  width: 100%;
+  max-width: 1100px;
+}
+
+.ln-wrapper .admin-top {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.ln-wrapper .ln-add-btn {
+  background: var(--color-btn-danger);
+  color: var(--color-btn-text-light);
+}
+
+.ln-wrapper .admin-search {
+  margin-bottom: 20px;
+}
+
+.ln-wrapper .admin-search input {
+  max-width: 350px;
+}
+
+.ln-wrapper .table-container {
+  overflow-x: auto;
+  background: var(--color-bg-alt);
+  border-radius: 18px;
+  border: 1px solid var(--color-border);
+}
+
+.ln-wrapper .ln-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+}
+
+.ln-wrapper .ln-table th,
+.ln-wrapper .ln-table td {
+  padding: 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.9rem;
+}
+
+.ln-wrapper .ln-table th {
+  background: var(--color-bg);
+  font-weight: 600;
+}
+
+.ln-wrapper .ln-table tbody tr:hover {
+  background: var(--color-muted);
+}
+
+.ln-wrapper .icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  cursor: pointer;
+  transition: 0.2s;
+  color: var(--color-text);
+}
+
+.ln-wrapper .icon-btn i {
+  font-size: 16px;
+}
+
+.ln-wrapper .icon-btn.edit {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.ln-wrapper .icon-btn.edit:hover {
+  background: var(--color-primary-light);
+  color: var(--color-success);
+}
+
+.ln-wrapper .icon-btn.delete {
+  border-color: var(--color-estado-rechazado);
+  color: var(--color-estado-rechazado);
+}
+
+.ln-wrapper .icon-btn.delete:hover {
+  background: #fee2e2;
+  color: var(--color-estado-rechazado);
+}
+
+.ln-wrapper .paginador {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.ln-wrapper .paginador button {
+  padding: 8px 14px;
+  font-size: 0.8rem;
+}
+
+.ln-wrapper .ln-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s ease;
+  z-index: 1000;
+  padding: 10px;
+}
+
+.ln-wrapper .ln-modal.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.ln-wrapper .icon-btn:not(:last-child) {
+  margin-right: 6px;
+}
+
+.ln-wrapper .ln-modal-content {
+  width: 100%;
+  max-width: 420px;
+  padding: 28px;
+  border-radius: 20px;
+  background: var(--color-bg);
+  transform: scale(0.9);
+  transition: 0.3s ease;
+  position: relative;
+}
+
+.ln-wrapper .ln-modal.show .ln-modal-content {
+  transform: scale(1);
+}
+
+.ln-wrapper .ln-close {
+  position: absolute;
+  right: 16px;
+  top: 12px;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: var(--color-text-muted);
+}
+
+.ln-wrapper .ln-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ln-wrapper .ln-phone-group {
+  display: flex;
+  gap: 10px;
+}
+
+.ln-wrapper .ln-phone-group select {
+  width: 35%;
+}
+
+.ln-wrapper .ln-phone-group input {
+  width: 65%;
+}
+
+.ln-wrapper .ln-form-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+.ln-wrapper .cancel-btn {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+.ln-wrapper .cancel-btn:hover {
+  background: var(--color-muted);
+}
+
+@media (max-width: 600px) {
+  .ln-wrapper .ln-header h1 {
+    font-size: 1.7rem;
+  }
+
+  .ln-wrapper .card {
+    padding: 22px;
+  }
+
+  .ln-wrapper .ln-phone-group {
+    flex-direction: column;
+  }
+
+  .ln-wrapper .ln-phone-group select,
+  .ln-wrapper .ln-phone-group input {
+    width: 100%;
+  }
+
+  .ln-wrapper .ln-modal-content {
+    max-width: 100%;
+    margin: 0 10px;
+  }
+}

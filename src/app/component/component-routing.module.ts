@@ -17,6 +17,7 @@ import { SolicitudComponent } from './sin-acceso/solicitud/solicitud.component';
 import { RevisionComponent } from './administracion/revision/revision.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { TerminosCondicionesSubastadoresComponent } from './sin-acceso/terminos-condiciones-subastadores/terminos-condiciones-subastadores.component';
+import { ListanegraComponent } from './listanegra/listanegra.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -90,7 +91,7 @@ const routes: Routes = [
   path: 'solicitud-subastador',
   component: SolicitudComponent,
   canActivate: [GuardService],
-  data: { roles: [Roles.USER] }
+  data: { roles: [Roles.USER, , Roles.SUBASTADOR_PENDIENTE] }
 },
 
 {
@@ -112,7 +113,15 @@ const routes: Routes = [
   component: TerminosCondicionesSubastadoresComponent,
   canActivate: [GuardService],
   data: { roles: [Roles.ADMIN, Roles.SUBASTADOR] }
+},
+
+{
+  path: 'lista-negra',
+  component: ListanegraComponent,
+  canActivate: [GuardService],
+  data: { roles: [Roles.ADMIN, Roles.SUBASTADOR, Roles.SUBASTADOR_PENDIENTE, Roles.USER] }
 }
+
 
 ];
 

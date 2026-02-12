@@ -1,0 +1,183 @@
+<div class="ln-wrapper">
+
+<app-volver></app-volver>
+
+<header class="ln-header">
+  <h1>Global Carnivora Network</h1>
+  <p class="sub">Sistema de Seguridad de la Comunidad</p>
+
+  <button
+    *ngIf="!esAdmin"
+    class="acerca-btn"
+    (click)="mostrarInfo = !mostrarInfo">
+    Acerca de la app
+  </button>
+</header>
+
+<main>
+
+  <div *ngIf="!esAdmin" class="card">
+
+    <div class="info-box" *ngIf="mostrarInfo">
+      Esta herramienta es de uso exclusivo para la comunidad
+      <strong>Global Carnivora Network</strong>.
+      Permite verificar si un número ha sido reportado.
+    </div>
+
+    <div class="form-group">
+      <label>País</label>
+      <select [(ngModel)]="prefijoBusqueda" name="prefijoBusqueda">
+        <option value="+51">🇵🇪 Perú (+51)</option>
+        <option value="+57">🇨🇴 Colombia (+57)</option>
+        <option value="+52">🇲🇽 México (+52)</option>
+        <option value="+54">🇦🇷 Argentina (+54)</option>
+        <option value="+56">🇨🇱 Chile (+56)</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Número</label>
+      <input
+        type="text"
+        placeholder="Coloca el número"
+        [(ngModel)]="telefonoBusqueda"
+        name="telefonoBusqueda"
+      />
+    </div>
+
+    <button (click)="buscar()">Buscar</button>
+
+    <div *ngIf="resultadoBusqueda" class="resultado alerta">
+      ⚠ <strong>CUIDADO</strong><br />
+      <strong>Motivo:</strong> {{ resultadoBusqueda.motivo || 'No especificado' }}
+    </div>
+
+    <div *ngIf="resultadoBusqueda === null" class="resultado ok">
+      ✔ No registra reportes dentro de la comunidad.
+    </div>
+
+  </div>
+
+  <div *ngIf="esAdmin" class="admin-panel">
+
+    <div class="admin-top">
+      <button class="ln-add-btn" (click)="abrirModal()">Agregar número</button>
+    </div>
+
+    <div
+      class="ln-modal"
+      [class.show]="modalVisible"
+      (click)="cerrarModal()">
+
+      <div
+        class="ln-modal-content"
+        (click)="$event.stopPropagation()">
+
+        <span class="ln-close" (click)="cerrarModal()">&times;</span>
+
+        <form
+          class="ln-form"
+          #form="ngForm"
+          (ngSubmit)="guardar(form)">
+
+          <div class="ln-phone-group">
+            <select [(ngModel)]="prefijo" name="prefijo" required>
+              <option value="+51">🇵🇪 +51</option>
+              <option value="+57">🇨🇴 +57</option>
+              <option value="+52">🇲🇽 +52</option>
+              <option value="+54">🇦🇷 +54</option>
+              <option value="+56">🇨🇱 +56</option>
+            </select>
+
+            <input
+              type="text"
+              placeholder="Número"
+              [(ngModel)]="numeroLocal"
+              name="numero"
+              required
+              minlength="6"
+            />
+          </div>
+
+          <input
+            type="text"
+            placeholder="Motivo"
+            [(ngModel)]="seleccionado.motivo"
+            name="motivo"
+            required
+          />
+
+          <div class="ln-form-actions">
+            <button
+              type="button"
+              class="cancel-btn"
+              (click)="cancelar(form)">
+              Cancelar
+            </button>
+
+            <button
+              type="submit"
+              [disabled]="form.invalid">
+              {{ seleccionado.id === 0 ? 'Agregar' : 'Actualizar' }}
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+    <div class="admin-search">
+      <input
+        type="text"
+        placeholder="Buscar número o motivo..."
+        [(ngModel)]="filtroAdmin"
+        (input)="aplicarFiltroAdmin()"
+      />
+    </div>
+
+    <div class="table-container">
+      <table class="ln-table">
+        <thead>
+          <tr>
+            <th>Teléfono</th>
+            <th>Motivo</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of listaPaginada">
+            <td>{{ item.phone }}</td>
+            <td>{{ item.motivo || '—' }}</td>
+            <td>{{ item.fechaCreacion | date:'short' }}</td>
+            <td>
+              <button class="icon-btn edit" title="Editar" (click)="editar(item)">
+                editar
+              </button>
+              <button class="icon-btn delete" title="Eliminar" (click)="eliminar(item.id)">
+                eliminar
+              </button>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="paginador">
+      <button (click)="cambiarPagina(paginaActual - 1)" [disabled]="paginaActual === 1">
+        Anterior
+      </button>
+
+      <span>Página {{ paginaActual }} de {{ totalPaginas }}</span>
+
+      <button (click)="cambiarPagina(paginaActual + 1)" [disabled]="paginaActual === totalPaginas">
+        Siguiente
+      </button>
+    </div><br>
+
+  </div>
+
+</main>
+
+</div>
