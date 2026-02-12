@@ -1,0 +1,60 @@
+<header class="top-bar">
+  <div class="welcome">
+    <h1>Hola, {{ user?.name || 'Invitado' }}</h1>
+    <p class="role-badge">Ecosistema Carnívoras</p>
+  </div>
+  <div class="top-actions">
+    <div class="notif-btn">
+      <i class="bi bi-bell"></i>
+      <span class="indicator"></span>
+    </div>
+    <div class="user-pill desktop-only">
+      <span>{{ user?.name }}</span>
+      <div class="avatar">{{ user?.name?.charAt(0) }}</div>
+    </div>
+  </div>
+</header>
+
+<div class="search-container">
+  <div class="search-wrapper">
+    <i class="bi bi-search"></i>
+    <input type="text" #filter (input)="0" placeholder="¿Qué herramienta necesitas hoy?">
+  </div>
+</div>
+
+<section class="tools-grid">
+  <div class="tool-card is-new" *ngIf="'lista negra'.includes(filter.value.toLowerCase())" (click)="go('/components/lista-negra')">
+    <div class="icon-box"><i class="fa-solid fa-user-slash"></i></div>
+    <span class="tool-name">Lista Negra</span>
+  </div>
+
+  <div class="tool-card" *ngIf="'subastas'.includes(filter.value.toLowerCase())" (click)="go('/components/ver-subastas')">
+    <div class="icon-box"><i class="bi bi-hammer"></i></div>
+    <span class="tool-name">Subastas</span>
+  </div>
+
+  <div class="tool-card" *ngIf="'eventos'.includes(filter.value.toLowerCase())" (click)="go('/components/eventos')">
+    <div class="icon-box"><i class="material-icons">calendar_today</i></div>
+    <span class="tool-name">Eventos</span>
+  </div>
+
+  <div class="tool-card" *ngIf="'estadisticas'.includes(filter.value.toLowerCase())" (click)="go('/components/detalles')">
+    <div class="icon-box"><i class="fa-solid fa-chart-pie"></i></div>
+    <span class="tool-name">Estadísticas</span>
+  </div>
+
+  <div class="tool-card" *ngIf="'comunidad'.includes(filter.value.toLowerCase())">
+    <div class="icon-box"><i class="bi bi-people"></i></div>
+    <span class="tool-name">Comunidad</span>
+  </div>
+
+  <div class="tool-card" *ngIf="'historial'.includes(filter.value.toLowerCase())">
+    <div class="icon-box"><i class="material-icons">history</i></div>
+    <span class="tool-name">Historial</span>
+  </div>
+
+  <div class="tool-card accent" *ngIf="isUser() && 'ser subastador'.includes(filter.value.toLowerCase())" (click)="go('/components/solicitud-subastador')">
+    <div class="icon-box"><i class="fa-solid fa-gavel"></i></div>
+    <span class="tool-name">Ser Subastador</span>
+  </div>
+</section>

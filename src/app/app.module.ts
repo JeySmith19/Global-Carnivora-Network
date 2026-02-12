@@ -19,6 +19,7 @@ import { RecoverPasswordComponent } from './component/security/recover-password/
 import { CodeRecoverPasswordComponent } from './component/security/code-recover-password/code-recover-password.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { TerminosCondicionesComponent } from './component/sin-acceso/terminos-condiciones/terminos-condiciones.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -41,11 +42,10 @@ import { TerminosCondicionesComponent } from './component/sin-acceso/terminos-co
     MatIconModule,
     ReactiveFormsModule,
     MatButtonModule,
+    RouterModule,
     MatNativeDateModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
 

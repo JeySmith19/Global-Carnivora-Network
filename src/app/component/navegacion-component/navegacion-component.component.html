@@ -1,0 +1,40 @@
+<div class="app-layout">
+  <aside class="sidebar desktop-only">
+    <div class="brand">
+      <div class="logo-icon">C</div>
+      <span>CarniNet</span>
+    </div>
+    <nav class="side-nav">
+      <a routerLink="/components/xd" routerLinkActive="active" class="nav-item">
+        <i class="material-icons">dashboard</i> Inicio
+      </a>
+      <a routerLink="/components/perfil" routerLinkActive="active" class="nav-item">
+        <i class="material-icons">account_circle</i> Mi Perfil
+      </a>
+      <div class="divider"></div>
+      <a routerLink="/components/lista-negra" routerLinkActive="active" class="nav-item">
+        <i class="fa-solid fa-shield-halved"></i> Seguridad
+      </a>
+    </nav>
+  </aside>
+
+  <main class="viewport">
+    <div class="dynamic-content">
+      <app-volver *ngIf="showBackButton"></app-volver>
+
+      <router-outlet></router-outlet> 
+    </div>
+  </main>
+
+  <nav class="mobile-bottom-nav mobile-only">
+    <a routerLink="/components/xd" routerLinkActive="active">
+      <i class="material-icons">home</i>
+    </a>
+    <a routerLink="/components/lista-negra" routerLinkActive="active">
+      <i class="fa-solid fa-shield-halved"></i>
+    </a>
+    <a routerLink="/components/perfil" routerLinkActive="active">
+      <i class="material-icons">person</i>
+    </a>
+  </nav>
+</div>

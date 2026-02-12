@@ -18,111 +18,120 @@ import { RevisionComponent } from './administracion/revision/revision.component'
 import { InicioComponent } from './inicio/inicio.component';
 import { TerminosCondicionesSubastadoresComponent } from './sin-acceso/terminos-condiciones-subastadores/terminos-condiciones-subastadores.component';
 import { ListanegraComponent } from './listanegra/listanegra.component';
+import { HomeGeneralComponent } from './home-general/home-general.component';
+import { NavegacionComponentComponent } from './navegacion-component/navegacion-component.component';
+import { VolverComponent } from './elementos/botones/volver/volver.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-
-  { path: 'no-autorizado', component: SinAccesoComponent },
-
-  { 
-    path: 'eventos', 
-    component: EventoComponent, 
-    canActivate: [GuardService], 
-    data: { roles: [Roles.ADMIN] } 
-  },
-
-  { 
-    path: 'subastas', 
-    component: SubastaComponent, 
-    canActivate: [GuardService], 
-    data: { roles: [Roles.ADMIN, Roles.SUBASTADOR] } 
-  },
-
-  { 
-    path: 'subastas/:id', 
-    component: SubastaComponent, 
-    canActivate: [GuardService], 
-    data: { roles: [Roles.ADMIN, Roles.SUBASTADOR] } 
-  },
-
-  { 
-    path: 'ver-subastas', 
-    component: ListarComponent, 
-    canActivate: [GuardService], 
-    data: { roles: [Roles.ADMIN, Roles.SUBASTADOR] } 
-  },
-
-  { 
-    path: 'detalles', 
-    component: InformacionSubastaComponent, 
-    canActivate: [GuardService], 
-    data: { roles: [Roles.ADMIN, Roles.SUBASTADOR] } 
-  },
-
-  { 
-    path: 'organizar-subastas/:idEvento', 
-    component: OrganizarSubastasComponent, 
-    canActivate: [GuardService], 
-    data: { roles: [Roles.ADMIN] } 
-  },
-
-  { 
-    path: 'subastas-aceptadas/:idEvento', 
-    component: SubastasAceptadasComponent, 
-    canActivate: [GuardService], 
-    data: { roles: [Roles.ADMIN] } 
-  },
-
-  { 
-    path: 'perfil', 
-    component: MyDataComponent, 
-    canActivate: [GuardService], 
-    data: { roles: [Roles.ADMIN, Roles.SUBASTADOR] } 
-  },
-
-  { 
-    path: 'dashboard', 
-    component: DashboardComponent, 
-    canActivate: [GuardService], 
-    data: { roles: [Roles.ADMIN, Roles.SUBASTADOR] } 
-  },
-
   {
-  path: 'solicitud-subastador',
-  component: SolicitudComponent,
-  canActivate: [GuardService],
-  data: { roles: [Roles.USER, , Roles.SUBASTADOR_PENDIENTE] }
-},
-
-{
-  path: 'revision-solicitudes',
-  component: RevisionComponent,
-  canActivate: [GuardService],
-  data: { roles: [Roles.ADMIN] }
-},
-
-{
-  path: 'inicio',
-  component: InicioComponent,
-  canActivate: [GuardService],
-  data: { roles: [Roles.USER, Roles.SUBASTADOR_PENDIENTE] }
-},
-
-{
-  path: 'terminos-subastador',
-  component: TerminosCondicionesSubastadoresComponent,
-  canActivate: [GuardService],
-  data: { roles: [Roles.ADMIN, Roles.SUBASTADOR] }
-},
-
-{
-  path: 'lista-negra',
-  component: ListanegraComponent,
-  canActivate: [GuardService],
-  data: { roles: [Roles.ADMIN, Roles.SUBASTADOR, Roles.SUBASTADOR_PENDIENTE, Roles.USER] }
-}
-
-
+    path: '',
+    component: NavegacionComponentComponent,
+    children: [
+      {
+        path: 'xd',
+        component: HomeGeneralComponent,
+        canActivate: [GuardService],
+        data: { roles: [Roles.ADMIN, Roles.SUBASTADOR, Roles.SUBASTADOR_PENDIENTE, Roles.USER] }
+      },
+      {
+        path: 'lista-negra',
+        component: ListanegraComponent,
+        canActivate: [GuardService],
+        data: { roles: [Roles.ADMIN, Roles.SUBASTADOR, Roles.SUBASTADOR_PENDIENTE, Roles.USER] }
+      },
+      {
+        path: 'eventos',
+        component: EventoComponent,
+        canActivate: [GuardService],
+        data: { roles: [Roles.ADMIN] }
+      },
+      {
+        path: 'subastas',
+        component: SubastaComponent,
+        canActivate: [GuardService],
+        data: { roles: [Roles.ADMIN, Roles.SUBASTADOR] }
+      },
+      {
+        path: 'subastas/:id',
+        component: SubastaComponent,
+        canActivate: [GuardService],
+        data: { roles: [Roles.ADMIN, Roles.SUBASTADOR] }
+      },
+      {
+        path: 'ver-subastas',
+        component: ListarComponent,
+        canActivate: [GuardService],
+        data: { roles: [Roles.ADMIN, Roles.SUBASTADOR] }
+      },
+      {
+        path: 'detalles',
+        component: InformacionSubastaComponent,
+        canActivate: [GuardService],
+        data: { roles: [Roles.ADMIN, Roles.SUBASTADOR] }
+      },
+      {
+        path: 'organizar-subastas/:idEvento',
+        component: OrganizarSubastasComponent,
+        canActivate: [GuardService],
+        data: { roles: [Roles.ADMIN] }
+      },
+      {
+        path: 'subastas-aceptadas/:idEvento',
+        component: SubastasAceptadasComponent,
+        canActivate: [GuardService],
+        data: { roles: [Roles.ADMIN] }
+      },
+      {
+        path: 'perfil',
+        component: MyDataComponent,
+        canActivate: [GuardService],
+        data: { roles: [Roles.ADMIN, Roles.SUBASTADOR, Roles.SUBASTADOR_PENDIENTE, Roles.USER] }
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        canActivate: [GuardService],
+        data: { roles: [Roles.ADMIN, Roles.SUBASTADOR] }
+      },
+      {
+        path: 'solicitud-subastador',
+        component: SolicitudComponent,
+        canActivate: [GuardService],
+        data: { roles: [Roles.USER, Roles.SUBASTADOR_PENDIENTE] }
+      },
+      {
+        path: 'revision-solicitudes',
+        component: RevisionComponent,
+        canActivate: [GuardService],
+        data: { roles: [Roles.ADMIN] }
+      },
+      {
+        path: 'inicio',
+        component: InicioComponent,
+        canActivate: [GuardService],
+        data: { roles: [Roles.USER, Roles.SUBASTADOR_PENDIENTE] }
+      },
+      {
+        path: 'terminos-subastador',
+        component: TerminosCondicionesSubastadoresComponent,
+        canActivate: [GuardService],
+        data: { roles: [Roles.ADMIN, Roles.SUBASTADOR] }
+      },
+      {
+        path: 'no-autorizado',
+        component: SinAccesoComponent
+      },
+      {
+        path: 'mantenimiento',
+        component: MantenimientoComponent
+      },
+      {
+        path: '',
+        redirectTo: 'xd',
+        pathMatch: 'full'
+      }
+    ]
+  }
 ];
 
 @NgModule({
