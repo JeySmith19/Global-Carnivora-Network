@@ -55,6 +55,11 @@
       <span>Subastas</span>
     </a>
 
+    <a *ngIf="isAdmin()" routerLink="/components/eventos" routerLinkActive="active" class="mobile-nav-link">
+      <i class="material-icons">event</i>
+      <span>Eventos</span>
+    </a>
+
     <a routerLink="/components/lista-negra" routerLinkActive="active" class="mobile-nav-link">
       <i class="bi bi-shield-check"></i>
       <span>Seguridad</span>
