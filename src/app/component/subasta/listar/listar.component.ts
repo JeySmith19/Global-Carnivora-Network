@@ -40,7 +40,7 @@ export class ListarComponent implements OnInit {
   cargarSubastasPorEvento() {
     if (!this.eventoSeleccionado) return;
     this.cargando = true;
-    this.subastaService.listByEvento(this.eventoSeleccionado).subscribe({
+    this.subastaService.listSubastadorPorEvento(this.eventoSeleccionado).subscribe({
       next: data => {
         this.subastas = data.sort((a, b) => (a.numeroSubasta ?? 0) - (b.numeroSubasta ?? 0));
         this.cargando = false;
