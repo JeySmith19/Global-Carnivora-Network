@@ -15,7 +15,12 @@
 
     <div class="form-group">
       <label>Planta *</label>
-      <input type="text" [(ngModel)]="subasta.planta" placeholder="Nombre de la planta" />
+      <textarea
+        [(ngModel)]="subasta.planta"
+        name="planta"
+        rows="3"
+        placeholder="Nombre de la planta (puedes usar saltos de línea)">
+      </textarea>
     </div>
 
     <div class="form-group">
@@ -45,12 +50,12 @@
       <img [src]="previewUrl" />
     </div>
 
-    <!-- Aceptación de términos -->
     <div class="terminos-check">
       <label>
-        <input type="checkbox"
-               [(ngModel)]="aceptaTerminos"
-               name="aceptaTerminos" />
+        <input
+          type="checkbox"
+          [(ngModel)]="aceptaTerminos"
+          name="aceptaTerminos" />
         Acepto los términos y condiciones
       </label>
 
@@ -66,15 +71,17 @@
     </div>
 
     <div class="acciones-form">
-      <button class="btn-crear"
-              (click)="subastaEditando ? guardarEdicion() : crear()"
-              [disabled]="isLoading || !aceptaTerminos">
+      <button
+        class="btn-crear"
+        (click)="subastaEditando ? guardarEdicion() : crear()"
+        [disabled]="isLoading || !aceptaTerminos">
         {{ isLoading ? 'Procesando...' : (subastaEditando ? 'Guardar cambios' : 'Crear Subasta') }}
       </button>
 
-      <button class="btn-cancelar"
-              (click)="cancelarEdicion()"
-              [disabled]="isLoading">
+      <button
+        class="btn-cancelar"
+        (click)="cancelarEdicion()"
+        [disabled]="isLoading">
         Cancelar
       </button>
     </div>
@@ -95,7 +102,6 @@
   </ng-template>
 </div>
 
-<!-- MODAL TÉRMINOS -->
 <div class="modal-backdrop" *ngIf="mostrarTerminos">
   <div class="modal modal-grande">
     <div class="modal-header">
