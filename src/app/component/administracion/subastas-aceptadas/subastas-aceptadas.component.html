@@ -4,10 +4,20 @@
       <h2>Subastas Aceptadas</h2>
       <span class="evento-id">Listado general</span>
     </div>
-    <button class="btn-secundario" (click)="Generar()" [disabled]="generando">
-      {{ generando ? 'Generando...' : 'Generar subastas' }}
-    </button>
+
+    <div class="header-actions acciones-header">
+      <button class="btn-secundario generar" (click)="Generar()" [disabled]="generando">
+        <i class="fa-solid fa-gavel"></i>
+        {{ generando ? 'Generando...' : 'Generar subastas' }}
+      </button>
+
+      <button class="btn-secundario reporte" (click)="mostrarReporte = true">
+        <i class="fa-solid fa-chart-line"></i>
+        Ver reporte
+      </button>
+    </div>
   </header>
+
   <div class="contador-subastas">
     <span class="label">Número de subastas</span>
     <span class="valor">{{ subastas.length }}</span>
@@ -20,7 +30,7 @@
     </p>
 
     <div class="fila-subasta" *ngFor="let s of subastas">
-      <!-- Usamos método zoom(s) en lugar de asignar directamente -->
+
       <label class="img-box" (click)="zoom(s)">
         <span class="badge-numero">#{{ s.numeroSubasta || '-' }}</span>
         <img *ngIf="getImagenSrc(s); else noImg" [src]="getImagenSrc(s)">
@@ -40,9 +50,12 @@
 
       <div class="acciones">
         <button class="btn-detalle primary" (click)="s.showModal = true">
+          <i class="fa-solid fa-eye"></i>
           Ver detalle
         </button>
+
         <button *ngIf="s.numeroSubasta" class="btn-whatsapp" (click)="copiarSubasta(s)">
+          <i class="fa-brands fa-whatsapp"></i>
           Copiar
         </button>
       </div>
@@ -70,6 +83,26 @@
 
     <div *ngIf="!cargando && !subastas.length" class="estado-lista">
       <p>No hay subastas aceptadas</p>
+    </div>
+  </div>
+
+  <div class="modal" *ngIf="mostrarReporte">
+    <div class="modal-bg" (click)="mostrarReporte = false"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Reporte de participación</h3>
+        <button class="modal-close" (click)="mostrarReporte = false">×</button>
+      </div>
+      <div class="modal-body">
+        <p><b>Total subastas:</b> {{ subastas.length }}</p>
+        <div class="reporte-lista">
+          <div class="reporte-item" *ngFor="let r of resumenUsuarios; let i = index">
+            <span class="rank">#{{ i + 1 }}</span>
+            <span class="user">{{ r.username }}</span>
+            <span class="total">{{ r.total }} subastas</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

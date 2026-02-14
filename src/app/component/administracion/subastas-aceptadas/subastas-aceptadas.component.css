@@ -24,6 +24,11 @@
   justify-content: center;
 }
 
+.header-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
 
 .organizar-header h2 {
   margin: 0;
@@ -48,11 +53,20 @@
   cursor: pointer;
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
   transition: 0.25s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .btn-secundario:hover {
   background: var(--color-btn-primary-light);
   transform: translateY(-2px);
+}
+
+.reporte {
+  background: var(--color-secondary);
+  color: #fff;
 }
 
 .contador-subastas {
@@ -251,6 +265,39 @@
   color: var(--color-text-muted);
 }
 
+.reporte-lista {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.reporte-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+}
+
+.rank {
+  font-weight: 700;
+  color: var(--color-primary);
+  width: 40px;
+}
+
+.user {
+  flex: 1;
+  font-weight: 600;
+}
+
+.total {
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
 .modal {
   position: fixed;
   inset: 0;
@@ -383,14 +430,23 @@
 @media (max-width: 992px) {
   .organizar-header {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+    align-items: center;
+    gap: 14px;
+  }
+  .header-actions {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
   }
   .btn-secundario {
-    width: 100%;
+    flex: 1;
+    padding: 10px 14px;
+    font-size: 13px;
+    border-radius: 12px;
   }
   .contador-subastas {
-    margin: 0 0 20px 0;
+    margin: 0 0 18px 0;
   }
   .fila-subasta {
     grid-template-columns: 1fr;
@@ -416,29 +472,27 @@
 }
 
 @media (max-width: 768px) {
-    .organizar-header {
-    display: flex;
-    flex-direction: column;
+  .organizar-header {
     align-items: center;
     text-align: center;
   }
-
-  .header-left {
-    align-items: center;
+  .btn-secundario {
+    padding: 8px 12px;
+    font-size: 12px;
+    border-radius: 10px;
   }
-  
-  .fila-subasta {
-    gap: 14px;
+  .header-actions {
+    gap: 8px;
   }
   .info h3 {
-    font-size: 17px;
-  }
-  .precio {
     font-size: 16px;
   }
+  .precio {
+    font-size: 15px;
+  }
   .estado {
-    font-size: 12px;
-    padding: 4px 10px;
+    font-size: 11px;
+    padding: 4px 8px;
   }
   .img-box {
     height: 160px;
@@ -447,32 +501,31 @@
 
 @media (max-width: 520px) {
   .organizar-header h2 {
-    font-size: 20px;
+    font-size: 18px;
+  }
+  .btn-secundario {
+    padding: 7px 10px;
+    font-size: 11px;
+    border-radius: 8px;
+  }
+  .header-actions {
+    gap: 6px;
   }
   .info h3 {
-    font-size: 15px;
-  }
-  .precio {
     font-size: 14px;
   }
+  .precio {
+    font-size: 13px;
+  }
   .estado {
-    font-size: 11px;
-    padding: 3px 8px;
+    font-size: 10px;
+    padding: 3px 6px;
   }
   .badge-numero {
-    font-size: 11px;
-    padding: 3px 8px;
+    font-size: 10px;
+    padding: 3px 6px;
   }
   .img-box {
     height: 140px;
-  }
-  .acciones {
-    flex-direction: column;
-    gap: 8px;
-  }
-  .btn-detalle.primary,
-  .btn-whatsapp {
-    width: 100%;
-    flex: unset;
   }
 }

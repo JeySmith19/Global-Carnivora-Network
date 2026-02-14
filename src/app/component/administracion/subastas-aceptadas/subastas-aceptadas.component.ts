@@ -16,6 +16,8 @@ export class SubastasAceptadasComponent implements OnInit {
   cargando = false;
   showZoom = false;
   zoomSrc: string = '';
+  mostrarReporte = false;
+  resumenUsuarios: { username: string; total: number }[] = [];
 
   constructor(
     private adminService: AdministracionService,
@@ -35,10 +37,22 @@ export class SubastasAceptadasComponent implements OnInit {
         this.subastas = data
           .filter(s => s.eventoId === this.eventoId)
           .sort((a, b) => (a.numeroSubasta ?? 0) - (b.numeroSubasta ?? 0));
+        this.generarResumenUsuarios();
         this.cargando = false;
       },
       () => this.cargando = false
     );
+  }
+
+  private generarResumenUsuarios() {
+    const mapa = new Map<string, number>();
+    this.subastas.forEach(s => {
+      const user = s.username || 'Sin usuario';
+      mapa.set(user, (mapa.get(user) || 0) + 1);
+    });
+    this.resumenUsuarios = Array.from(mapa.entries())
+      .map(([username, total]) => ({ username, total }))
+      .sort((a, b) => b.total - a.total);
   }
 
   Generar() {
@@ -97,43 +111,30 @@ export class SubastasAceptadasComponent implements OnInit {
 
 ⏳ Tiempo: ${s.duracionSubastaMinutos ?? '-'} minutos
 
-👤 Subastador: 
+👤 Subastador:
 ${s.username || '-'}
 
-📞 Contacto: 
+📞 Contacto:
 ${s.phone || '-'}
 
-📍 Procedencia: 
+📍 Procedencia:
 ${s.city || '-'}
 
-🌿 Planta en subasta: 
+🌿 Planta en subasta:
 ${s.planta || '-'}
 
-🪴 Tamaño de maceta: 
+🪴 Tamaño de maceta:
 ${s.maceta || '-'}
 
-💰 Precio base: 
+💰 Precio base:
 S/ ${s.precioBase ?? '-'}
 
-📝 Observaciones: 
+📝 Observaciones:
 ${s.observaciones || '-'}
 
 🌍 Global Carnivora Network – 𝓛𝓪 𝓟𝓾𝓳𝓪 𝓒𝓪𝓻𝓷í𝓿𝓸𝓻𝓪 🌱`;
 
     navigator.clipboard.writeText(texto);
-
-    if (!s.imagen) return;
-
-    fetch(s.imagen as string)
-      .then(res => res.blob())
-      .then(blob => {
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = `subasta_${s.numeroSubasta || 'imagen'}.jpg`;
-        link.click();
-        URL.revokeObjectURL(link.href);
-      })
-      .catch(() => console.error('No se pudo descargar la imagen'));
   }
 
   getImagenSrc(s: Subasta): string | null {
